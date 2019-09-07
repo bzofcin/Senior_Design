@@ -1,2 +1,6 @@
 Name: Ivy Barish
 Email: barisn1@unlv.nevada.edu
+
+Name: Nick Poole
+Email: poolen@unlv.nevada.edu
+phone: 702-747-0575
