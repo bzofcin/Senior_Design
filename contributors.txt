@@ -3,3 +3,6 @@ Email: barisn1@unlv.nevada.edu
 
 Name: Nick Poole
 Email: poolen@unlv.nevada.edu
+
+Name: Matthew Farmer
+Email: farmerm7@unlv.nevada.edu
