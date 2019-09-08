@@ -6,3 +6,6 @@ Email: poolen@unlv.nevada.edu
 
 Name: Matthew Farmer
 Email: farmerm7@unlv.nevada.edu
+
+Name: Kevin Heward
+Email: heward@unlv.nevada.edu
