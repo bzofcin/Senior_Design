@@ -133,7 +133,144 @@ Part 5: Git reporting
             0
 
 
-    D)
+    D)  Top 10 Contributors Jan-Jun 2017 by lines inserted
+        Top 10 by commits:
+            git shortlog -s -n --since="2017-01-01" --until="2017-06-31" --no-merges
+               427  Markus Reiter
+               288  Mike McQuaid
+                39  Alyssa Ross
+                29  Gautham Goli
+                26  ilovezfs
+                25  Dominyk Tiller
+                23  JCount
+                23  Misty De Meo
+                18  mansimarkaur
+                13  EricFromCanada
+
+        Python script to re-rank by number of inserts:
+            import os
+            import collections
+
+            # Dictionary of top 10 by commits
+            # <author>: <number of inserts>
+            authors = {"Markus Reiter": 0,
+                       "Mike McQuaid": 0,
+                       "Alyssa Ross": 0,
+                       "Gautham Goli": 0,
+                       "ilovezfs": 0,
+                       "Dominyk Tiller": 0,
+                       "JCount": 0,
+                       "Misty De Meo": 0,
+                       "mansimarkaur": 0,
+                       "EricFromCanada": 0}
+
+            # Extracts number of inserts for an author and sums them
+            def parse_user_data(author, user_data):
+                user_data = user_data.split()
+                length = len(user_data)
+                for i in range(length):
+                    if user_data[i] == "changed,":
+                      i += 1
+                      authors[author] += int(user_data[i])
+
+            # Iterates through authors dict, gets git log for author, calls data parser
+            for author in authors:
+                # os.system('git log --pretty="%an (%ad) %s" --author="' + author + '" --since="2017-01-01" --until="2017-06-31" --shortstat')
+                user_data = os.popen('git log --pretty="%an" --author="' \
+                                     + author + '" --since="2017-01-01" --until="2017-06-31" --shortstat --no-merges').read()
+                parse_user_data(author, user_data)
+                # print(author + " has " + str(authors[author]) + " inserts.")
+
+            # Sorts dict by number of inserts to rank them
+            sorted_authors = sorted(authors.items(), key=lambda kv: kv[1], reverse=True)
+            sorted_inserts = collections.OrderedDict(sorted_authors)
+
+            i = 1
+            for author in sorted_inserts:
+              print(str(i) + ") " + author + ": " + str(authors[author]) + " inserts.")
+              i += 1
+
+        Output:
+            1) Markus Reiter: 31072 inserts.
+            2) Mike McQuaid: 15450 inserts.
+            3) Gautham Goli: 3006 inserts.
+            4) EricFromCanada: 1172 inserts.
+            5) Alyssa Ross: 839 inserts.
+            6) ilovezfs: 375 inserts.
+            7) Misty De Meo: 315 inserts.
+            8) Dominyk Tiller: 290 inserts.
+            9) mansimarkaur: 172 inserts.
+            10) JCount: 93 inserts.
+
+
+        Top 10 Contributors 2016 by lines inserted
+        Top 10 by commits:
+            git shortlog -s -n --since="2016-01-01" --until="2016-12-31" --no-merges
+                   727  Mike McQuaid
+                   231  Xu Cheng
+                   227  Markus Reiter
+                   216  Martin Afanasjew
+                   196  Dominyk Tiller
+                   109  Alyssa Ross
+                    64  Baptiste Fontaine
+                    63  ilovezfs
+                    54  Misty De Meo
+                    48  Andrew Janke
+
+        Python script to re-rank by number of inserts:
+            import os
+            import collections
+
+            # Dictionary of top 10 by commits
+            # <author>: <number of inserts>
+            authors = {"Mike McQuaid": 0,
+                       "Xu Cheng": 0,
+                       "Markus Reiter": 0,
+                       "Martin Afanasjew": 0,
+                       "Dominyk Tiller": 0,
+                       "Alyssa Ross": 0,
+                       "Baptiste Fontaine": 0,
+                       "ilovezfs": 0,
+                       "Misty De Meo": 0,
+                       "Andrew Janke": 0}
+
+            # Extracts number of inserts for an author and sums them
+            def parse_user_data(author, user_data):
+                user_data = user_data.split()
+                length = len(user_data)
+                for i in range(length):
+                    if user_data[i] == "changed,":
+                      i += 1
+                      authors[author] += int(user_data[i])
+
+            # Iterates through authors dict, gets git log for author, calls data parser
+            for author in authors:
+                # os.system('git log --pretty="%an (%ad) %s" --author="' + author + '" --since="2017-01-01" --until="2017-06-31" --shortstat')
+                user_data = os.popen('git log --pretty="%an" --author="' \
+                                     + author + '" --since="2016-01-01" --until="2016-12-31" --shortstat --no-merges').read()
+                parse_user_data(author, user_data)
+                # print(author + " has " + str(authors[author]) + " inserts.")
+
+            # Sorts dict by number of inserts to rank them
+            sorted_authors = sorted(authors.items(), key=lambda kv: kv[1], reverse=True)
+            sorted_inserts = collections.OrderedDict(sorted_authors)
+
+            i = 1
+            for author in sorted_inserts:
+              print(str(i) + ") " + author + ": " + str(authors[author]) + " inserts.")
+              i += 1
+
+        Output:
+            1) Markus Reiter: 43989 inserts.
+            2) Mike McQuaid: 27208 inserts.
+            3) Xu Cheng: 4409 inserts.
+            4) Martin Afanasjew: 4025 inserts.
+            5) Baptiste Fontaine: 3374 inserts.
+            6) Alyssa Ross: 2252 inserts.
+            7) Andrew Janke: 1645 inserts.
+            8) Dominyk Tiller: 1166 inserts.
+            9) ilovezfs: 956 inserts.
+            10) Misty De Meo: 405 inserts.
 
 
 Part 6: Executive Summary
