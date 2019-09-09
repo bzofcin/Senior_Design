@@ -9,3 +9,6 @@ Email: farmerm7@unlv.nevada.edu
 
 Name: Kevin Heward
 Email: heward@unlv.nevada.edu
+
+Name: Ty Wagonseller
+Email: wagonsel@unlv.nevada.edu
