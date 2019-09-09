@@ -12,3 +12,6 @@ Email: heward@unlv.nevada.edu
 
 Name: Ty Wagonseller
 Email: wagonsel@unlv.nevada.edu
+
+Name: Benjamin Zofcin
+Email: zofcin@unlv.nevada.edu
