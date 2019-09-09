@@ -2,11 +2,11 @@ CS-472
 Ivy Barish
 Git Assignment Part 5
 
-A/ Mike McQuaid during August 2017
+A/ Mike McQuaid during August 2017:
 
 $ git log --pretty="%an (%ad) %s" --author="Mike McQuaid" --since="2017-08-01" --until="2017-08-31"
-
 // OUTPUT:
+
 Mike McQuaid (Thu Aug 31 19:26:56 2017 +0100) Merge pull request #3105 from sjackman/pour_local_bottle
 Mike McQuaid (Thu Aug 31 19:17:58 2017 +0100) Merge pull request #3110 from DomT4/too_many_goats
 Mike McQuaid (Thu Aug 31 19:14:37 2017 +0100) Merge pull request #3111 from alyssais/migrate_empty_homebrew_directory
@@ -56,3 +56,72 @@ Mike McQuaid (Sat Aug 5 17:51:26 2017 +0100) formula_installer: restore build_bo
 Mike McQuaid (Sat Aug 5 17:39:40 2017 +0100) Merge pull request #2976 from GauthamGoli/audit_external_patches_rubocop
 Mike McQuaid (Sat Aug 5 17:09:32 2017 +0100) travis.yml: only build the master branch.
 Mike McQuaid (Sat Aug 5 15:16:05 2017 +0100) Merge pull request #2991 from javian/additionalphpignores
+
+
+
+B/ Top 10 Active Authors 2016:
+
+$ git shortlog -s -n --since="2016" --before="2017"
+//OUTPUT:
+
+  1456  Mike McQuaid
+  1005  Markus Reiter
+   149  Alyssa Ross
+   101  ilovezfs
+    99  Dominyk Tiller
+    91  Gautham Goli
+    66  Josh Hagins
+    60  Misty De Meo
+    55  mansimarkaur
+    48  JCount
+
+
+
+C/ Total commits per year since 2009:
+
+$ git rev-list --all --count --since="2009" --before="2010"
+
+750
+
+$ git rev-list --all --count --since="2010" --before="2011"
+
+448
+
+$ git rev-list --all --count --since="2011" --before="2012"
+
+1105
+
+$ git rev-list --all --count --since="2012" --before="2013"
+
+1507
+
+$ git rev-list --all --count --since="2013" --before="2014"
+
+2178
+
+$ git rev-list --all --count --since="2014" --before="2015"
+
+1765
+
+$ git rev-list --all --count --since="2015" --before="2016"
+
+2176
+
+$ git rev-list --all --count --since="2016" --before="2017"
+
+3737
+
+$ git rev-list --all --count --since="2017" --before="2018"
+
+2729
+
+$ git rev-list --all --count --since="2018" --before="2019"
+
+2268
+
+$ git rev-list --all --count --since="2019" 
+
+0
+
+
+
