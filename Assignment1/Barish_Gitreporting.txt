@@ -81,47 +81,66 @@ C/ Total commits per year since 2009:
 
 $ git rev-list --all --count --since="2009" --before="2010"
 
-750
+	750
 
 $ git rev-list --all --count --since="2010" --before="2011"
 
-448
+	448
 
 $ git rev-list --all --count --since="2011" --before="2012"
 
-1105
+	1105
 
 $ git rev-list --all --count --since="2012" --before="2013"
 
-1507
+	1507
 
 $ git rev-list --all --count --since="2013" --before="2014"
 
-2178
+	2178
 
 $ git rev-list --all --count --since="2014" --before="2015"
 
-1765
+	1765
 
 $ git rev-list --all --count --since="2015" --before="2016"
 
-2176
+	2176
 
 $ git rev-list --all --count --since="2016" --before="2017"
 
-3737
+	3737
 
 $ git rev-list --all --count --since="2017" --before="2018"
 
-2729
+	2729
 
 $ git rev-list --all --count --since="2018" --before="2019"
 
-2268
+	2268
 
 $ git rev-list --all --count --since="2019" 
 
-0
+	0
+
+
+
+D/  The first 6 months of 2017 if a list of the top 10 contributors (authors-the most # lines of code):
+
+$ git shortlog -n -s --since="2017-01-01" --until="2017-06-31"
+//OUTPUT:
+
+   689  Markus Reiter
+   622  Mike McQuaid
+    49  Alyssa Ross
+    45  ilovezfs
+    33  JCount
+    32  Misty De Meo
+    29  Gautham Goli
+    25  Dominyk Tiller
+    18  mansimarkaur
+    17  Vítor Galvão
+
 
 
 
