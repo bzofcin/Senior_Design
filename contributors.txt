@@ -15,3 +15,6 @@ Email: wagonsel@unlv.nevada.edu
 
 Name: Benjamin Zofcin
 Email: zofcin@unlv.nevada.edu
+
+Name: Bradyn Mensch
+Email: mensch@unlv.nevada.edu
