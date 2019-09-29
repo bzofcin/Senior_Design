@@ -101,12 +101,16 @@ Part 5: Git reporting
             start_year = 0
             end_year = 0
 
-            for year in range(2009, 2020):
+            for year in range(2009, 2019):
                 start_year = year
                 end_year = start_year + 1
                 command = 'git rev-list --all --no-merges --count --since="' + str(start_year) + '" --until="' + str(end_year) + '"'
                 print("Commits in " + str(start_year) + ": ")
                 commits = os.system('git rev-list --all --count --since="' + str(start_year) + '" --until="' + str(end_year) + '"')
+
+            command = 'git rev-list --all --no-merges --count --since="2019-01-01"'
+            print("Commits in 2019: ")
+            commits = os.system(command)
 
         Output:
             Commits in 2009:
@@ -128,9 +132,9 @@ Part 5: Git reporting
             Commits in 2017:
             2727
             Commits in 2018:
-            2276
+            2274
             Commits in 2019:
-            0
+            860
 
 
     D)  Top 10 Contributors Jan-Jun 2017 by lines inserted
