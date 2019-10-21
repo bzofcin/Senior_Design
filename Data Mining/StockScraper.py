@@ -1,7 +1,7 @@
-import urllib.request
+from datetime import date, timedelta
+import pandas_datareader.data as web
+import  csv
 import time
-import os
-import sys
 
 stock_sym = {
 "ATVI":	"Activision Blizzard Inc",
@@ -53,6 +53,7 @@ stock_sym = {
 "INTU":	"Intuit Inc",
 "ISRG":	"Intuitive Surgical Inc",
 "IDXX":	"IDEXX Laboratories Inc",
+"^IXIC": "NASDAQ Composite",
 "JBHT":	"J.B. Hunt Transport Services Inc",
 "JD":	"JD.com Inc",
 "KLAC":	"KLA Corp",
@@ -104,38 +105,21 @@ stock_sym = {
 "XEL":	"Xcel Energy Inc",
 "XLNX":	"Xilinx Inc"
 }
+start_time = time.time()
+today = date.today()
+yesterday = today - timedelta(days = 1)
+
+for item in stock_sym:
+    df = web.DataReader(item, 'yahoo', yesterday, yesterday)
+    formated_date = yesterday.strftime("%m/%d/%Y")
+
+    for index, rows in df.iterrows():
+        my_list = [formated_date, rows[0], rows[1], rows[2], rows[3], rows[4]]
 
 
-def downloadfiles(symbol, name):
-#Downloads the files from Alphavantage and stores them in a file called Stock_Data
+    with open("../Stock_Data/" + stock_sym.get(item) + ".csv", "a") as fp:
+        wr = csv.writer(fp, dialect = 'excel')
+        wr.writerow(my_list)
 
-    Front ="https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="
-    Back = "&outputsize=full&apikey=FI97CUETTHW9CX8Q&datatype=csv"
-    urllib.request.urlretrieve(Front + symbol + Back, "Stock_Data/" + name.get(symbol) + ".csv")
-
-def create():
-#Checks to see if the Stock_Data File exists
-#if it does it moves on, if it doesn't then creates the file location
-    canCreate = "Stock_Data"
-
-    print ("Verifying required files and directories...")
-    if os.path.exists(canCreate) is False:
-    	print (canCreate + "/ Doesn't exist, creating it...")
-    	os.mkdir(canCreate)
-
-    print ("Verification passed\n")
-
-
-if __name__ == "__main__":
-#calls function to create file location then stores files into Stock_Data
-#Only 5 files can be downloaded per minute, so time.sleep(13) pauses the next files
-#for 13 seconds. Currently 30 files are being downloaded per day which takes 6 minutes
-#to complete 
-
-    create()
-
-    for item in stock_sym:
-        downloadfiles(item, stock_sym)
-        time.sleep(13)
-
-    sys.exit(0)
+print("--- %s seconds ---" % (time.time() - start_time))
+print("Data has been collected succesfully")
