@@ -50,6 +50,7 @@ from keras.layers import Dropout
 # os.environ['KERAS_BACKEND'] = 'theano'
 # importlib.reload(K)
 
+from tensorflow import *
 from tensorflow.python.client import device_lib
 from keras import backend as K
 import keras
@@ -57,7 +58,7 @@ import tensorflow as tf
 
 
 # Set up GPU
-config = tf.ConfigProto(device_count={'GPU': 1, 'CPU': 8})
+config = tf.ConfigProto(device_count={'GPU': 1, 'CPU': 1})
 sess = tf.Session(config=config)
 keras.backend.set_session(sess)
 
