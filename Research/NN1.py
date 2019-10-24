@@ -77,9 +77,23 @@ for i in range(epoch):
     # Compute delta for hidden layer:
     # Multiply hidden layer error by hidden layer gradient
     d_hiddenlayer = Error_at_hidden_layer * slope_hidden_layer
+    # Update weight for output
+    # Adds dot product of hidden layer sigmoid output and output delta
+    # multiplied by learning rate
+    # Learning rate is a configuration parameter that controls how much
+    # the weights are updated
     wout += hiddenlayer_activations.T.dot(d_output) * lr
+    # Update output bias
+    # Adds sum of row-wise output layer delta multiplied by learning rate
+    # to output bias
     bout += np.sum(d_output, axis=0, keepdims=True) * lr
+    # Update weight for hidden layers
+    # Adds dot product of inputs array and hidden layer delta
+    # multiplied by learning rate to hidden layer weights matrix
     wh += X.T.dot(d_hiddenlayer) * lr
+    # Update hidden layer biases
+    # Adds sum of row-wise output layer delta multiplied by learning rate
+    # to hidden layer bias
     bh += np.sum(d_hiddenlayer, axis=0, keepdims=True) * lr
 
 print('\n Output from the model:')
