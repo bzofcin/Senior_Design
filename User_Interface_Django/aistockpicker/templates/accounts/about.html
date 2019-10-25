@@ -1,0 +1,151 @@
+{% extends "layouts/bs4_layout.html" %}
+
+{% block content %}
+
+<script>
+window.onload = function () {
+
+var dataPoints1 = [];
+var dataPoints2 = [];
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	zoomEnabled: true,
+	title: {
+		text: "Portfolio Value of Deplhi vs Competitors"
+	},
+	axisX: {
+		title: "chart updates every 3 secs"
+	},
+	axisY:{
+		prefix: "$",
+		includeZero: false
+	},
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		cursor:"pointer",
+		verticalAlign: "top",
+		fontSize: 22,
+		fontColor: "dimGrey",
+		itemclick : toggleDataSeries
+	},
+	data: [{
+		type: "line",
+		xValueType: "dateTime",
+		yValueFormatString: "$#####.00",
+		xValueFormatString: "hh:mm:ss TT",
+		showInLegend: true,
+		name: "Delphi",
+		dataPoints: dataPoints1
+		},
+		{
+			type: "line",
+			xValueType: "dateTime",
+			yValueFormatString: "$#####.00",
+			showInLegend: true,
+			name: "Competitor" ,
+			dataPoints: dataPoints2
+	}]
+});
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else {
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
+var updateInterval = 3000;
+// initial value
+var yValue1 = 150;
+var yValue2 = 145;
+
+var time = new Date;
+// starting at 9.30 am
+time.setHours(9);
+time.setMinutes(30);
+time.setSeconds(00);
+time.setMilliseconds(00);
+
+function updateChart(count) {
+	count = count || 1;
+	var deltaY1, deltaY2;
+	for (var i = 0; i < count; i++) {
+		time.setTime(time.getTime()+ updateInterval);
+		deltaY1 = .7 + Math.random() *(-.5-.5);
+		deltaY2 = .5 + Math.random() *(-.5-.5);
+
+	// adding random value and rounding it to two digits.
+	yValue1 = Math.round((yValue1 + deltaY1)*100)/100;
+	yValue2 = Math.round((yValue2 + deltaY2)*100)/100;
+
+	// pushing the new values
+	dataPoints1.push({
+		x: time.getTime(),
+		y: yValue1
+	});
+	dataPoints2.push({
+		x: time.getTime(),
+		y: yValue2
+	});
+	}
+
+	// updating legend text with  updated with y Value
+	chart.options.data[0].legendText = " Delphi Portfolio  $" + yValue1;
+	chart.options.data[1].legendText = " Competitor  $" + yValue2;
+	chart.render();
+}
+// generates first set of dataPoints
+updateChart(100);
+setInterval(function(){updateChart()}, updateInterval);
+
+}
+</script>
+
+
+
+   <div class="container">
+        <div class="row mb-5">
+            <div class="col-xs-12">
+                <h1>Delphi Stock Picker</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Why Choose US</h5>
+                        <p class="card-text">
+                                AI stock picking algorithm,
+                                We are a team of Software Engineers with a background in A.I. and a passion for the the U.S. Stock Market. With the combined talent of Software Engineers, Stock Market Analysts, and
+                                Data Scientists, we have researched and developed a  unique algorithms based on multilple data anayltics tools. This stock picker is constantly being updated and improved to exceed
+                                the previous versions performance.
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-7">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Last Months Stock Picks vs S&P 500</h5>
+                        <p class="card-text">
+                             <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
