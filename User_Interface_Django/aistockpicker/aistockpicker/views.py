@@ -10,6 +10,6 @@ def handler500(request):
     return render(request, '500.html', status=500)
 
 def home(request):
-    data = {}
+
     #return JsonResponse({'mystring':"return this string"})
-    return render(request,'accounts/home.html', data)
+    return render(request,'accounts/home.html', {'authenticated': False})
