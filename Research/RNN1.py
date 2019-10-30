@@ -1,34 +1,56 @@
+# RNN to predict the sequence of a sine wave.
+
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 
+# Input: single sequence of length 50 (the sine wave)
 sin_wave = np.array([math.sin(x) for x in np.arange(200)])
-
 plt.plot(sin_wave[:50])
 
 X = []
 Y = []
 
+# Shape of input data: (number_of_records x length_of_sequence x types_of_sequences)
+# Only 1 type of sequence: sine wave
+# Shape of output data: (number_of_records x types_of_sequences)
+# Where types_of_sequences is 1
+
+# Length of sequence = 50
 seq_len = 50
+# num_records is unpredicted portion of the sequence
 num_records = len(sin_wave) - seq_len
 
+# Create lists X and Y, input and output respectively
+# num_records - 50 because we set aside 50 records for validation data (see below)
 for i in range(num_records - 50):
+    # Returns 50 records from sin_wave in each array entry (2D array)
     X.append(sin_wave[i:i + seq_len])
+    # Returns next consecutive record for output
     Y.append(sin_wave[i + seq_len])
 
+# Convert input list X into a numpy array
+# Reshape X array dimensions to be 100 x 50 x 1 or
+# (number_of_records x length_of_sequence x types_of_sequences)
 X = np.array(X)
 X = np.expand_dims(X, axis=2)
 
+# Convert output list Y into a numpy array
+# Reshape Y array dimensions to be 100 x 1 or
+# (number_of_records x types_of_sequences)
 Y = np.array(Y)
 Y = np.expand_dims(Y, axis=1)
 
+# Print shape of the data
+print("X.shape: " + str(X.shape))
+print("Y.shape: " + str(Y.shape))
 
-X.shape, Y.shape = ((100, 50, 1), (100, 1))
-
+# 50 records set aside for validation data, created here:
 X_val = []
 Y_val = []
 
+# Create lists X and Y for input/output validation data
+# Consists of remaining 50 records left out of input/output data
 for i in range(num_records - 50, num_records):
     X_val.append(sin_wave[i:i + seq_len])
     Y_val.append(sin_wave[i + seq_len])
@@ -39,20 +61,34 @@ X_val = np.expand_dims(X_val, axis=2)
 Y_val = np.array(Y_val)
 Y_val = np.expand_dims(Y_val, axis=1)
 
+# Create RNN architecture
+# Consists of input sequence, 100-unit hidden layer, and a single valued output
+
 learning_rate = 0.0001
+# number of epochs
 nepoch = 25
-T = 50                   # length of sequence
+# length of (input?) sequence
+T = 50
+# Units in hidden layer
 hidden_dim = 100
+# Units in output layer
 output_dim = 1
 
+# Backpropagation Through Time Truncation
 bptt_truncate = 5
+# Gradient clipping, avoids exploding gradient
 min_clip_value = -10
 max_clip_value = 10
 
+# Initialize weights to random values
+# U is weight matrix between input and hidden layers
 U = np.random.uniform(0, 1, (hidden_dim, T))
+# W is weight matrix for shared weights in the Hidden Layer
 W = np.random.uniform(0, 1, (hidden_dim, hidden_dim))
+# V is the weight matrix between hidden and output layers
 V = np.random.uniform(0, 1, (output_dim, hidden_dim))
 
+# Activation Function (sigmoid)
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
