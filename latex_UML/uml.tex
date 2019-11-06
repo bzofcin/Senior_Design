@@ -1,0 +1,36 @@
+\documentclass[landscape,10pt]{article}
+\usepackage{tikz-uml}
+
+\title{\vspace{-5.3cm}\LARGE{\textbf{Delphi Trader UML}}}
+\date{}
+\author{}
+\begin{document}
+  \maketitle
+  \thispagestyle{empty}
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{umlpackage}{Delphi Environment}
+        \begin{umlpackage}{Front-End}
+          \umlclass[type=interface]{django}
+          {
+            INSTALLED\_APPS \\ MIDDLEWARE \\ ROOT\_URLCONF \\ TEMPLATES \\ DATABASES \\ AUTH\_PASSWORD\_VALIDATORS 
+          }{}
+          \umlclass[y=-3, x=-1]{INSTALLED\_APPS}{
+            accounts
+            stockpicker
+          }{}
+          \umlclass[y=-5, x=-1]{ROOT\_URLCONF}{
+						aistockpicker.urls
+					}{}
+
+        \end{umlpackage}
+        \begin{umlpackage}{Back-End}
+          
+        \end{umlpackage}
+        \begin{umlpackage}{Database}
+          
+        \end{umlpackage}
+      \end{umlpackage}
+    \end{tikzpicture}
+  \end{center}
+\end{document}
