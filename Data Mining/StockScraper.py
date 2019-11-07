@@ -3,7 +3,7 @@ import pandas_datareader.data as web
 import  csv
 import time
 
-stock_sym = {
+StockSym = {
 "ATVI":	"Activision Blizzard Inc",
 "ADBE":	"Adobe Inc.",
 "AMD":	"Advanced Micro Devices Inc",
@@ -27,7 +27,6 @@ stock_sym = {
 "CERN":	"Cerner Corp",
 "CHKP":	"Check Point Software Technologies Ltd",
 "CHTR":	"Charter Communications Inc",
-"CTRP":	"Ctrip.Com International Ltd",
 "CTAS":	"Cintas Corp",
 "CSCO":	"Cisco Systems Inc",
 "CTXS":	"Citrix Systems Inc",
@@ -53,7 +52,6 @@ stock_sym = {
 "INTU":	"Intuit Inc",
 "ISRG":	"Intuitive Surgical Inc",
 "IDXX":	"IDEXX Laboratories Inc",
-"^IXIC": "NASDAQ Composite",
 "JBHT":	"J.B. Hunt Transport Services Inc",
 "JD":	"JD.com Inc",
 "KLAC":	"KLA Corp",
@@ -77,7 +75,6 @@ stock_sym = {
 "NXPI":	"NXP Semiconductors NV",
 "ORLY":	"O'Reilly Automotive Inc",
 "PAYX":	"Paychex Inc",
-"PCAR":	"Paccar Inc",
 "BKNG":	"Booking Holdings Inc",
 "PYPL":	"PayPal Holdings Inc",
 "PEP":	"PepsiCo Inc.",
@@ -87,7 +84,6 @@ stock_sym = {
 "SIRI":	"Sirius XM Holdings Inc",
 "SWKS":	"Skyworks Solutions Inc",
 "SBUX":	"Starbucks Corp",
-"SYMC":	"Symantec Corp",
 "SNPS":	"Synopsys Inc",
 "TTWO":	"Take-Two Interactive Software Inc",
 "TSLA":	"Tesla Inc",
@@ -105,21 +101,33 @@ stock_sym = {
 "XEL":	"Xcel Energy Inc",
 "XLNX":	"Xilinx Inc"
 }
-start_time = time.time()
-today = date.today()
-yesterday = today - timedelta(days = 1)
 
-for item in stock_sym:
-    df = web.DataReader(item, 'yahoo', yesterday, yesterday)
-    formated_date = yesterday.strftime("%m/%d/%Y")
+StartTime = time.time()
+Today = date.today()
+Yesterday = Today - timedelta(days = 1)
 
-    for index, rows in df.iterrows():
-        my_list = [formated_date, rows[0], rows[1], rows[2], rows[3], rows[4]]
+for item in StockSym:
+    try:
+        df = web.DataReader(item, 'yahoo', Yesterday, Yesterday)
+        FormatedDate = Yesterday.strftime("%Y-%m-%d")
+        for index, rows in df.iterrows():
+            MyList = [FormatedDate, rows[0], rows[1], rows[2], rows[3], rows[4]]
 
+        with open("./Stock_Data/" + StockSym.get(item) + ".csv", "a") as fp:
+            wr = csv.writer(fp, dialect = 'excel')
+            wr.writerow(MyList)
+    except:
+        try:
+            df = web.DataReader(item, 'google', Yesterday, Yesterday)
+            FormatedDate = Yesterday.strftime("%Y-%m-%d")
+            for index, rows in df.iterrows():
+                MyList = [FormatedDate, rows[0], rows[1], rows[2], rows[3], rows[4]]
 
-    with open("../Stock_Data/" + stock_sym.get(item) + ".csv", "a") as fp:
-        wr = csv.writer(fp, dialect = 'excel')
-        wr.writerow(my_list)
+            with open("./Stock_Data/" + StockSym.get(item) + ".csv", "a") as fp:
+                wr = csv.writer(fp, dialect='excel')
+                wr.writerow(MyList)
+        except:
+            print(StockSym.get(item) + " was not reached\n")
 
-print("--- %s seconds ---" % (time.time() - start_time))
+print("--- %s seconds ---" % (time.time() - StartTime))
 print("Data has been collected succesfully")

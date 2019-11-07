@@ -3,7 +3,7 @@ import time
 import os
 import sys
 
-stock_sym = {
+StockSym = {
 "ATVI":	"Activision Blizzard Inc",
 "ADBE":	"Adobe Inc.",
 "AMD":	"Advanced Micro Devices Inc",
@@ -106,22 +106,22 @@ stock_sym = {
 }
 
 
-def downloadfiles(symbol, name):
+def DownloadFiles(symbol, name):
 #Downloads the files from Alphavantage and stores them in a file called Stock_Data
 
     Front ="https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="
     Back = "&outputsize=full&apikey=FI97CUETTHW9CX8Q&datatype=csv"
     urllib.request.urlretrieve(Front + symbol + Back, "Stock_Data/" + name.get(symbol) + ".csv")
 
-def create():
+def Create():
 #Checks to see if the Stock_Data File exists
 #if it does it moves on, if it doesn't then creates the file location
-    canCreate = "Stock_Data"
+    CanCreate = "Stock_Data"
 
     print ("Verifying required files and directories...")
-    if os.path.exists(canCreate) is False:
-    	print (canCreate + "/ Doesn't exist, creating it...")
-    	os.mkdir(canCreate)
+    if os.path.exists(CanCreate) is False:
+    	print (CanCreate + "/ Doesn't exist, creating it...")
+    	os.mkdir(CanCreate)
 
     print ("Verification passed\n")
 
@@ -132,10 +132,10 @@ if __name__ == "__main__":
 #for 13 seconds. Currently 30 files are being downloaded per day which takes 6 minutes
 #to complete 
 
-    create()
+    Create()
 
-    for item in stock_sym:
-        downloadfiles(item, stock_sym)
+    for item in StockSym:
+        DownloadFiles(item, StockSym)
         time.sleep(13)
 
     sys.exit(0)
