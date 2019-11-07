@@ -8,18 +8,45 @@ from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.sessions.models import Session
+from django.contrib.auth.decorators import login_required
+#from .models import Users
 
+import hmac, base64, struct, hashlib, time
+
+import urllib
+import json
+import datetime
 
 
 def login(request):
 
-    return render(request,'accounts/login.html', {})
+
+    if request.method == 'POST':
+        email = request.POST['email']
+        password= request.POST['password']
+        confirmPassword= request.POST['confirmpassword']
+ #       a = Users()
+ #       a.email = email
+ #       a.password=password
+ #       a.save()
+
+    return render(request,'accounts/login.html',{})
+
 
 def loggedIn(request):
 
     return render(request,'accounts/loggedInScreen.html', {})
 
 def register(request):
+
+    #if request.method == 'POST':
+
+        #username = form.cleaned_data.get('username')
+        #raw_password = form.cleaned_data.get('password1')
+        #user =
+        #login(request, user)
+        #return redirect('home')
+
 
     return render(request,'accounts/registration.html', {'authenticated': False })
 
@@ -28,26 +55,3 @@ def about(request):
 
     return render(request,'accounts/about.html', {'authenticated': False })
 
-
-def login_norecaptcha(request):
-    if request.user.is_authenticated():
-        return redirect('home')
-
-
-    if request.method == 'POST':
-        username= request.POST['username']
-        password= request.POST['password']
-
-        request.session['username'] = username
-        user = authenticate(username=username, password=password)
-        if user is not None:
-        	if user.is_active:
-        		auth_login(request, user)
-        		return redirect('home')
-
-        else:
-
-        	return render(request, 'accounts/login.html', {'errormsg': "Invalid Username & Password"})
-
-
-    return render(request, 'auth/sa_login.html', {})

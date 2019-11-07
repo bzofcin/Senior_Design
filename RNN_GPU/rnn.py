@@ -50,22 +50,26 @@ from keras.layers import Dropout
 # os.environ['KERAS_BACKEND'] = 'theano'
 # importlib.reload(K)
 
-from tensorflow.python.client import device_lib
-from keras import backend as K
-import keras
-import tensorflow as tf
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
+# from tensorflow import *
+# from tensorflow.python.client import device_lib
+# from keras import backend as K
+# import keras
+# import tensorflow as tf
 
 
-# Set up GPU
-config = tf.ConfigProto(device_count={'GPU': 1, 'CPU': 8})
-sess = tf.Session(config=config)
-keras.backend.set_session(sess)
-
-# Check GPU install
-print("Keras GPUS: ")
-K.tensorflow_backend._get_available_gpus()
-print(device_lib.list_local_devices())
-time.sleep(10)
+# # Set up GPU
+# config = tf.ConfigProto(device_count={'GPU': 1, 'CPU': 1})
+# sess = tf.Session(config=config)
+# keras.backend.set_session(sess)
+#
+# # Check GPU install
+# print("Keras GPUS: ")
+# K.tensorflow_backend._get_available_gpus()
+# print(device_lib.list_local_devices())
+# time.sleep(10)
 
 # Initialising the RNN
 regressor = Sequential()
@@ -114,6 +118,46 @@ X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 predicted_stock_price = regressor.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 
+# Output runtime
+print("--- %s seconds ---" % (time.time() - start_time))
+
+from accuracy_stats import calculate_accuracy
+
+calculate_accuracy(predicted_stock_price, real_stock_price)
+
+# # Calculating accuracy
+# predicted_length = len(predicted_stock_price)
+# # trend up == 1; trend down == 0; no change == 2
+# predicted_trend = 0
+# real_trend = 0
+# total = 0
+# accurate = 0
+# percent_accurate = 0
+# for i in range(1, predicted_length):
+#     if predicted_stock_price[i] > predicted_stock_price[i-1]:
+#         predicted_trend = 1
+#     elif predicted_stock_price[i] < predicted_stock_price[i-1]:
+#         predicted_trend = 0
+#     elif predicted_stock_price[i] == predicted_stock_price[i-1]:
+#         predicted_trend = 2
+#
+#     if real_stock_price[i] > real_stock_price[i-1]:
+#         real_trend = 1
+#     elif real_stock_price[i] < real_stock_price[i-1]:
+#         real_trend = 0
+#     elif real_stock_price[i] == real_stock_price[i-1]:
+#         real_trend = 2
+#
+#     if predicted_trend == real_trend:
+#         accurate += 1
+#
+#     total += 1
+#
+# percent_accurate = (accurate/total) * 100
+# print("Accuracy: " + str(percent_accurate) + "%")
+
+
+
 # Visualising the results
 plt.plot(real_stock_price, color='red', label='Real Google Stock Price')
 plt.plot(predicted_stock_price, color='blue', label='Predicted Google Stock Price')
@@ -122,6 +166,3 @@ plt.xlabel('Time')
 plt.ylabel('Google Stock Price')
 plt.legend()
 plt.show()
-
-# Output runtime
-print("--- %s seconds ---" % (time.time() - start_time))

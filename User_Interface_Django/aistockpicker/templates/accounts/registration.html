@@ -2,6 +2,64 @@
 
 {% block content %}
 
+<style>
+body{
+
+	}
+	.contact{
+		padding: 4%;
+		height: 400px;
+	}
+	.col-md-3{
+		background: #ff9b00;
+		padding: 4%;
+		border-top-left-radius: 0.5rem;
+		border-bottom-left-radius: 0.5rem;
+	}
+	.contact-info{
+		margin-top:10%;
+	}
+	.contact-info img{
+		margin-bottom: 15%;
+	}
+	.contact-info h2{
+		margin-bottom: 10%;
+	}
+	.col-md-9{
+		background: #fff;
+		padding: 3%;
+		border-top-right-radius: 0.5rem;
+		border-bottom-right-radius: 0.5rem;
+	}
+	.contact-form label{
+		font-weight:600;
+	}
+	.pass_show{position: relative}
+
+.pass_show .ptxt {
+
+position: absolute;
+
+top: 50%;
+
+right: 10px;
+
+z-index: 1;
+
+color: #f36c01;
+
+margin-top: -10px;
+
+cursor: pointer;
+
+transition: .3s ease all;
+
+}
+
+.pass_show .ptxt:hover{color: #333333;}
+
+</style>
+
 <div class="container">
 
         <div class="row mb-5">
@@ -22,40 +80,28 @@
                                         <p class="card-text">
 
                                             <article class="card-body mx-auto" style="max-width: 80%;">
-                                                <form>
-                                                    <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                                                        </div>
-                                                        <input name="username" class="form-control" placeholder="User Name" type="text">
-                                                    </div>
-
-                                                    <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                                                        </div>
-                                                        <input name="fullname" class="form-control" placeholder="Full Name" type="text">
-                                                    </div>
+                                                 <form role="form" id="contact-form" class="contact-form" method="POST">
+                                                    {% csrf_token %}
 
                                                     <div class="form-group input-group">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                                         </div>
-                                                        <input name="email" class="form-control" placeholder="Email address" type="email">
+                                                        <input name="email" class="form-control" placeholder="Email address" type="email" required>
                                                     </div>
 
                                                     <div class="form-group input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                                            <span class="input-group-text"> <i class="fa fa-key"></i> </span>
                                                         </div>
-                                                        <input name="password" class="form-control" placeholder="Create password" type="password">
+                                                        <input name="password" class="form-control" id="paw"  placeholder="Create password" type="password" required>
                                                     </div>
 
                                                     <div class="form-group input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                                            <span class="input-group-text"> <i class="fa fa-key"></i> </span>
                                                         </div>
-                                                        <input name="confirmpassword" class="form-control" placeholder="Repeat password" type="password">
+                                                        <input name="confirmpassword" class="form-control" placeholder="Repeat password" type="password" required>
                                                     </div> <!-- form-group// -->
 
                                                     <div class="form-group">
@@ -79,10 +125,28 @@
                         <div class="card-body">
                             <h5 class="card-title">Privacy Policy</h5>
                             <p class="card-text">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. nded to Southeast Asia with the launch of CarBay.com, CarBay.ph and Oto.com
+                                We take precautions to protect your information. When you submit sensitive information via the website, your information is protected both online and offline.
                             </p>
+
+                        </div>
+                    </div>
+
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h5 class="card-title">Password Requirements</h5>
+                			<div class="aro-pswd_info">
+            				<div id="pswd_info">
+
+            					<ul>
+            						<li id="letter" class="invalid">At least <strong>one letter</strong></li>
+            						<li id="capital" class="invalid">At least <strong>one capital letter</strong></li>
+            						<li id="number" class="invalid">At least <strong>one number</strong></li>
+            						<li id="length" class="invalid">Be at least <strong>8 characters</strong></li>
+            						<li id="space" class="invalid">be<strong> use [~,!,@,#,$,%,^,&,*,-,=,.,;,']</strong></li>
+            					</ul>
+            				</div>
+        				</div>
+
                         </div>
                     </div>
                 </div>
@@ -94,65 +158,56 @@
 
 </div>
 <script>
-        window.onload = function () {
 
-        var options = {
-            animationEnabled: true,
-            exportEnabled: true,
-            title:{
-                text: "Temperature in Newark - November 2017"
+$('#contact-form').bootstrapValidator({
+//        live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            Name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The Name is required and cannot be empty'
+                    }
+                }
             },
-            axisY: {
-                includeZero:false,
-                title: "Temperature (°C)",
-                suffix: " °C"
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The email address is not valid'
+                    }
+                }
             },
-            axisX: {
-                valueFormatString: "DD MMM"
-            },
-            data: [
-            {
-                type: "rangeArea",
-                xValueFormatString: "DD MMMM",
-                yValueFormatString: "#0.## °C",
-                toolTipContent: " <span style=\"color:#4F81BC\">{x}</span><br><b>Min:</b> {y[0]}<br><b>Max:</b> {y[1]}",
-                dataPoints: [
-                    { x: new Date(2017, 10, 1), y: [4, 14] },
-                    { x: new Date(2017, 10, 2), y: [13, 24] },
-                    { x: new Date(2017, 10, 3), y: [10, 24] },
-                    { x: new Date(2017, 10, 4), y: [6, 14] },
-                    { x: new Date(2017, 10, 5), y: [12, 17] },
-                    { x: new Date(2017, 10, 6), y: [8, 19] },
-                    { x: new Date(2017, 10, 7), y: [4, 10] },
-                    { x: new Date(2017, 10, 8), y: [4, 11] },
-                    { x: new Date(2017, 10, 9), y: [3, 12] },
-                    { x: new Date(2017, 10, 10), y: [-4, 10] },
-                    { x: new Date(2017, 10, 11), y: [-4, 5] },
-                    { x: new Date(2017, 10, 12), y: [-2, 9] },
-                    { x: new Date(2017, 10, 13), y: [3, 9] },
-                    { x: new Date(2017, 10, 14), y: [2, 9] },
-                    { x: new Date(2017, 10, 15), y: [1, 12] },
-                    { x: new Date(2017, 10, 16), y: [7, 15] },
-                    { x: new Date(2017, 10, 17), y: [3, 10] },
-                    { x: new Date(2017, 10, 18), y: [-1, 12] },
-                    { x: new Date(2017, 10, 19), y: [4, 15] },
-                    { x: new Date(2017, 10, 20), y: [2, 9] },
-                    { x: new Date(2017, 10, 21), y: [2, 16] },
-                    { x: new Date(2017, 10, 22), y: [2, 13] },
-                    { x: new Date(2017, 10, 23), y: [-1, 8] },
-                    { x: new Date(2017, 10, 24), y: [-3, 11] },
-                    { x: new Date(2017, 10, 25), y: [1, 15] },
-                    { x: new Date(2017, 10, 26), y: [3, 11] },
-                    { x: new Date(2017, 10, 27), y: [3, 12] },
-                    { x: new Date(2017, 10, 28), y: [0, 12] },
-                    { x: new Date(2017, 10, 29), y: [4, 19] },
-                    { x: new Date(2017, 10, 30), y: [0, 11] }
-                ]
-            }]
-        };
-        $("#chartContainer").CanvasJSChart(options);
-
+            Message: {
+                validators: {
+                    notEmpty: {
+                        message: 'The Message is required and cannot be empty'
+                    }
+                }
+            }
         }
-        </script>
+    });
+
+$(document).ready(function(){
+    $('.pass_show').append('<span class="ptxt">Show</span>');
+    });
+
+
+    $(document).on('click','.pass_show .ptxt', function(){
+
+    $(this).text($(this).text() == "Show" ? "Hide" : "Show");
+
+    $(this).prev().attr('type', function(index, attr){return attr == 'password' ? 'text' : 'password'; });
+
+});
+</script>
+
 
 {% endblock %}

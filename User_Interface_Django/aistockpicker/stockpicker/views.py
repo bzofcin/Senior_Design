@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.http import JsonResponse
-
+from django.contrib.auth.decorators import login_required
 
 def main(request):
     data = {'authenticated': True}

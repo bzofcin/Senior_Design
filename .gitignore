@@ -1,0 +1,7 @@
+.vscode/settings.json
+.vscode/sftp.json
+latex_UML/uml.aux
+latex_UML/uml.fdb_latexmk
+latex_UML/uml.fls
+latex_UML/uml.log
+latex_UML/uml.synctex.gz
