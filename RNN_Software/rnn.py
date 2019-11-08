@@ -11,16 +11,17 @@ import pandas as pd
 from sys import argv
 import os
 
-BADTESTS  = "../Stock_Data/"
+BADTESTS  = "./Data Mining/Stock_Data/"
 
 mylist = os.listdir(BADTESTS)
-print (1)
-#num1 = int(argv[1])
-num1 = 1
+#print (1)
+num1 = int(argv[1])
+#num1 = 1
+print("Running " + mylist[num1] + "from " + str(num1))
 # Importing the training set
 #only numpy arrays can be input arrays for keras 
 test = mylist[num1]
-dataset_train = pd.read_csv("../Stock_Data/"+test)
+dataset_train = pd.read_csv(BADTESTS+test)
 dataset_train.sort_values(by="timestamp", inplace=True,ascending=True)
 # this is training on the first opening price
 # need to end range at n+1 because the uperbound is excluded  
@@ -116,16 +117,17 @@ regressor.compile(optimizer = 'adam', loss = 'mean_squared_error')
 #this fits the information to the training set 
 #first input is the training set and ouptut of prediction which is compared to ytrain
 #the next inout is the y train which is the comparison of the 
-#batch size is the size of batch going into 
-regressor.fit(X_train, y_train, epochs =1, batch_size = 36)
+#batch size is the size of batch going into
+print("regressor.fit is running")
+regressor.fit(X_train, y_train, epochs =1, batch_size = 36, verbose=2, use_multiprocessing=False)
 
 
 
 # Part 3 - Making the predictions and visualising the results
 
 # Getting the real stock price of 2017
-#model does not capture spike only trends 
-dataset_test = pd.read_csv("../Stock_Data/"+test)
+#model does not capture spike only trends
+dataset_test = pd.read_csv(BADTESTS+test)
 dataset_test.sort_values(by="timestamp", inplace=True,ascending=True)
 real_stock_price = dataset_test.iloc[length1-7:length1+1, 1:2].values
 #real_stock_price =  dataset_train.iloc[length1-7:length1+1, 1:2].values
@@ -149,10 +151,11 @@ predicted_stock_price = regressor.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 
 # Visualising the results
-#plt.plot(real_stock_price, color = 'red', label = "real" + test)
-#plt.plot(predicted_stock_price, color = 'blue', label = "Predicted" + test)
-#plt.title('Amazon Stock Price Prediction')
-#plt.xlabel('Time')
-#plt.ylabel('Amazon Stock Price')
-#plt.legend()
-#plt.show()
+# import matplotlib.pyplot as plt
+# plt.plot(real_stock_price, color = 'red', label = "real" + test)
+# plt.plot(predicted_stock_price, color = 'blue', label = "Predicted" + test)
+# plt.title('Amazon Stock Price Prediction')
+# plt.xlabel('Time')
+# plt.ylabel('Amazon Stock Price')
+# plt.legend()
+# plt.show()
