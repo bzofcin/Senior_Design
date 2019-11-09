@@ -1,0 +1,185 @@
+{% extends "layouts/bs4_layout.html" %}
+
+{% block content %}
+
+
+<div class="container">
+
+
+
+<div class="container-fluid">
+
+      <div class="row">
+        <div class="col-sm-12">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Search Information</h5>
+
+                            <p class="card-text">
+                        	    <form method="POST"  action="/stockpicker/purchase" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+                                <article class="card-body mx-auto" style="max-width: 90%;">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label>Ticker Symbol</label>
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <i class="fa fa-sitemap"></i> </span>
+                                                    </div>
+                                                    <input name="company" id="company" class="form-control" placeholder="Stock" type="text" maxlength="3">
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <label>Shares</label>
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <i class="fa fa-sitemap"></i> </span>
+                                                    </div>
+                                                    <input name="shares" id="shares"  class="form-control" placeholder="Shares" type="text" maxlength="3">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary btn-block mt-4"> Buy  </button>
+                                                </div> <!-- form-group// -->
+                                            </div>
+                                        </div>
+                                    </form>
+                                </p>
+
+                                </article>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+	<div class="row">
+		<div class="col-md-12">
+			<h1>
+				Your Portfolio
+			</h1>
+
+			    <h3>
+			        Username
+			    </h3>
+			<table class="table table-condensed table-hover">
+				<thead>
+					<tr>
+						<th>
+							Ticker Symbol
+						</th>
+						<th>
+							Comany
+						</th>
+						<th>
+							Shares
+						</th>
+						<th>
+							Price
+						</th>
+						<th>
+							Value
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							GGL
+						</td>
+						<td>
+							Google
+						</td>
+						<td>
+							100
+						</td>
+						<td>
+							$128.50
+						</td>
+
+						<td>
+						    $12,850.00
+						 </td>
+					</tr>
+					<tr>
+						<td>
+							GGL
+						</td>
+						<td>
+							Google
+						</td>
+						<td>
+							100
+						</td>
+						<td>
+							$128.50
+						</td>
+
+						<td>
+						    $12,850.00
+						 </td>
+					</tr>
+					<tr>
+						<td>
+							GGL
+						</td>
+						<td>
+							Google
+						</td>
+						<td>
+							100
+						</td>
+						<td>
+							$128.50
+						</td>
+
+						<td>
+						    $12,324.00
+						 </td>
+					</tr>
+					<tr>
+						<td>
+							GGL
+						</td>
+						<td>
+							Google
+						</td>
+						<td>
+							100
+						</td>
+						<td>
+							$128.50
+						</td>
+
+						<td>
+						   $12,850.00
+						 </td>
+					</tr>
+
+				</tbody>
+			</table>
+			<div class="row">
+				<div class="col-md-12">
+					<p>
+						You may logout <a class="logout" href="#">here.</a>
+					</p>
+					<p>
+						You may change your password <a class="logout" href="#">here.</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
