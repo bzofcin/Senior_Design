@@ -9,6 +9,14 @@ from keras.layers import Dropout
 import os
 import sys
 from datetime import date, timedelta
+import time
+
+#Tasks still working on:
+#Iterate over each stock for a year (or two) to get historical predictions
+#Create/Update a directory for a stock based on the number of days forecasted
+#Create/Update a csv file for named for the stock and how many days forcasted
+#Take Ty's multiproc code and wrap it around this code to run this code on EC2
+#without using multiple instances
 
 # StockSym = {
 # "ATVI":	"Activision Blizzard Inc",
@@ -109,16 +117,22 @@ from datetime import date, timedelta
 # "XLNX":	"Xilinx Inc"
 # }
 
+
+#setting the data up for later use by only testing one for now
 StockSym = {
 "GOOGL":"Alphabet Class A"
 }
 
 def GetData(stock):
+    #The method gets the data from a specific stock and keeps the data as far back as the histyears
+    #parameter = the key, value pair from StockSym
+    #returns a dataframe of the current stocks to stocks starting at histyears
+    histyears = 5
     front = "./Stock_Data/"
     end = ".csv"
     filePath = front + stock + end
     today = date.today();
-    lastYear = today -  timedelta(days=1825)
+    lastYear = today - timedelta(days=(int(histyears*365)))
     formatedYear = lastYear.strftime("%Y-%m-%d")
     try:
         fullData = pd.read_csv(filePath)
@@ -131,26 +145,44 @@ def GetData(stock):
 
 
 if __name__ == "__main__":
-    yesterday = date.today() - timedelta(days=7);
-    formatedYesterday = yesterday.strftime("%Y-%m-%d")
+    #datepredict is how many days to predict.  Used to split the data in to test and train data
+    #By choosing the datepredict of historical stocks, the number of days that will be predicted
+    #may not line up due to historical stock values not being updated for weekends and holidays.
+    datepredict = 10
+    #predictOn is the interval of days that is used to train the RNN (60 was the set day before
+    predictOn = 60
+    #splitPoint gives the date to split the train and test data
+    splitPoint = date.today() - timedelta(days=datepredict);
+    #formats the date of the splitPoint into the format used in the stock data
+    formatedSplitPoint = splitPoint.strftime("%Y-%m-%d")
     for item in StockSym:
         TrainData = GetData(StockSym.get(item))
         try:
-            TestData = TrainData.loc[TrainData["timestamp"] >= formatedYesterday]
-            TrainData = TrainData.loc[TrainData["timestamp"] <= formatedYesterday]
+            #Splits the data into the Training and Testing data, sorts the data in accending order
+            #and gets the length of the training and testing data sets
+            TestData = TrainData.loc[TrainData["timestamp"] >= formatedSplitPoint]
+            TrainData = TrainData.loc[TrainData["timestamp"] < formatedSplitPoint]
             TestData.sort_values(by="timestamp",inplace=True,ascending=True)
             TrainData.sort_values(by="timestamp",inplace=True,ascending=True)
+            TrainLen = len(TrainData)
+            TestLen = len(TestData)
         except:
             print("Failed to split up the testing and training data")
 
         try:
+            #The RNN code that we used, altered to allow for the variables stated above
+            #set to run on closed data
+            #removed batchsize due to running in sequencial() as it already batches
+            #epoch currently set to 50, this really depends on the amount of historical
+            #data used and how many days are being predicted
+            StartTime = time.time()
             training_set = TrainData.iloc[:, 4:5].values
             sc = MinMaxScaler(feature_range=(0, 1))
             training_set_scaled = sc.fit_transform(training_set)
             X_train = []
             y_train = []
-            for i in range(60, len(TrainData)):
-                X_train.append(training_set_scaled[i - 60:i, 0])
+            for i in range(predictOn, TrainLen):
+                X_train.append(training_set_scaled[i - predictOn:i, 0])
                 y_train.append(training_set_scaled[i, 0])
             X_train, y_train = np.array(X_train), np.array(y_train)
             X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
@@ -190,26 +222,27 @@ if __name__ == "__main__":
     # first input is the training set and ouptut of prediction which is compared to ytrain
     # the next inout is the y train which is the comparison of the
     # batch size is the size of batch going into
-            regressor.fit(X_train, y_train, epochs=50, batch_size=100)
+            regressor.fit(X_train, y_train, epochs=50, verbose=2, use_multiprocessing=True) #batch_size=100,
+            print("--- %s seconds ---" % (time.time() - StartTime))
         except:
             print("Failed at epochs")
         try:
             real_stock_price = TestData.iloc[:, 4:5].values
             dataset_total = pd.concat((TrainData['close'], TestData['close']), axis=0)
-            inputs = dataset_total[len(dataset_total) - len(TestData) -60:].values
+            inputs = dataset_total[len(dataset_total) - len(TestData) -predictOn:].values
             inputs = inputs.reshape(-1, 1)
             inputs = sc.transform(inputs)
             X_test = []
         # info foroutput the 60 days past to predict the next 20 days.
-            for i in range(60, 66):
-                X_test.append(inputs[i - 60:i, 0])
+            for i in range(predictOn, predictOn + TestLen):
+                X_test.append(inputs[i - predictOn:i, 0])
             X_test = np.array(X_test)
             X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
             predicted_stock_price = regressor.predict(X_test)
         # get original scale of predicted values
             predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 
-            predicted_length = len(predicted_stock_price)-1
+            predicted_length = len(predicted_stock_price)
             # trend up == 1; trend down == 0; no change == 2
             predicted_trend = 0
             real_trend = 0
@@ -240,9 +273,9 @@ if __name__ == "__main__":
             print("Accuracy: " + str(percent_accurate) + "%")
 
         # Calculating accuracy
-            plt.plot(real_stock_price, color='red', label='Real ' + StockSym.get(item) + ' Stock Price')
-            plt.plot(predicted_stock_price, color='blue', label='Predicted ' + StockSym.get(item) + ' Price')
-            plt.title(StockSym.get(item) +' Stock Price Prediction')
+            plt.plot(real_stock_price, color='red', marker='*', markerfacecolor='red', label='Real ' + StockSym.get(item) + ' Stock Price')
+            plt.plot(predicted_stock_price, color='blue', marker='*', markerfacecolor='blue', label='Predicted ' + StockSym.get(item) + ' Trends')
+            plt.title(StockSym.get(item) +' Stock Price Trend Prediction')
             plt.xlabel('Time in Days')
             plt.ylabel(StockSym.get(item) +' Stock Price')
             plt.legend()
