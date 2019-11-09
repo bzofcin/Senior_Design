@@ -52,6 +52,7 @@ StockSym = {
 "INTU":	"Intuit Inc",
 "ISRG":	"Intuitive Surgical Inc",
 "IDXX":	"IDEXX Laboratories Inc",
+"^IXIC": "NASDAQ Composite",
 "JBHT":	"J.B. Hunt Transport Services Inc",
 "JD":	"JD.com Inc",
 "KLAC":	"KLA Corp",
@@ -101,6 +102,7 @@ StockSym = {
 "XEL":	"Xcel Energy Inc",
 "XLNX":	"Xilinx Inc"
 }
+
 
 StartTime = time.time()
 Today = date.today()
