@@ -13,4 +13,28 @@ class TextCNN(object):
     def __init__(self, sequence_length, num_classes, vocab_size,
                  embedding_size, filter_sizes, num_filters):
         # Placeholders for input, output and dropout.
+        # tf.placeholder creates a placeholder variable tha twe feed t the network, then execute at train or test time
+        # Second arg is the shape of the input tensor
+        # "None" means that the length of that dimension could be anything
+        # In our case, the first dimension is the batch size. Using none allows the network
+        #   to handle arbitrary batch sizes.
         self.input_x = tf.placeholder(tf.int32, [None, sequence_length], name="input_x")
+        self.input_y = tf.placeholder(tf.float32, [None, num_classes], name="input_y")
+        self.dropout_keep_prob = tf.placeholder(tf.float32, name="droput_keep_prob")
+
+        # Embedding Layer
+        # The first layer is the embedding layer
+        # It maps vocab word indices into low-dimensional vector representations.
+        # Essentially a lookup table we learn from the data
+        # 'tf.device("/cpu:0") forces operations on CPU. Tensorflow defaults to GPU otherwise.
+        #   Embedding implementation currently isn't supported for GPU and throws an error
+        # 'tf.name_scope' creats a new Name Scope with the name "embedding".
+        #   Adds all operations into a top-level node for a nice hierarchy when visualizing network
+        #   on tensorboard.
+        with tf.device('/cpu:0'), tf.name_scope("embedding"):
+            # 'W' is our embedding matrix that we learn during training.
+            W = tf.Variable(
+                tf.random_uniform([vocab_size, embedding_size], -1.0, 1.0), name="W"
+            )
+            self.embedded_chars = tf.nn.embedding_lookup(W, self.input_x)
+            self.embedded_chars_expanded = tf.expand_dims(self.embedded_chars, -1)
