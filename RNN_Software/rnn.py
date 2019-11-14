@@ -10,13 +10,16 @@ import numpy as np
 import pandas as pd
 from sys import argv
 import os
+import time
 
-BADTESTS  = "./Data Mining/Stock_Data/"
+start_time = time.time()
+
+BADTESTS  = "../Data Mining/Stock_Data/"
 
 mylist = os.listdir(BADTESTS)
 #print (1)
-num1 = int(argv[1])
-#num1 = 1
+#num1 = int(argv[1])
+num1 = 1
 print("Running " + mylist[num1] + "from " + str(num1))
 # Importing the training set
 #only numpy arrays can be input arrays for keras 
@@ -119,7 +122,7 @@ regressor.compile(optimizer = 'adam', loss = 'mean_squared_error')
 #the next inout is the y train which is the comparison of the 
 #batch size is the size of batch going into
 print("regressor.fit is running")
-regressor.fit(X_train, y_train, epochs =1, batch_size = 36, verbose=2, use_multiprocessing=False)
+regressor.fit(X_train, y_train, epochs =100, batch_size = 32, verbose=2, use_multiprocessing=False)
 
 
 
@@ -149,6 +152,13 @@ X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 predicted_stock_price = regressor.predict(X_test)
 #get original scale of predicted values 
 predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+
+# Output runtime
+print("--- %s seconds ---" % (time.time() - start_time))
+
+from accuracy_stats import calculate_accuracy
+
+calculate_accuracy(predicted_stock_price, real_stock_price)
 
 # Visualising the results
 # import matplotlib.pyplot as plt

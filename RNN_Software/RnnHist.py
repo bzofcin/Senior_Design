@@ -127,8 +127,8 @@ def GetData(stock):
     #The method gets the data from a specific stock and keeps the data as far back as the histyears
     #parameter = the key, value pair from StockSym
     #returns a dataframe of the current stocks to stocks starting at histyears
-    histyears = 5
-    front = "./Stock_Data/"
+    histyears = 10
+    front = "../Data Mining/Stock_Data/"
     end = ".csv"
     filePath = front + stock + end
     today = date.today();
@@ -222,7 +222,7 @@ if __name__ == "__main__":
     # first input is the training set and ouptut of prediction which is compared to ytrain
     # the next inout is the y train which is the comparison of the
     # batch size is the size of batch going into
-            regressor.fit(X_train, y_train, epochs=50, verbose=2, use_multiprocessing=True) #batch_size=100,
+            regressor.fit(X_train, y_train, epochs=100, batch=32, verbose=2, use_multiprocessing=True) #batch_size=100,
             print("--- %s seconds ---" % (time.time() - StartTime))
         except:
             print("Failed at epochs")
@@ -242,35 +242,9 @@ if __name__ == "__main__":
         # get original scale of predicted values
             predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 
-            predicted_length = len(predicted_stock_price)
-            # trend up == 1; trend down == 0; no change == 2
-            predicted_trend = 0
-            real_trend = 0
-            total = 0
-            accurate = 0
-            percent_accurate = 0
-            for i in range(1, predicted_length):
-                if predicted_stock_price[i] > predicted_stock_price[i - 1]:
-                    predicted_trend = 1
-                elif predicted_stock_price[i] < predicted_stock_price[i - 1]:
-                    predicted_trend = 0
-                elif predicted_stock_price[i] == predicted_stock_price[i - 1]:
-                    predicted_trend = 2
+            from accuracy_stats import calculate_accuracy
 
-                if real_stock_price[i] > real_stock_price[i - 1]:
-                    real_trend = 1
-                elif real_stock_price[i] < real_stock_price[i - 1]:
-                    real_trend = 0
-                elif real_stock_price[i] == real_stock_price[i - 1]:
-                    real_trend = 2
-
-                if predicted_trend == real_trend:
-                    accurate += 1
-
-                total += 1
-
-            percent_accurate = (accurate / total) * 100
-            print("Accuracy: " + str(percent_accurate) + "%")
+            calculate_accuracy(predicted_stock_price, real_stock_price)
 
         # Calculating accuracy
             plt.plot(real_stock_price, color='red', marker='*', markerfacecolor='red', label='Real ' + StockSym.get(item) + ' Stock Price')

@@ -27,14 +27,18 @@ epoch = 5000
 # learning rate
 lr = 0.1
 # number of features in data set
+# .shape[1] shapes the inputlayer to have the same dimensions
+# as an X matrix row, in this case a 3x1 matrix, or 3 neurons
 inputlayer_neurons = X.shape[1]
 # number of hidden layers neurons
 hiddenlayer_neurons = 3
 # number of neurons at output layer
+# Binary output so only one output neuron
 output_neurons = 1
 
 # initializing weight and bias
 # weights matrix
+# Weights for input neurons and hidden layer neurons
 wh = np.random.uniform(size=(inputlayer_neurons, hiddenlayer_neurons))
 # bias array
 bh = np.random.uniform(size=(1, hiddenlayer_neurons))
