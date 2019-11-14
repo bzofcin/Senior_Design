@@ -148,7 +148,7 @@ if __name__ == "__main__":
     #datepredict is how many days to predict.  Used to split the data in to test and train data
     #By choosing the datepredict of historical stocks, the number of days that will be predicted
     #may not line up due to historical stock values not being updated for weekends and holidays.
-    datepredict = 10
+    datepredict = 30
     #predictOn is the interval of days that is used to train the RNN (60 was the set day before
     predictOn = 60
     #splitPoint gives the date to split the train and test data
@@ -222,7 +222,7 @@ if __name__ == "__main__":
     # first input is the training set and ouptut of prediction which is compared to ytrain
     # the next inout is the y train which is the comparison of the
     # batch size is the size of batch going into
-            regressor.fit(X_train, y_train, epochs=100, batch=32, verbose=2, use_multiprocessing=True) #batch_size=100,
+            regressor.fit(X_train, y_train, epochs=100, verbose=2, use_multiprocessing=True) #batch_size=100,
             print("--- %s seconds ---" % (time.time() - StartTime))
         except:
             print("Failed at epochs")
