@@ -127,7 +127,7 @@ def GetData(stock):
     #The method gets the data from a specific stock and keeps the data as far back as the histyears
     #parameter = the key, value pair from StockSym
     #returns a dataframe of the current stocks to stocks starting at histyears
-    histyears = 10
+    histyears = 20
     front = "../Data Mining/Stock_Data/"
     end = ".csv"
     filePath = front + stock + end
