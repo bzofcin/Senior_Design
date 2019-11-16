@@ -9,10 +9,10 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.sessions.models import Session
 from django.contrib.auth.decorators import login_required
-from .models import myusers
+
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from .forms import RegisterForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, auth
 
 import hmac, base64, struct, hashlib, time
 import crypt, getpass, pwd
@@ -20,22 +20,23 @@ import urllib
 import json
 import datetime
 
-from .models import users
+#import feedparser
 
 def login(request):
 
-
     if request.method == 'POST':
-        user = myusers()
-        username = request.POST['username'].strip()
+        form = AuthenticationForm(request=request, data=request.POST)
+        username = request.POST['username']
         password = request.POST['password']
-        #password_hash = crypt.crypt(raw_password, 's0mRIdlKvIghsds131dsa9jlasdfj')
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(username=username, password=password)
         if user is not None:
-           login(request)
-           return redirect('stockpicker:myportfolio')
+            auth.login(request, user)
+            return redirect('stockpicker/myportfolio')
+        else:
+            return render(request,'accounts/login.html', {'message': 'Wrong Username and Password', 'status' : 1})
 
-    return render(request,'accounts/login.html',{})
+    form = AuthenticationForm()
+    return render(request,'accounts/login.html',{'status' : 0, 'message': ''})
 
 
 def loggedIn(request):
@@ -48,7 +49,7 @@ def registeration(request):
         form = UserCreationForm(request.username, request.POST)
         if form.is_valid():
             user = form.save()
-            #update_session_auth_hash(request, user)  # Important!
+            update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'New Account Added!')
             return redirect('login')
 
@@ -57,7 +58,7 @@ def registeration(request):
 
 
 
-    return render(request,'accounts/registration.html', {'authenticated': False, 'pass': 'Empty' })
+    return render(request,'accounts/registration.html', {})
 
 
 def register(request):
@@ -66,34 +67,25 @@ def register(request):
 
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = RegisterForm(request.POST)
+        form = UserCreationForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
+            user = form.save()
             if User.objects.filter(username=form.cleaned_data['username']).exists():
-                return render(request, template, {
-                    'form': form,
+                return render(request, 'accounts/registration.html', {
                     'error_message': 'Username already exists.'
                 })
             else:
-                # Create the user:
-                user = User.objects.create_user(
-                    form.cleaned_data['username'],
-                    form.cleaned_data['password']
-                )
-                user.save()
-
-                # Login the user
-                login(request)
-
+                username = form.cleaned_data.get('username')
+                raw_password = form.cleaned_data.get('password')
+                user = authenticate(username=username, password=raw_password)
+                print("signup authencticate", user)
+                login(request, user)
                 # redirect to accounts page:
                 return redirect('/stockpicker/myportfolio')
 
-   # No post data availabe, let's just show the page.
-    else:
-        form = RegisterForm()
 
-
-    return render(request,'accounts/registration.html', {'authenticated': False, 'form': form })
+    return render(request,'accounts/registration.html', {'authenticated': False })
 
 def about(request):
 
