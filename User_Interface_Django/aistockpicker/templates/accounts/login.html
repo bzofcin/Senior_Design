@@ -4,46 +4,66 @@
 
 <div class="container">
 
-    <div class="row mb-5">
-        <div class="col-xs-12">
-            <h1>Sign In</h1>
-        </div>
-    </div>
 
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-sm-6">
             <div class="row mb-5">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                                <h5 class="card-title">Login</h5>
+                                <h5 class="card-title">Sign In</h5>
 
                                 <p class="card-text">
 
+                                    {% if status == 1 %}
+                                    <div class="alert alert-danger">
+                                      <strong><i class="fa fa-warning" style="color:red"></i> Error! </strong>{{ message }}
+                                    </div>
+
+                                    {% endif %}
                                     <article class="card-body mx-auto" style="max-width: 80%;">
-                                        <form>
-                                            <div class="form-group input-group">
+                                    <form method="POST">
+                                    {% csrf_token %}
+                                     <div class="row">
+                                        <div class="col">
+                                           <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                                 </div>
-                                                <input name="" class="form-control" name="username" placeholder="User Name" type="text">
+                                                <input class="form-control" name="username" id="username"  placeholder="User Name" type="text">
                                             </div>
-
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col">
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                                 </div>
-                                                <input class="form-control" name="password" placeholder="Your Password" type="password">
+                                                <input class="form-control" name="password" id="password" placeholder="Your Password" type="password">
                                             </div>
+                                          </div>
+                                        </div>
 
+                                        <div class="row">
+                                          <div class="col-4">
                                             <div class="form-group">
-                                                <a href="/stockpicker/main" class="btn btn-primary btn-block"> Login  </a>
+                                                <button type="submit" class="btn btn-primary btn-block"> Login  </button>
                                             </div> <!-- form-group// -->
+                                          </div>
+                                        </div>
 
-                                            <p class="text-center">Do you need to register? <a href="/accounts/register" class="btn btn-warning" style="color:white"><i class="fa fa-user"></i> Register</a>
+                                        <div class="row">
+                                          <div class="col">
 
-                                            </p>
-                                        </form>
+                                          <p class="text-center">Do you need to <a href="/accounts/register" style="color:blue">Register</a>?
+                                        </div>
+                                     </div>
+
+
+                                        </p>
+
+                                    </form>
                                     </article>
                                 </p>
                         </div>
