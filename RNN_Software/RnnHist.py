@@ -20,7 +20,7 @@ from sys import argv
 #Directory is where the Predicted Data will be placed
 #if you run it as is, the Predicted folder will be created inside RNN_Software
 #Consider where you would like to store that data before running
-Stock_Dir = "./Stock_Data"
+Stock_Dir = "../Data Mining/Stock_Data"
 Stocks = os.listdir(Stock_Dir)
 Directory = "Predicted_Data"
 
