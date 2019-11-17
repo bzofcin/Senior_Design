@@ -9,8 +9,51 @@
                 .card-text {
                     font-size: 18px;
                 }
+                .page-footer {
+                  position: fixed;
+                  left: 0;
+                  height: 40px;
+                  bottom: 0;
+                  width: 100%;
+                  background-color: black;
+                  color: white;
+                  text-align: center;
+                }
+
+                .navbar {
+                  z-index: 100;
+                  overflow: hidden;
+                  background-color: #333;
+                  position: fixed; /* Set the navbar to fixed position */
+                  top: 0; /* Position the navbar at the top of the page */
+                  width: 100%; /* Full width */
+                }
+
+                /* Links inside the navbar */
+                .navbar a {
+                  float: left;
+                  display: block;
+                  color: #f2f2f2;
+                  text-align: center;
+                  padding: 10px 12px;
+                  text-decoration: none;
+                }
+
+                /* Change background on mouse-over */
+                .navbar a:hover {
+                  background: #ddd;
+                  color: black;
+                }
+
+                /* Main content */
+                .main {
+                    z-index: -1;
+                  margin-top: 100px; /* Add a top margin to avoid content overlay */
+                }
+
             </style>
         </head>
+
 
         <body>
 
@@ -23,16 +66,17 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     {% if authenticated %}
-                       <a href="/stockpicker/main" class="nav-item active nav-link"><i class="fa fa-list"></i> </a>
                        <a href="/stockpicker/portfolio"  class="nav-item active nav-link"><i class="fa fa-bar-chart"></i></a>
+                       <a href="/stockpicker/main" class="nav-item active nav-link"><i class="fa fa-list"></i> </a>
+                       <a href="/stockpicker/research"  class="nav-item active nav-link"><i class="fa fa-search"></i></a>
                     {% else %}
                        <a href="/" class="nav-item active nav-link"><i class="fa fa-home"></i> Home</a>
                     {% endif %}
                 </ul>
-
+d
                 <form action="#" method="post" class="form-inline my-2 mylg-0">
                     {% if authenticated %}
-                        <a href="/" class="btn btn-danger" ><i class="fa fa-sign-out"></i> Logout</a>
+                        <a href="/accounts/logout" class="btn btn-danger" ><i class="fa fa-sign-out"></i> Logout</a>
                     {% else %}
                         <a href="/accounts/register" class="btn btn-danger mr-3" ><i class="fa fa-user"></i> Register</a>
                         <a href="/accounts/login" class="btn btn-success mr-3" ><i class="fa fa-sign-in"></i> Login</a>
@@ -43,12 +87,26 @@
         </nav>
 
 
-        <div id="main">
+        <div class="main">
             {% block content %}{% endblock %}
         </div>
 
+        <!-- Footer -->
+        <footer class="page-footer font-small special-color-dark pt-1">
+
+          <!-- Copyright -->
+          <div class="footer-copyright text-center">© 2019 Copyright:
+            Dephli Stock Picker
+          </div>
+          <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+
         <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
         <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+
     </body>
 </html>
 

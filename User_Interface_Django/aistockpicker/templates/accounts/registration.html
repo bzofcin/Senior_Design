@@ -2,64 +2,6 @@
 
 {% block content %}
 
-<style>
-body{
-
-	}
-	.contact{
-		padding: 4%;
-		height: 400px;
-	}
-	.col-md-3{
-		background: #ff9b00;
-		padding: 4%;
-		border-top-left-radius: 0.5rem;
-		border-bottom-left-radius: 0.5rem;
-	}
-	.contact-info{
-		margin-top:10%;
-	}
-	.contact-info img{
-		margin-bottom: 15%;
-	}
-	.contact-info h2{
-		margin-bottom: 10%;
-	}
-	.col-md-9{
-		background: #fff;
-		padding: 3%;
-		border-top-right-radius: 0.5rem;
-		border-bottom-right-radius: 0.5rem;
-	}
-	.contact-form label{
-		font-weight:600;
-	}
-	.pass_show{position: relative}
-
-.pass_show .ptxt {
-
-position: absolute;
-
-top: 50%;
-
-right: 10px;
-
-z-index: 1;
-
-color: #f36c01;
-
-margin-top: -10px;
-
-cursor: pointer;
-
-transition: .3s ease all;
-
-}
-
-.pass_show .ptxt:hover{color: #333333;}
-
-</style>
-
 <div class="container">
 
         <div class="row mb-5">
@@ -75,43 +17,47 @@ transition: .3s ease all;
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Registration</h5>
+                                    <h5 class="card-title mb-5">Registration</h5>
 
+                                    {% if status == 1 %}
+                                    <div class="alert alert-danger">
+                                      <strong><i class="fa fa-warning" style="color:red"></i> Error! </strong>{{ message }}
+                                    </div>
+                                    {% endif %}
                                         <p class="card-text">
-
-                                            <article class="card-body mx-auto" style="max-width: 80%;">
-                                                 <form role="form" id="contact-form" class="contact-form" method="POST">
-                                                    {% csrf_token %}
-
-                                                    <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                                                        </div>
-                                                        <input name="email" class="form-control" placeholder="Email address" type="email" required>
+                                          <form method="post">
+                                             {% csrf_token %}
+                                               <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                                     </div>
+                                                    <input class="form-control" name="first_name" id="first_name"  placeholder="First Name" type="text">
+                                                </div>
 
-                                                    <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <i class="fa fa-key"></i> </span>
-                                                        </div>
-                                                        <input name="password" class="form-control" id="paw"  placeholder="Create password" type="password" required>
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                                     </div>
+                                                    <input name="username" class="form-control" placeholder="User Name" type="text">
+                                                </div>
 
-                                                    <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <i class="fa fa-key"></i> </span>
-                                                        </div>
-                                                        <input name="confirmpassword" class="form-control" placeholder="Repeat password" type="password" required>
-                                                    </div> <!-- form-group// -->
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <i class="fa fa-key"></i> </span>
+                                                    </div>
+                                                    <input name="password1" class="form-control" placeholder="Password" type="password">
+                                                </div>
 
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
-                                                    </div> <!-- form-group// -->
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <i class="fa fa-key"></i> </span>
+                                                    </div>
+                                                    <input name="password2" class="form-control" placeholder="Confirm Password" type="password">
+                                                </div>
+                                            <button class="btn btn-danger" type="submit">Sign up</button>
+                                          </form>
 
-                                                    <p class="text-center">Have an account? <a href="/accounts/login" class="btn btn-success" style="color:white"><i class="fa fa-sign-in"></i> Login</a>
-                                                    </p>
-                                                </form>
-                                            </article>
+
                                         </p>
                                 </div>
                             </div>
@@ -196,16 +142,14 @@ $('#contact-form').bootstrapValidator({
     });
 
 $(document).ready(function(){
-    $('.pass_show').append('<span class="ptxt">Show</span>');
+    $('#pass2').focusout(function(){
+        var pass = $('#password1').val();
+        var pass2 = $('#password2').val();
+        if(pass != pass2){
+            alert('the passwords didn\'t match!');
+        }
+
     });
-
-
-    $(document).on('click','.pass_show .ptxt', function(){
-
-    $(this).text($(this).text() == "Show" ? "Hide" : "Show");
-
-    $(this).prev().attr('type', function(index, attr){return attr == 'password' ? 'text' : 'password'; });
-
 });
 </script>
 

@@ -3,11 +3,8 @@
 {% block content %}
 
 
+
 <div class="container">
-
-
-
-<div class="container-fluid">
 
       <div class="row">
         <div class="col-sm-12">
@@ -30,7 +27,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"> <i class="fa fa-sitemap"></i> </span>
                                                     </div>
-                                                    <input name="company" id="company" class="form-control" placeholder="Stock" type="text" maxlength="3">
+                                                    <input name="company" id="company" class="form-control" placeholder="Stock" type="text" maxlength="4" style="text-transform: uppercase">
                                                 </div>
                                             </div>
                                             <div class="col-3">
@@ -39,7 +36,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"> <i class="fa fa-sitemap"></i> </span>
                                                     </div>
-                                                    <input name="shares" id="shares"  class="form-control" placeholder="Shares" type="text" maxlength="3">
+                                                    <input name="shares" id="shares"  class="form-control" placeholder="Shares" type="text" maxlength="7">
                                                 </div>
                                             </div>
                                         </div>
@@ -65,13 +62,10 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<h1>
+			<h3>
 				Your Portfolio
-			</h1>
+			</h3>
 
-			    <h3>
-			        Username
-			    </h3>
 			<table class="table table-condensed table-hover">
 				<thead>
 					<tr>
@@ -115,105 +109,19 @@
                             {{ item.purchase_price }}
                         </td>
                         <td>
-                            {{ item.timestamp|date:"M d, Y" }}
-                        </td>
-                        <td>
-                            {{ item.pub_date|date:"M d, Y" }}
+                            {{ item.purchase_timestamp|date:"M d, Y" }}
                         </td>
                         <td>
                             Calculated Value
                         </td>
                         <td>
-                            <a href="delete/{{ item.id }}" class="btn btn-danger">Sell</a>
+                            <a href="{% url 'sell' item.id %}" class="btn btn-danger">Sell</a>
                         </td>
                     </tr>
                 {% endfor %}
 
-					<tr>
-						<td>
-							GGL
-						</td>
-						<td>
-							Google
-						</td>
-						<td>
-							100
-						</td>
-						<td>
-							$128.50
-						</td>
-
-						<td>
-						    $12,850.00
-						 </td>
-					</tr>
-					<tr>
-						<td>
-							GGL
-						</td>
-						<td>
-							Google
-						</td>
-						<td>
-							100
-						</td>
-						<td>
-							$128.50
-						</td>
-
-						<td>
-						    $12,850.00
-						 </td>
-					</tr>
-					<tr>
-						<td>
-							GGL
-						</td>
-						<td>
-							Google
-						</td>
-						<td>
-							100
-						</td>
-						<td>
-							$128.50
-						</td>
-
-						<td>
-						    $12,324.00
-						 </td>
-					</tr>
-					<tr>
-						<td>
-							GGL
-						</td>
-						<td>
-							Google
-						</td>
-						<td>
-							100
-						</td>
-						<td>
-							$128.50
-						</td>
-
-						<td>
-						   $12,850.00
-						 </td>
-					</tr>
-
 				</tbody>
 			</table>
-			<div class="row">
-				<div class="col-md-12">
-					<p>
-						You may logout <a class="logout" href="#">here.</a>
-					</p>
-					<p>
-						You may change your password <a class="logout" href="#">here.</a>
-					</p>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>

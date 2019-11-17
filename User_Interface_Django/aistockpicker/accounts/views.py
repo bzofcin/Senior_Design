@@ -19,8 +19,33 @@ import crypt, getpass, pwd
 import urllib
 import json
 import datetime
-
+from urllib import request
+#from .rssfeed import rssapi
+import feedparser
+locu_api = 'YOUR KEY HERE'
 #import feedparser
+
+def test(request):
+    return render(request,'accounts/test.html', {})
+
+
+def readapi(request):
+
+   #rsf = rssapi.getfeed('')
+    #locality = query.replace(' ', '%20')
+    #final_url = url + "&locality=" + locality + "&category=restaurant"
+    #final_url = url + "&category=restaurant"
+    api_key = locu_api
+    #url = 'https://api.locu.com/v1_0/venue/search/?api_key=' + api_key
+    url = 'https://www.nasdaq.com/feed/rssoutbound?symbol=AMZN'
+    #url2 = 'https://jsonplaceholder.typicode.com/posts'
+    json_obj = feedparser.parse(url)
+    #data = json.load(json_obj)
+
+    #for item in data['objects']:
+        #print(item['name'], item['phone']
+    return render(request,'stockpicker/rssdump.html', {'data': json_obj})
+
 
 def login(request):
 
@@ -46,6 +71,27 @@ def loggedIn(request):
 def registeration(request):
 
     if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = UserCreationForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            user = form.save()
+            if User.objects.filter(username=form.cleaned_data['username']).exists():
+                return render(request, 'accounts/registration.html', {
+                    'status': 1, 'message': 'Username already exists.'
+                })
+            else:
+                username = form.cleaned_data.get('username')
+                raw_password = form.cleaned_data.get('password')
+                first_name = form.cleaned_data.get('first_name')
+                user = authenticate(username=username, password=raw_password)
+                print("signup authencticate", user)
+                login(request, user)
+                # redirect to accounts page:
+                return redirect('/stockpicker/myportfolio')
+
+
+    if request.method == 'POST':
         form = UserCreationForm(request.username, request.POST)
         if form.is_valid():
             user = form.save()
@@ -66,6 +112,12 @@ def register(request):
      # if this is a POST request we need to process the form data
 
     if request.method == 'POST':
+
+
+        #password1 = form.cleaned_data.get('password')
+        #password2 = form.cleaned_data.get('password')
+
+
         # create a form instance and populate it with data from the request:
         form = UserCreationForm(request.POST)
         # check whether it's valid:
@@ -73,11 +125,12 @@ def register(request):
             user = form.save()
             if User.objects.filter(username=form.cleaned_data['username']).exists():
                 return render(request, 'accounts/registration.html', {
-                    'error_message': 'Username already exists.'
+                    'status': 1, 'message': 'Username already exists.'
                 })
             else:
                 username = form.cleaned_data.get('username')
                 raw_password = form.cleaned_data.get('password')
+                first_name = form.cleaned_data.get('first_name')
                 user = authenticate(username=username, password=raw_password)
                 print("signup authencticate", user)
                 login(request, user)
