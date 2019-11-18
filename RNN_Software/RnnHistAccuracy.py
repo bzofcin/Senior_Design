@@ -11,8 +11,8 @@ class Accuracy:
     def single_epoch_method(self, prediction_dir, stocks_dir):
         prediction_sets = os.listdir(prediction_dir)
         actual_sets = os.listdir(stocks_dir)
-        print(actual_sets)
-        print(prediction_sets)
+        # print(actual_sets)
+        # print(prediction_sets)
 
         # get dates to pull actual prices
         # get predicted prices
@@ -22,7 +22,7 @@ class Accuracy:
             prediction_set = pd.read_csv(item)
             prediction_dates = prediction_set.iloc[:, 0]
             # print(prediction_dates)
-            prediction_prices = prediction_set.iloc[:,1]
+            prediction_prices = prediction_set.iloc[:, 1]
             # print(prediction_prices)
 
         # get actual prices
@@ -32,18 +32,24 @@ class Accuracy:
             starting_date = prediction_dates[0]
             num_days = len(prediction_dates)
             num_days -= 1
+            # print(actual_set)
             print("Number of days: " + str(num_days))
             print("Starting Date: " + str(starting_date))
+
             # starting_row: searches timestamp column for row containing specific date,
             #   in this case the first date in the predictions
             # .index[0] returns just the integer value of the row
             # !!!! For some reason this method returns a value 2 less than the row number
             #   when viewed in excel or pycharm !!!!
-            starting_row = actual_set.loc[actual_set['timestamp'] == starting_date].index[0]
+            print("Actual Prices: ")
+            print(actual_set)
+            starting_row = actual_set.loc[actual_set['timestamp'] == starting_date].index
+            print("Starting Row: ")
+            print(starting_row)
             # num_days -= 3
-            ending_row = starting_row - num_days
+            ending_row = starting_row + num_days
             # Column 4 contains closing price
-            actual_prices = actual_set.iloc[ending_row:starting_row, 4]
+            actual_prices = actual_set.iloc[starting_row:ending_row, 4]
             #actual_prices.reindex(index=actual_prices.index[::-1])
             print("Start: " + str(starting_row))
 
@@ -89,7 +95,8 @@ class Accuracy:
         print("Accuracy: " + str(percent_accurate) + "%")
 
 
-stocks_dir = "../Data Mining/TestDir/"
+# stocks_dir = "../RNN_Experiments/Data Mining/Stock_Data_Indexed/"
+stocks_dir = "../RNN_Experiments/Data Mining/TestDir/"
 prediction_dir = "../RNN_Experiments/Predicted_Data/E_1_PO_30_DP_1_H_5/"
 accuracy = Accuracy(prediction_dir, stocks_dir)
 accuracy.single_epoch_method(prediction_dir, stocks_dir)
