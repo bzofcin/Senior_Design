@@ -16,10 +16,12 @@ start_time = time.time()
 
 BADTESTS  = "../Data Mining/Stock_Data/"
 
+start_time = time.time()
+#print(int(argv[1]))
 mylist = os.listdir(BADTESTS)
 #print (1)
-#num1 = int(argv[1])
-num1 = 2
+num1 = int(argv[1])
+#num1 = 1
 
 print("Running " + mylist[num1] + "from " + str(num1))
 # Importing the training set
@@ -30,21 +32,24 @@ test = "NASDAQ Composite.csv"
 aditional_data = pd.read_csv(BADTESTS + test)
 dataset_train['NasOpen'] = aditional_data['open']
 dataset_train['NasClose'] = aditional_data['close']
-
+dataset_train['NasHigh'] = aditional_data['high']
+#dataset_train = dataset_train.drop(['volume'], axis = 1)
 test = mylist[num1]
-dataset_train.drop(dataset_train.tail(7).index,inplace=True)
-dataset_train.sort_values(by="timestamp", inplace=True,ascending=True)
 
+n_future = 7  # Number of days you want to predict into the future
+n_past = 30  # Number of past days you want to use to predict the future
+
+dataset_train.drop(dataset_train.tail(n_future).index,inplace=True)
+dataset_train.sort_values(by="timestamp", inplace=True,ascending=True)
+print(dataset_train.head(2))
 # this is training on the first opening price
 # need to end range at n+1 because the uperbound is excluded
 # [:] gets entire column
 #.values creats a numpy array
 #training_set = dataset_train.iloc[:, 3:4].values
 #training_set = dataset_train.iloc[:, 2:3].values
-cols = list(dataset_train)[2:9]
-
+cols = list(dataset_train)[1:10]
 # Preprocess data for training by removing all commas
-print(dataset_train['timestamp'].tail(7) )
 dataset_train = dataset_train[cols].astype(str)
 for i in cols:
     for j in range(0, len(dataset_train)):
@@ -93,10 +98,10 @@ y_train = []
 # Creating a data structure with 60 timesteps and 1 output
 
 n_future = 7  # Number of days you want to predict into the future
-n_past = 60  # Number of past days you want to use to predict the future
+n_past = 30  # Number of past days you want to use to predict the future
 
 for i in range(n_past, len(training_set_scaled) - n_future + 1):
-    X_train.append(training_set_scaled[i - n_past:i, 0:7])
+    X_train.append(training_set_scaled[i - n_past:i, 0: 9 ])
     y_train.append(training_set_scaled[i + n_future - 1:i + n_future, 1])
 
 
@@ -128,7 +133,7 @@ regressor = Sequential()
 #drop out is used for over filling
 #three args number of units or cells that will be used
 #return sequence needs to be true until you are done stacking layers
-regressor.add(LSTM(units = 50, return_sequences = True, input_shape = (60 , 6)))
+regressor.add(LSTM(units = 50, return_sequences = True, input_shape = (n_past , 8)))
 #20% of ther neurons will be dropped out. this  means that 10 cells wil be ignored out of 50
 regressor.add(Dropout(0.2))
 #dont need to speciy input shape it is alredy specified
@@ -163,12 +168,12 @@ regressor.compile(optimizer = 'adam', loss = 'mean_squared_error')
 #the next inout is the y train which is the comparison of the
 #batch size is the size of batch going into
 
-es = EarlyStopping(monitor='val_loss', mode = 'min', patience=50, verbose=1)
+es = EarlyStopping(monitor='val_loss', mode = 'min', patience=10, verbose=1)
 rlr = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=5, verbose=1)
 mcp = ModelCheckpoint(filepath='weights.h5', monitor='val_loss', verbose=1, save_best_only=True, save_weights_only=True)
 tb = TensorBoard('logs')
 
-history = regressor.fit(X_train, y_train, shuffle=True, epochs=50,
+history = regressor.fit(X_train, y_train, shuffle=True, epochs= 50,
                         callbacks=[es, rlr, mcp, tb], validation_split=0.2, verbose=1, batch_size=64)
 
 # Lets first import the test_set.
@@ -177,16 +182,19 @@ dataset_test.sort_values(by="timestamp", inplace=True,ascending= True)
 y_true = np.array(dataset_test[ 'close'])
 print(dataset_test['timestamp'])
 len1 = len(y_true)
-print(y_true[len1 - 7 : len1 + 1])
-y_true = y_true[len1 - 7 : len1 + 1]
+
+print(y_true[len1 - n_future : len1 + 1])
+
+y_true = y_true[len1 - n_future : len1 + 1]
+
 # Trim the test set to first 12 entries (till the 19th)
-y_true = y_true[0:8]
-predictions = regressor.predict(X_train[-7:])
+y_true = y_true[0:n_future+1]
+predictions = regressor.predict(X_train[-n_future:])
 
 # We skip the 31-Dec, 1-Jan,2-Jan, etc to compare with the test_set
 
 y_pred = sc_predict.inverse_transform(predictions)
-
+print(y_pred)
 hfm, = plt.plot(y_pred, 'r', label='predicted_stock_price')
 hfm2, = plt.plot(y_true, 'b', label='actual_stock_price')
 
@@ -198,7 +206,10 @@ plt.savefig('graph.png', bbox_inches='tight')
 plt.show()
 plt.close()
 # Part 3 - Making the predictions and visualising the results
+print("--- %s seconds ---" % (time.time() - start_time))
+from accuracy_stats import calculate_accuracy
 
+calculate_accuracy(y_pred, y_true)
 # Getting the real stock price of 2017
 #model does not capture spike only trends
 #dataset_test = pd.read_csv(BADTESTS+test)
