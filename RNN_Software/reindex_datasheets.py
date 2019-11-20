@@ -104,11 +104,13 @@ StockSym = {
 
 StockSym1 = {
     "INTC":	"Intel Corp",
-    "XLNX":	"Xilinx Inc"
+    # "XLNX":	"Xilinx Inc"
 }
-data_dir = "../RNN_Experiments/Data Mining/Stock_Data_Test/"
+data_dir = "../RNN_Experiments/Data Mining/TestDir/"
 indexed_dir = "../RNN_Experiments/Data Mining/Stock_Data_Indexed/"
 reversed_dir = r"C:\Users\Terran\Documents\seniorprojectfall2019team7\RNN_Experiments\Data Mining\Stock_Data_Reversed"
+if not os.path.exists(indexed_dir):
+    os.mkdir(indexed_dir)
 if not os.path.exists(reversed_dir):
     os.mkdir(reversed_dir)
 
@@ -122,6 +124,8 @@ for item in StockSym1:
     # print(reversed_df)
     # Save data frame to excel file
     # indexed_df = reversed_df.iloc[:, 1:]
+    if os.path.exists(reversed_dir + StockSym1.get(item) + ".csv"):
+        os.remove(reversed_dir + StockSym1.get(item) + ".csv")
     with open(reversed_dir + StockSym1.get(item) + ".csv", "a") as fp:
         reversed_df.to_csv(fp)
 
@@ -136,6 +140,8 @@ for item in StockSym1:
     indexed_df = df.iloc[:, 1:]
     print(indexed_df)
 
+    if os.path.exists(indexed_dir + StockSym1.get(item) + ".csv"):
+        os.remove(indexed_dir + StockSym1.get(item) + ".csv")
     with open(indexed_dir + StockSym1.get(item) + ".csv", "a") as fp:
         indexed_df.to_csv(fp, index=False)
 
