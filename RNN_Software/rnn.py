@@ -18,7 +18,7 @@ BADTESTS = "../Data Mining/Stock_Data/"
 mylist = os.listdir(BADTESTS)
 # print (1)
 # num1 = int(argv[1])
-num1 = 1
+num1 = 2
 print("Running " + mylist[num1] + "from " + str(num1))
 # Importing the training set
 # only numpy arrays can be input arrays for keras

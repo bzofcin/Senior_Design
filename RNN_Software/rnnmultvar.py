@@ -19,7 +19,7 @@ BADTESTS  = "../Data Mining/Stock_Data/"
 mylist = os.listdir(BADTESTS)
 #print (1)
 #num1 = int(argv[1])
-num1 = 1
+num1 = 2
 
 print("Running " + mylist[num1] + "from " + str(num1))
 # Importing the training set
@@ -32,6 +32,7 @@ dataset_train['NasOpen'] = aditional_data['open']
 dataset_train['NasClose'] = aditional_data['close']
 
 test = mylist[num1]
+dataset_train.drop(dataset_train.tail(7).index,inplace=True)
 dataset_train.sort_values(by="timestamp", inplace=True,ascending=True)
 
 # this is training on the first opening price
@@ -46,7 +47,7 @@ cols = list(dataset_train)[2:9]
 print(dataset_train['timestamp'].tail(7) )
 dataset_train = dataset_train[cols].astype(str)
 for i in cols:
-    for j in range(0, len(dataset_train) - 7):
+    for j in range(0, len(dataset_train)):
         dataset_train[i][j] = dataset_train[i][j].replace(",", "")
 
 dataset_train = dataset_train.astype(float)
@@ -96,7 +97,7 @@ n_past = 60  # Number of past days you want to use to predict the future
 
 for i in range(n_past, len(training_set_scaled) - n_future + 1):
     X_train.append(training_set_scaled[i - n_past:i, 0:7])
-    y_train.append(training_set_scaled[i + n_future - 1:i + n_future, 0])
+    y_train.append(training_set_scaled[i + n_future - 1:i + n_future, 1])
 
 
 X_train, y_train = np.array(X_train), np.array(y_train)
@@ -173,7 +174,7 @@ history = regressor.fit(X_train, y_train, shuffle=True, epochs=50,
 # Lets first import the test_set.
 dataset_test = pd.read_csv(BADTESTS+test)
 dataset_test.sort_values(by="timestamp", inplace=True,ascending= True)
-y_true = np.array(dataset_test[ 'open'])
+y_true = np.array(dataset_test[ 'close'])
 print(dataset_test['timestamp'])
 len1 = len(y_true)
 print(y_true[len1 - 7 : len1 + 1])
