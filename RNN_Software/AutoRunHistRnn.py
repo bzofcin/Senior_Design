@@ -6,7 +6,7 @@ if __name__ == '__main__':
 #Stock_Dir should point to where the Stock_Data is in the directory
 #If running of the repository, location is "../Data Mining/Stock_Data"
 #The filenames will be stored into the list Stocks
-    Stock_Dir = "../Data Mining/Stock_Data/"
+    Stock_Dir = "../Data Mining/TestDir/"
     Stocks = os.listdir(Stock_Dir)
     StockNum = 0
 
