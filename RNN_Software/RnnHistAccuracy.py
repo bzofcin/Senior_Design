@@ -11,8 +11,8 @@ class Accuracy:
     def single_epoch_method(self, prediction_dir, stocks_dir):
         prediction_sets = os.listdir(prediction_dir)
         actual_sets = os.listdir(stocks_dir)
-        # print(actual_sets)
-        # print(prediction_sets)
+        print(actual_sets)
+        print(prediction_sets)
 
         # get dates to pull actual prices
         # get predicted prices
@@ -32,7 +32,7 @@ class Accuracy:
             starting_date = prediction_dates[0]
             num_days = len(prediction_dates)
             num_days -= 1
-            # print(actual_set)
+            #print(actual_set)
             print("Number of days: " + str(num_days))
             print("Starting Date: " + str(starting_date))
 
@@ -41,26 +41,35 @@ class Accuracy:
             # .index[0] returns just the integer value of the row
             # !!!! For some reason this method returns a value 2 less than the row number
             #   when viewed in excel or pycharm !!!!
-            print("Actual Prices: ")
-            print(actual_set)
-            starting_row = actual_set.loc[actual_set['timestamp'] == starting_date].index
-            print("Starting Row: ")
-            print(starting_row)
+            # print("Actual Prices: ")
+            # print(actual_set)
+            starting_row = actual_set.loc[actual_set['timestamp'] == starting_date].index[0]
+            print("Starting Row: " + str(starting_row))
             # num_days -= 3
             ending_row = starting_row + num_days
+            print("ending row: " + str(ending_row))
             # Column 4 contains closing price
+            print("starting price: " + str(actual_set.iloc[starting_row, 4]))
+            print("ending price: " + str(actual_set.iloc[ending_row, 4]))
             actual_prices = actual_set.iloc[starting_row:ending_row, 4]
             #actual_prices.reindex(index=actual_prices.index[::-1])
-            print("Start: " + str(starting_row))
+            # print("actual price: " + str(actual_prices))
+
+        if os.path.exists(stocks_dir + "test.csv"):
+            os.remove(stocks_dir + "test.csv")
+        with open(stocks_dir + "test.csv", "a") as fp:
+            prediction_prices.to_csv(fp, index=True)
 
         # prediction_prices.reindex(index=prediction_prices.index[::-1])
+        testprice = prediction_prices.at[1, 1]
+        print("test: " + str(testprice))
         predicted_stock_price = prediction_prices
         real_stock_price = actual_prices
         print("Predicted: ")
         print(predicted_stock_price)
         print("Actual: ")
         print(real_stock_price)
-        # self.many_epoch_method(predicted_stock_price, real_stock_price)
+        self.many_epoch_method(predicted_stock_price, real_stock_price)
 
     def many_epoch_method(self, predicted_stock_price, real_stock_price):
         # Calculating accuracy
@@ -95,8 +104,8 @@ class Accuracy:
         print("Accuracy: " + str(percent_accurate) + "%")
 
 
-# stocks_dir = "../RNN_Experiments/Data Mining/Stock_Data_Indexed/"
-stocks_dir = "../RNN_Experiments/Data Mining/TestDir/"
+stocks_dir = "../RNN_Experiments/Data Mining/Stock_Data_Indexed/"
+# stocks_dir = "../RNN_Experiments/Data Mining/TestDir/"
 prediction_dir = "../RNN_Experiments/Predicted_Data/E_1_PO_30_DP_1_H_5/"
 accuracy = Accuracy(prediction_dir, stocks_dir)
 accuracy.single_epoch_method(prediction_dir, stocks_dir)
