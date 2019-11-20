@@ -26,9 +26,13 @@ print("Running " + mylist[num1] + "from " + str(num1))
 #only numpy arrays can be input arrays for keras
 test = mylist[num1]
 dataset_train = pd.read_csv(BADTESTS+test)
+test = "NASDAQ Composite.csv"
+aditional_data = pd.read_csv(BADTESTS + test)
+dataset_train['NasOpen'] = aditional_data['open']
+dataset_train['NasClose'] = aditional_data['close']
 
+test = mylist[num1]
 dataset_train.sort_values(by="timestamp", inplace=True,ascending=True)
-
 
 # this is training on the first opening price
 # need to end range at n+1 because the uperbound is excluded
@@ -36,13 +40,13 @@ dataset_train.sort_values(by="timestamp", inplace=True,ascending=True)
 #.values creats a numpy array
 #training_set = dataset_train.iloc[:, 3:4].values
 #training_set = dataset_train.iloc[:, 2:3].values
-cols = list(dataset_train)[2:4]
+cols = list(dataset_train)[2:9]
 
 # Preprocess data for training by removing all commas
 print(dataset_train['timestamp'].tail(7) )
 dataset_train = dataset_train[cols].astype(str)
 for i in cols:
-    for j in range(0, len(dataset_train)):
+    for j in range(0, len(dataset_train) - 7):
         dataset_train[i][j] = dataset_train[i][j].replace(",", "")
 
 dataset_train = dataset_train.astype(float)
@@ -91,7 +95,7 @@ n_future = 7  # Number of days you want to predict into the future
 n_past = 60  # Number of past days you want to use to predict the future
 
 for i in range(n_past, len(training_set_scaled) - n_future + 1):
-    X_train.append(training_set_scaled[i - n_past:i, 0:2])
+    X_train.append(training_set_scaled[i - n_past:i, 0:7])
     y_train.append(training_set_scaled[i + n_future - 1:i + n_future, 0])
 
 
@@ -123,7 +127,7 @@ regressor = Sequential()
 #drop out is used for over filling
 #three args number of units or cells that will be used
 #return sequence needs to be true until you are done stacking layers
-regressor.add(LSTM(units = 50, return_sequences = True, input_shape = (60 , 2)))
+regressor.add(LSTM(units = 50, return_sequences = True, input_shape = (60 , 6)))
 #20% of ther neurons will be dropped out. this  means that 10 cells wil be ignored out of 50
 regressor.add(Dropout(0.2))
 #dont need to speciy input shape it is alredy specified
@@ -163,13 +167,13 @@ rlr = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=5, verbose=1)
 mcp = ModelCheckpoint(filepath='weights.h5', monitor='val_loss', verbose=1, save_best_only=True, save_weights_only=True)
 tb = TensorBoard('logs')
 
-history = regressor.fit(X_train, y_train, shuffle=True, epochs=10,
+history = regressor.fit(X_train, y_train, shuffle=True, epochs=50,
                         callbacks=[es, rlr, mcp, tb], validation_split=0.2, verbose=1, batch_size=64)
 
 # Lets first import the test_set.
 dataset_test = pd.read_csv(BADTESTS+test)
 dataset_test.sort_values(by="timestamp", inplace=True,ascending= True)
-y_true = np.array(dataset_test[ 'close'])
+y_true = np.array(dataset_test[ 'open'])
 print(dataset_test['timestamp'])
 len1 = len(y_true)
 print(y_true[len1 - 7 : len1 + 1])
