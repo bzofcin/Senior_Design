@@ -26,6 +26,7 @@ StockSym = {
 "CERN":	"Cerner Corp",
 "CHKP":	"Check Point Software Technologies Ltd",
 "CHTR":	"Charter Communications Inc",
+"CTRP":	"Ctrip.Com International Ltd",
 "CTAS":	"Cintas Corp",
 "CSCO":	"Cisco Systems Inc",
 "CTXS":	"Citrix Systems Inc",
@@ -75,6 +76,7 @@ StockSym = {
 "NXPI":	"NXP Semiconductors NV",
 "ORLY":	"O'Reilly Automotive Inc",
 "PAYX":	"Paychex Inc",
+"PCAR":	"Paccar Inc",
 "BKNG":	"Booking Holdings Inc",
 "PYPL":	"PayPal Holdings Inc",
 "PEP":	"PepsiCo Inc.",
@@ -84,6 +86,7 @@ StockSym = {
 "SIRI":	"Sirius XM Holdings Inc",
 "SWKS":	"Skyworks Solutions Inc",
 "SBUX":	"Starbucks Corp",
+"SYMC":	"Symantec Corp",
 "SNPS":	"Synopsys Inc",
 "TTWO":	"Take-Two Interactive Software Inc",
 "TSLA":	"Tesla Inc",
@@ -103,21 +106,31 @@ StockSym = {
 }
 
 StockSym1 = {
+    "AMD":	"Advanced Micro Devices Inc",
+    "AAPL":	"Apple Inc",
     "INTC":	"Intel Corp",
+    "MCHP":	"Microchip Technology Inc",
+    "MU":	"Micron Technology Inc",
+    "MSFT":	"Microsoft Corp",
     "NVDA":	"NVIDIA Corp",
+    "NXPI":	"NXP Semiconductors NV",
+    "QCOM":	"Qualcomm Inc",
     "XLNX":	"Xilinx Inc"
 }
-data_dir = "../Data Mining/Stock_Data/"
-indexed_dir = "../Data Mining/Stock_Data_Indexed/"
+
+# data_dir = "../Data Mining/Stock_Data/"
+data_dir = "../Data Mining/TestDir/"
+# indexed_dir = "../Data Mining/Stock_Data_Indexed/"
+indexed_dir = "../Data Mining/Test_Data_Indexed/"
 reversed_dir = "../Data Mining/Stock_Data_Reversed/"
 if not os.path.exists(indexed_dir):
     os.mkdir(indexed_dir)
 if not os.path.exists(reversed_dir):
     os.mkdir(reversed_dir)
 
-for item in StockSym:
+for item in StockSym1:
     # Reverse index
-    file = data_dir + StockSym.get(item) + ".csv"
+    file = data_dir + StockSym1.get(item) + ".csv"
     df = pd.read_csv(file)
     # print(datasheet)
     # datasheet.reindex(index=datasheet.index[::-1])
@@ -125,9 +138,9 @@ for item in StockSym:
     # print(reversed_df)
     # Save data frame to excel file
     # indexed_df = reversed_df.iloc[:, 1:]
-    if os.path.exists(reversed_dir + StockSym.get(item) + ".csv"):
-        os.remove(reversed_dir + StockSym.get(item) + ".csv")
-    with open(reversed_dir + StockSym.get(item) + ".csv", "a") as fp:
+    if os.path.exists(reversed_dir + StockSym1.get(item) + ".csv"):
+        os.remove(reversed_dir + StockSym1.get(item) + ".csv")
+    with open(reversed_dir + StockSym1.get(item) + ".csv", "a") as fp:
         reversed_df.to_csv(fp)
 
     # test = pd.read_csv(indexed_dir + StockSym1.get(item) + ".csv")
@@ -135,19 +148,19 @@ for item in StockSym:
 
 
     # Load excel file to remove new reversed index column
-    file = reversed_dir + StockSym.get(item) + ".csv"
+    file = reversed_dir + StockSym1.get(item) + ".csv"
     df = pd.read_csv(file)
     # print(df)
     indexed_df = df.iloc[:, 1:]
     print(indexed_df)
 
-    if os.path.exists(indexed_dir + StockSym.get(item) + ".csv"):
-        os.remove(indexed_dir + StockSym.get(item) + ".csv")
-    with open(indexed_dir + StockSym.get(item) + ".csv", "a") as fp:
+    if os.path.exists(indexed_dir + StockSym1.get(item) + ".csv"):
+        os.remove(indexed_dir + StockSym1.get(item) + ".csv")
+    with open(indexed_dir + StockSym1.get(item) + ".csv", "a") as fp:
         indexed_df.to_csv(fp, index=False)
 
-    test = pd.read_csv(indexed_dir + StockSym.get(item) + ".csv")
-    print(test)
+    # test = pd.read_csv(indexed_dir + StockSym1.get(item) + ".csv")
+    # print(test)
 
 if os.path.exists(reversed_dir):
     os.remove(reversed_dir)

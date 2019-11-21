@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
     #For now Datepredict should always be 1.  This will run the RNN once for each day
     #until predInterval is met
-    datepredict = 7
+    datepredict = 30
 
 
     # ************************************************************************
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     #epoch is then number of epochs to run
     #years in the amount of historical data it will be trained on
     predictOn = 60
-    epoch = 10
+    epoch = 50
     years = 5
     single = False
 
