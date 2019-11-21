@@ -13,6 +13,16 @@ locu_api = 'YOUR KEY HERE'
 from .models import portfolio
 import datetime
 #import feedparser
+import requests
+
+
+def trends(request):
+    if request.method == 'POST':   # when you post a form
+        data = ''
+
+    return render(request,'stockpicker/stock_trends.html', {})
+
+
 
 def get_context_data(self, item, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -33,15 +43,11 @@ def research(request):
         url1= 'http://johnsmallman.wordpress.com/author/johnsmallman/feed/'
         url = 'https://www.nasdaq.com/feed/rssoutbound?symbol=' + company
         json_obj = feedparser.parse(url)
-        info = json_obj['feed'][0]['title_detail']
-        link = json_obj.headers.get('content-type')
-        #data = json.load(json_obj)
-        #for item in data['objects']:
-            #print(item['name'], item['phone']
-        return render(request,'stockpicker/stock_purchase.html', {'data': json_obj, inf: info, lin: link,   'authenticated': True})
+
+        return render(request,'stockpicker/stock_purchase.html', {'data': json_obj,  'authenticated': True})
     else:
         api_key = locu_api
-        url = 'https://www.nasdaq.com/feed/rssoutbound?symbol=AMZN'
+        url = 'https://www.nasdaq.com/feed/rssoutbound'
         data = feedparser.parse(url)
 
     return render(request,'stockpicker/stock_purchase.html', {'data': data, 'authenticated': True})
