@@ -45,7 +45,7 @@ if __name__ == "__main__":
     #epoch is then number of epochs to run
     #years in the amount of historical data it will be trained on
     predictOn = 60
-    epoch = 50
+    epoch = 20
     years = 5
     single = False
 
