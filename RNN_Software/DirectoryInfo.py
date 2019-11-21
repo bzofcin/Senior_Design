@@ -3,23 +3,26 @@ import csv
 from datetime import date, timedelta
 import pandas as pd
 
-def AddToFile(StockFile, file, title, row):
+def AddToFile(StockFile, file, title, df):
+    df.columns = range(df.shape[1])
     print("Determining if " + file + " exists")
     if os.path.isfile(StockFile + "/" + file):
         print(StockFile + "/" + file + "/ exists")
         print("Adding row to " + file)
         with open(StockFile + "/" + file, "a") as fp:
             wr = csv.writer(fp, dialect='excel')
-            wr.writerow(row)
+            for index, row in df.iterrows():
+                wr.writerow(row)
         fp.close()
     else:
         print(file + " does not exist.  Creating file...")
         print("Adding title to " + file)
         print("Adding row to " + file)
-        with open(StockFile + "/" + file, "w") as fp:
+        with open(StockFile + "/" + file, "a") as fp:
             wr = csv.writer(fp, dialect = 'excel')
             wr.writerow(title)
-            wr.writerow(row)
+            for index, row in df.iterrows():
+                wr.writerow(row)
         fp.close()
 
 def CreateDir(StockDir):
@@ -34,7 +37,7 @@ def CreateDir(StockDir):
 
     print("Directory Creation is complete")
 
-def GetDataByDate(StockFile, years, day):
+def GetDataByDate(StockFile, years, day, single):
 
     HistData = (date.today() - timedelta(days=(int(years*365)))).strftime("%Y-%m-%d")
 #EndData = (date.today() - timedelta(days=(int(day)))).strftime("%Y-%m-%d")
@@ -42,7 +45,10 @@ def GetDataByDate(StockFile, years, day):
         fullData = pd.read_csv(StockFile)
         fullData.sort_values(by="timestamp",inplace=True,ascending=False)
         dataLen = len(fullData.loc[fullData["timestamp"] > HistData])
-        trainTestData = fullData.iloc[day : dataLen+day]
+        if single is True:
+            trainTestData = fullData.iloc[day : dataLen+day]
+        else:
+            trainTestData = fullData.iloc[0: dataLen+day]
         return trainTestData
     except:
         print("File " + StockFile + " was not found and could not be opened.")

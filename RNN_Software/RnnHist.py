@@ -20,10 +20,9 @@ from sys import argv
 #Directory is where the Predicted Data will be placed
 #if you run it as is, the Predicted folder will be created inside RNN_Software
 #Consider where you would like to store that data before running
-Stock_Dir = "../Data Mining/TestDir"
+Stock_Dir = "./Test_Stock"
 Stocks = os.listdir(Stock_Dir)
-# Directory = "Predicted_Data"
-Directory = "Prediction_Test"
+Directory = "Predicted_Data"
 
 if __name__ == "__main__":
     #num takes in a passed argument from AutoRunHistRnn.py which lets RnnHist.py
@@ -33,9 +32,11 @@ if __name__ == "__main__":
     num = int(argv[1])
     predInterval = int(argv[2])
 
+
     #For now Datepredict should always be 1.  This will run the RNN once for each day
     #until predInterval is met
-    datepredict = 1
+    datepredict = 7
+
 
     # ************************************************************************
     # **************************Adjustable Data*******************************
@@ -43,9 +44,12 @@ if __name__ == "__main__":
     #PredictOn is the number of days the RNN trains to predict a day
     #epoch is then number of epochs to run
     #years in the amount of historical data it will be trained on
-    predictOn = 30
-    epoch = 1
+    predictOn = 60
+    epoch = 10
     years = 5
+    single = False
+
+
 
     #This code is designed to provide a systematic way categorizing the data
     #In the Predicted Folder, A Directory will be created based on the Adjusted Data Above
@@ -55,14 +59,14 @@ if __name__ == "__main__":
     DirName = "E_" + str(epoch) + "_PO_" + str(predictOn) + "_DP_" + str(datepredict) + "_H_" + str(years)
     Title = ["timestamp", "close"]
     StockName = Stocks[num]
-    StockName = StockName[:-4]
+    #StockName = StockName[:-4]
     print(StockName)
     File = DirName + "_" + StockName
     dir = Stock_Dir + "/" + Stocks[num]
 
 
     #This code calls GetDataByDate from a created library called DirectoryInfo
-    Data = di.GetDataByDate(dir, years, predInterval)
+    Data = di.GetDataByDate(dir, years, predInterval, single)
 
     try:
         #ActualData is stored separately.  In the regular RNN, this would be the data
@@ -112,8 +116,8 @@ if __name__ == "__main__":
         di.CreateDir(Directory)
         FileDir = Directory + "/" + DirName
         di.CreateDir(FileDir)
-        di.AddToFile(FileDir, File, Title, df_Pred_Stock.iloc[0])
-
+        #FIX ADD TO FILE TO ALLOW FOR MULTIPLE DAYS
+        di.AddToFile(FileDir, File, Title, df_Pred_Stock)
 
         #Stats printed
         print(Stocks[num])
@@ -122,3 +126,15 @@ if __name__ == "__main__":
         print("failed after epochs")
 
     sys.exit(0)
+
+
+
+
+
+
+
+
+
+
+
+
