@@ -104,14 +104,12 @@ StockSym = {
 
 StockSym1 = {
     "INTC":	"Intel Corp",
-    # "XLNX":	"Xilinx Inc"
+    "NVDA":	"NVIDIA Corp",
+    "XLNX":	"Xilinx Inc"
 }
-# data_dir = "../RNN_Experiments/Data Mining/TestDir/"
-# indexed_dir = "../RNN_Experiments/Data Mining/Stock_Data_Indexed/"
-# reversed_dir = r"C:\Users\Terran\Documents\seniorprojectfall2019team7\RNN_Experiments\Data Mining\Stock_Data_Reversed"
-data_dir = "../Data Mining/TestDir/"
-indexed_dir = "../Data Mining/Stock_Data_Indexed/"
-reversed_dir = "../Data Mining/Stock_Data_Reversed/"
+data_dir = "../RNN_Experiments/Data Mining/TestDir/"
+indexed_dir = "../RNN_Experiments/Data Mining/Stock_Data_Indexed/"
+reversed_dir = r"C:\Users\Terran\Documents\seniorprojectfall2019team7\RNN_Experiments\Data Mining\Stock_Data_Reversed"
 if not os.path.exists(indexed_dir):
     os.mkdir(indexed_dir)
 if not os.path.exists(reversed_dir):
@@ -152,5 +150,5 @@ for item in StockSym1:
     print(test)
 
 if os.path.exists(reversed_dir):
-    os.rmtree(reversed_dir)
+    os.rmdir(reversed_dir)
     print(reversed_dir + " is removed.")
