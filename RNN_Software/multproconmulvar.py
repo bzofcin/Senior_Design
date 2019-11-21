@@ -3,11 +3,11 @@ import os
 import time
 
 global x
-x = 0
+x = 10
 
 start_time = time.time()
 def f(l, i, a):
-    while(a[x] < 10):
+    while(a[x] < 20):
         l.acquire()
         a[x] = a[x]+1
         l.release()
@@ -15,7 +15,7 @@ def f(l, i, a):
 
 if __name__ == '__main__':
     lock = Lock()
-    arr = Array('i', range(10))
+    arr = Array('i', range(20))
 
     for num in range(9):
         Process(target=f, args=(lock, num, arr)).start()
