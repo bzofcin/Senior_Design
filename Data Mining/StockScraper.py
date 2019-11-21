@@ -106,7 +106,7 @@ StockSym = {
 
 StartTime = time.time()
 Today = date.today()
-Yesterday = Today - timedelta(days = 16)
+Yesterday = Today - timedelta(days = 1)
 
 for item in StockSym:
     try:
