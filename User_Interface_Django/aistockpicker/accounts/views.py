@@ -19,14 +19,13 @@ import crypt, getpass, pwd
 import urllib
 import json
 import datetime
+import re
 from urllib import request
 #from .rssfeed import rssapi
 import feedparser
 locu_api = 'YOUR KEY HERE'
 #import feedparser
 
-def test(request):
-    return render(request,'accounts/test.html', {})
 
 
 def readapi(request):
@@ -68,77 +67,38 @@ def loggedIn(request):
 
     return render(request,'accounts/loggedInScreen.html', {})
 
-def registeration(request):
+def registered(request):
 
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = UserCreationForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            user = form.save()
-            if User.objects.filter(username=form.cleaned_data['username']).exists():
-                return render(request, 'accounts/registration.html', {
-                    'status': 1, 'message': 'Username already exists.'
-                })
-            else:
-                username = form.cleaned_data.get('username')
-                raw_password = form.cleaned_data.get('password')
-                first_name = form.cleaned_data.get('first_name')
-                user = authenticate(username=username, password=raw_password)
-                print("signup authencticate", user)
-                login(request, user)
-                # redirect to accounts page:
-                return redirect('/stockpicker/myportfolio')
-
-
-    if request.method == 'POST':
-        form = UserCreationForm(request.username, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'New Account Added!')
-            return redirect('login')
-
-        else:
-            messages.error(request, 'Please correct the error below.')
-
-
-
-    return render(request,'accounts/registration.html', {})
+    return render(request,'accounts/registered.html', {'authenticated': False})
 
 
 def register(request):
+    status = 0
+    message = ''
 
      # if this is a POST request we need to process the form data
-
     if request.method == 'POST':
 
-
-        #password1 = form.cleaned_data.get('password')
-        #password2 = form.cleaned_data.get('password')
-
-
-        # create a form instance and populate it with data from the request:
         form = UserCreationForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            user = form.save()
-            if User.objects.filter(username=form.cleaned_data['username']).exists():
+            if User.objects.filter(username=request.POST['username']).exists():
+                status = 1
+                message = 'Username already exists!'
+            else:
+                user = form.save()
+                return render(request, 'accounts/registration.html', {
+                    'status': 2, 'message': 'You have been registered!.'
+                })
+                #return redirect('/accounts/login')
                 return render(request, 'accounts/registration.html', {
                     'status': 1, 'message': 'Username already exists.'
                 })
-            else:
-                username = form.cleaned_data.get('username')
-                raw_password = form.cleaned_data.get('password')
-                first_name = form.cleaned_data.get('first_name')
-                user = authenticate(username=username, password=raw_password)
-                print("signup authencticate", user)
-                login(request, user)
-                # redirect to accounts page:
-                return redirect('/stockpicker/myportfolio')
+        else:
+            return render(request,'accounts/registration.html', {'authenticated': False, 'status': 1, 'message': 'Error: Not valid entries. Make sure your passwords match.'})
+    return render(request,'accounts/registration.html', {'authenticated': False, 'status': status, 'message': message})
 
 
-    return render(request,'accounts/registration.html', {'authenticated': False })
 
 def about(request):
 
