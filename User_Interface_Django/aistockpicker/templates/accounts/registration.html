@@ -24,6 +24,12 @@
                                       <strong><i class="fa fa-warning" style="color:red"></i> Error! </strong>{{ message }}
                                     </div>
                                     {% endif %}
+                                   {% if status == 2 %}
+                                    <div class="alert alert-success">
+                                      <strong><i class="fa fa-warning" style="color:darkgreen"></i> Success! </strong>{{ message }}
+                                    </div>
+                                    {% endif %}
+
                                         <p class="card-text">
                                           <form method="post">
                                              {% csrf_token %}
