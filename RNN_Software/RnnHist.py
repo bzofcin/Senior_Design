@@ -20,9 +20,9 @@ from sys import argv
 #Directory is where the Predicted Data will be placed
 #if you run it as is, the Predicted folder will be created inside RNN_Software
 #Consider where you would like to store that data before running
-Stock_Dir = "./Test_Stock"
+Stock_Dir = "../Data Mining/TestDir/"
 Stocks = os.listdir(Stock_Dir)
-Directory = "Predicted_Data"
+Directory = "Prediction_Test"
 
 if __name__ == "__main__":
     #num takes in a passed argument from AutoRunHistRnn.py which lets RnnHist.py

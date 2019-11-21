@@ -31,7 +31,7 @@ def RunRNN(TrainData, TestData, TrainLen, TestLen, predictOn, epoch):
     regressor.add(Dropout(0.2))
     regressor.add(Dense(units=1))
     regressor.compile(optimizer='adam', loss='mean_squared_error')
-    regressor.fit(X_train, y_train, epochs=epoch, verbose=0, use_multiprocessing=True)
+    regressor.fit(X_train, y_train, epochs=epoch, verbose=2, use_multiprocessing=True)
 
     dataset_total = pd.concat((TrainData['close'], TestData['close']), axis=0)
     inputs = dataset_total[len(dataset_total) - len(TestData['close']) - predictOn:].values
