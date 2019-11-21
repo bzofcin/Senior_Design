@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 
-
 class Accuracy:
     def __init__(self, prediction_dir, stocks_dir):
         self.prediction_dir = prediction_dir
@@ -11,6 +10,7 @@ class Accuracy:
     def single_epoch_method(self, prediction_dir, stocks_dir):
         prediction_sets = os.listdir(prediction_dir)
         actual_sets = os.listdir(stocks_dir)
+        avg_accuracy = 0
         # print(actual_sets)
         # print(prediction_sets)
 
@@ -31,6 +31,8 @@ class Accuracy:
             # get actual prices
             actual_file = stocks_dir + actual_sets[real_set]
             real_set += 1
+            print("Stock number " + str(real_set))
+            actual_set = []
             actual_set = pd.read_csv(actual_file)
             starting_date = prediction_dates[0]
             num_days = len(prediction_dates)
@@ -62,7 +64,10 @@ class Accuracy:
             # print(predicted_stock_price)
             # print("Actual: ")
             # print(real_stock_price)
-            self.accuracy_calc(predicted_stock_price, real_stock_price, stock_name)
+            avg_accuracy += self.accuracy_calc(predicted_stock_price, real_stock_price, stock_name)
+
+        avg_accuracy = avg_accuracy / real_set
+        print("Average accuracy: " + str(avg_accuracy))
 
     def accuracy_calc(self, predicted_stock_price, real_stock_price, stock_name):
         # Calculating accuracy
@@ -98,12 +103,14 @@ class Accuracy:
 
         percent_accurate = (accurate / total) * 100
         print(stock_name + " accuracy: " + str(percent_accurate) + "%")
+        return percent_accurate
+
 
 
 # stocks_dir = "../RNN_Experiments/Data Mining/Stock_Data_Indexed/"
 stocks_dir = "../Data Mining/Stock_Data_Indexed/"
 # prediction_dir = "../RNN_Experiments/Predicted_Data/E_10_PO_60_DP_30_H_5/"
-prediction_dir = "../RNN_Software/Prediction_Test/E_10_PO_60_DP_7_H_5/"
+prediction_dir = "../RNN_Software/Prediction_Data/E_10_PO_60_DP_30_H_5/"
 accuracy = Accuracy(prediction_dir, stocks_dir)
 accuracy.single_epoch_method(prediction_dir, stocks_dir)
 

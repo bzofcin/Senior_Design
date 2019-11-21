@@ -107,7 +107,7 @@ StockSym1 = {
     "NVDA":	"NVIDIA Corp",
     "XLNX":	"Xilinx Inc"
 }
-data_dir = "../Data Mining/TestDir/"
+data_dir = "../Data Mining/Stock_Data/"
 indexed_dir = "../Data Mining/Stock_Data_Indexed/"
 reversed_dir = "../Data Mining/Stock_Data_Reversed/"
 if not os.path.exists(indexed_dir):
@@ -115,9 +115,9 @@ if not os.path.exists(indexed_dir):
 if not os.path.exists(reversed_dir):
     os.mkdir(reversed_dir)
 
-for item in StockSym1:
+for item in StockSym:
     # Reverse index
-    file = data_dir + StockSym1.get(item) + ".csv"
+    file = data_dir + StockSym.get(item) + ".csv"
     df = pd.read_csv(file)
     # print(datasheet)
     # datasheet.reindex(index=datasheet.index[::-1])
@@ -125,9 +125,9 @@ for item in StockSym1:
     # print(reversed_df)
     # Save data frame to excel file
     # indexed_df = reversed_df.iloc[:, 1:]
-    if os.path.exists(reversed_dir + StockSym1.get(item) + ".csv"):
-        os.remove(reversed_dir + StockSym1.get(item) + ".csv")
-    with open(reversed_dir + StockSym1.get(item) + ".csv", "a") as fp:
+    if os.path.exists(reversed_dir + StockSym.get(item) + ".csv"):
+        os.remove(reversed_dir + StockSym.get(item) + ".csv")
+    with open(reversed_dir + StockSym.get(item) + ".csv", "a") as fp:
         reversed_df.to_csv(fp)
 
     # test = pd.read_csv(indexed_dir + StockSym1.get(item) + ".csv")
@@ -135,18 +135,18 @@ for item in StockSym1:
 
 
     # Load excel file to remove new reversed index column
-    file = reversed_dir + StockSym1.get(item) + ".csv"
+    file = reversed_dir + StockSym.get(item) + ".csv"
     df = pd.read_csv(file)
     # print(df)
     indexed_df = df.iloc[:, 1:]
     print(indexed_df)
 
-    if os.path.exists(indexed_dir + StockSym1.get(item) + ".csv"):
-        os.remove(indexed_dir + StockSym1.get(item) + ".csv")
-    with open(indexed_dir + StockSym1.get(item) + ".csv", "a") as fp:
+    if os.path.exists(indexed_dir + StockSym.get(item) + ".csv"):
+        os.remove(indexed_dir + StockSym.get(item) + ".csv")
+    with open(indexed_dir + StockSym.get(item) + ".csv", "a") as fp:
         indexed_df.to_csv(fp, index=False)
 
-    test = pd.read_csv(indexed_dir + StockSym1.get(item) + ".csv")
+    test = pd.read_csv(indexed_dir + StockSym.get(item) + ".csv")
     print(test)
 
 if os.path.exists(reversed_dir):
