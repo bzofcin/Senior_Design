@@ -20,7 +20,7 @@ class Accuracy:
         for item in prediction_sets:
             # print(item)
             stock_name = item
-            print(stock_name)
+            # print(stock_name)
             item = prediction_dir + item
             prediction_set = pd.read_csv(item)
             prediction_dates = prediction_set.iloc[:, 0]
@@ -30,14 +30,15 @@ class Accuracy:
 
             # get actual prices
             actual_file = stocks_dir + actual_sets[real_set]
+            # print(actual_file)
             real_set += 1
-            print("Stock number " + str(real_set))
+            # print("Stock number " + str(real_set))
             actual_set = []
             actual_set = pd.read_csv(actual_file)
             starting_date = prediction_dates[0]
             num_days = len(prediction_dates)
             # num_days -= 1
-            #print(actual_set)
+            # print(actual_set)
             # print("Number of days: " + str(num_days))
             # print("Starting Date: " + str(starting_date))
 
@@ -110,7 +111,7 @@ class Accuracy:
 # stocks_dir = "../RNN_Experiments/Data Mining/Stock_Data_Indexed/"
 stocks_dir = "../Data Mining/Test_Data_Indexed/"
 # prediction_dir = "../RNN_Experiments/Predicted_Data/E_10_PO_60_DP_30_H_5/"
-prediction_dir = "../RNN_Software/Prediction_Test/E_10_PO_60_DP_30_H_20/"
+prediction_dir = "../RNN_Software/Prediction_Test/E_100_PO_60_DP_30_H_20/"
 accuracy = Accuracy(prediction_dir, stocks_dir)
 accuracy.single_epoch_method(prediction_dir, stocks_dir)
 
