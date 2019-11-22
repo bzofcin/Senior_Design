@@ -106,16 +106,16 @@ StockSym = {
 }
 
 StockSym1 = {
-    "AMD":	"Advanced Micro Devices Inc",
-    "AAPL":	"Apple Inc",
-    "INTC":	"Intel Corp",
-    "MCHP":	"Microchip Technology Inc",
-    "MU":	"Micron Technology Inc",
-    "MSFT":	"Microsoft Corp",
-    "NVDA":	"NVIDIA Corp",
-    "NXPI":	"NXP Semiconductors NV",
-    "QCOM":	"Qualcomm Inc",
-    "XLNX":	"Xilinx Inc"
+"AMZN":	"Amazon.com Inc",
+"AMGN":	"Amgen Inc",
+"AAPL":	"Apple Inc",
+"BIIB":	"Biogen Inc",
+"BKNG":	"Booking Holdings Inc",
+"CELG":	"Celgene Corp",
+"COST":	"Costco Wholesale Corp",
+"MSFT":	"Microsoft Corp",
+"^IXIC": "NASDAQ Composite",
+"NVDA":	"NVIDIA Corp"
 }
 
 # data_dir = "../Data Mining/Stock_Data/"
