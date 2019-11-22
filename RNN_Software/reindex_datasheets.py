@@ -106,6 +106,7 @@ StockSym = {
 }
 
 StockSym1 = {
+"AMD":	"Advanced Micro Devices Inc",
 "AMZN":	"Amazon.com Inc",
 "AMGN":	"Amgen Inc",
 "AAPL":	"Apple Inc",
@@ -114,7 +115,6 @@ StockSym1 = {
 "CELG":	"Celgene Corp",
 "COST":	"Costco Wholesale Corp",
 "MSFT":	"Microsoft Corp",
-"^IXIC": "NASDAQ Composite",
 "NVDA":	"NVIDIA Corp"
 }
 
