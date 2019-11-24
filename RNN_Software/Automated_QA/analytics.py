@@ -1,5 +1,4 @@
 import RnnHistAccuracy as acc
-import RnnHistRuntime as rt
 import pandas as pd
 import os
 
@@ -16,18 +15,17 @@ class Analytics:
         self.hi_accuracy = 0
         self.lo_accuracy = 0
 
-        self.avg_epochRT = 0
-        self.med_epochRT = 0
-        self.high_epochRT = 0
-        self.low_epochRT = 0
-        self.total_runtime = 0
+        # self.avg_epochRT = 0
+        # self.med_epochRT = 0
+        # self.high_epochRT = 0
+        # self.low_epochRT = 0
+        # self.total_runtime = 0
 
         self.volume = 0
 
+    def get_dir(self, ):
+        pass
 
-    def accuracy(self, stocks_dir, prediction_dir):
+    def calc_accuracy(self, stocks_dir, prediction_dir):
         accuracy = acc(prediction_dir, stocks_dir)
         accuracy.single_epoch_method(prediction_dir, stocks_dir)
-
-    def runtime(self, start_time):
-        pass

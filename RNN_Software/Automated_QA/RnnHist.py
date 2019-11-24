@@ -32,22 +32,29 @@ if __name__ == "__main__":
     num = int(argv[1])
     predInterval = int(argv[2])
 
+    # read in data for auto QA
+    epoch = int(argv[3])
+    predictOn = int(argv[4])
+    datepredict = int(argv[5])
+    years = int(argv[6])
+    single = bool(argv[7])
 
-    #For now Datepredict should always be 1.  This will run the RNN once for each day
-    #until predInterval is met
-    datepredict = 30
 
-
-    # ************************************************************************
-    # **************************Adjustable Data*******************************
-    # ************************************************************************
-    #PredictOn is the number of days the RNN trains to predict a day
-    #epoch is then number of epochs to run
-    #years in the amount of historical data it will be trained on
-    predictOn = 60
-    epoch = 10
-    years = 5
-    single = False
+    # #For now Datepredict should always be 1.  This will run the RNN once for each day
+    # #until predInterval is met
+    # datepredict = 30
+    #
+    #
+    # # ************************************************************************
+    # # **************************Adjustable Data*******************************
+    # # ************************************************************************
+    # #PredictOn is the number of days the RNN trains to predict a day
+    # #epoch is then number of epochs to run
+    # #years in the amount of historical data it will be trained on
+    # predictOn = 60
+    # epoch = 10
+    # years = 5
+    # single = False
 
 
 
@@ -118,6 +125,9 @@ if __name__ == "__main__":
         di.CreateDir(FileDir)
         #FIX ADD TO FILE TO ALLOW FOR MULTIPLE DAYS
         di.AddToFile(FileDir, File, Title, df_Pred_Stock)
+
+        # stats stored
+        # rt.runtime(StartTime, EndTime)
 
         #Stats printed
         print(Stocks[num])

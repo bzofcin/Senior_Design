@@ -1,11 +1,12 @@
 import time
 import os
+import analytics
 import statistics as stat
 
 class Runtime:
-    def __init__(self):
-        self.starttime = 0
-        self.endtime = 0
+    def __init__(self, start_time, end_time):
+        self.start_time = start_time
+        self.end_time = end_time
 
         self.runtimes = []
 
@@ -13,6 +14,9 @@ class Runtime:
         runtime = endtime - starttime
         self.runtimes.append(runtime)
         return runtime
+
+    def print_rt(self, runtimes):
+        analytics.avg_rt = self.calc_avg(runtimes)
 
     def calc_avg(self, runtimes):
         return stat.mean(runtimes)
