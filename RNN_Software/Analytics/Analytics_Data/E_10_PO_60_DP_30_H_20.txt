@@ -1,0 +1,23 @@
+E_10_PO_60_DP_30_H_20_Advanced Micro Devices Inc.csv accuracy: 41.37931034482759%
+E_10_PO_60_DP_30_H_20_Amazon.com Inc.csv accuracy: 58.620689655172406%
+E_10_PO_60_DP_30_H_20_Amgen Inc.csv accuracy: 34.48275862068966%
+E_10_PO_60_DP_30_H_20_Apple Inc.csv accuracy: 41.37931034482759%
+E_10_PO_60_DP_30_H_20_Biogen Inc.csv accuracy: 44.827586206896555%
+E_10_PO_60_DP_30_H_20_Booking Holdings Inc.csv accuracy: 41.37931034482759%
+E_10_PO_60_DP_30_H_20_Celgene Corp.csv accuracy: 44.827586206896555%
+E_10_PO_60_DP_30_H_20_Costco Wholesale Corp.csv accuracy: 51.724137931034484%
+E_10_PO_60_DP_30_H_20_Microsoft Corp.csv accuracy: 51.724137931034484%
+E_10_PO_60_DP_30_H_20_NVIDIA Corp.csv accuracy: 55.172413793103445%
+Average accuracy: 46.55172413793103
+
+E_10_PO_60_DP_30_H_20_Advanced Micro Devices Inc.csv accuracy: 37.93103448275862%
+E_10_PO_60_DP_30_H_20_Amazon.com Inc.csv accuracy: 58.620689655172406%
+E_10_PO_60_DP_30_H_20_Amgen Inc.csv accuracy: 34.48275862068966%
+E_10_PO_60_DP_30_H_20_Apple Inc.csv accuracy: 48.275862068965516%
+E_10_PO_60_DP_30_H_20_Biogen Inc.csv accuracy: 44.827586206896555%
+E_10_PO_60_DP_30_H_20_Booking Holdings Inc.csv accuracy: 41.37931034482759%
+E_10_PO_60_DP_30_H_20_Celgene Corp.csv accuracy: 44.827586206896555%
+E_10_PO_60_DP_30_H_20_Costco Wholesale Corp.csv accuracy: 48.275862068965516%
+E_10_PO_60_DP_30_H_20_Microsoft Corp.csv accuracy: 44.827586206896555%
+E_10_PO_60_DP_30_H_20_NVIDIA Corp.csv accuracy: 55.172413793103445%
+Average accuracy: 45.862068965517246

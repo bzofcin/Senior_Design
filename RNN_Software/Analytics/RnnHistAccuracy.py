@@ -109,9 +109,12 @@ class Accuracy:
 
 
 # stocks_dir = "../RNN_Experiments/Data Mining/Stock_Data_Indexed/"
-stocks_dir = "../Data Mining/Test_Data_Indexed/"
+# stocks_dir = "../Data Mining/Test_Data_Indexed/"
 # prediction_dir = "../RNN_Experiments/Predicted_Data/E_10_PO_60_DP_30_H_5/"
-prediction_dir = "../RNN_Software/Prediction_Test/E_10_PO_60_DP_30_H_20/"
+# prediction_dir = "../RNN_Software/Prediction_Test/E_100_PO_60_DP_30_H_20/"
+
+stocks_dir = r"C:\Users\Terran\Documents\seniorprojectfall2019team7\RNN_Software\Automated_QA\Prediction_Test\E_10_PO_60_DP_30_H_5\\"
+prediction_dir = r"C:\Users\Terran\Documents\seniorprojectfall2019team7\RNN_Software\Automated_QA\Test_Data_Indexed\\"
 accuracy = Accuracy(prediction_dir, stocks_dir)
 accuracy.single_epoch_method(prediction_dir, stocks_dir)
 

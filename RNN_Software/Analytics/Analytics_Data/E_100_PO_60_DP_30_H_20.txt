@@ -8,3 +8,4 @@ E_100_PO_60_DP_30_H_20_Costco Wholesale Corp.csv accuracy: 31.03448275862069%
 E_100_PO_60_DP_30_H_20_Microsoft Corp.csv accuracy: 58.620689655172406%
 E_100_PO_60_DP_30_H_20_NVIDIA Corp.csv accuracy: 41.37931034482759%
 Average accuracy: 52.8735632183908
+
