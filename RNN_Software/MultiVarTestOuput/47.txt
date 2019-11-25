@@ -1,0 +1,53 @@
+47
+Running Lam Research Corp.csvfrom 47
+       timestamp    open    high     low   close   volume
+5022  1999-12-07  93.688  94.563  91.188  94.125  4555800
+5021  1999-12-08  93.375  94.250  89.750  90.375  4037100
+
+Epoch 00001: val_loss improved from inf to 3.57042, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 3.57042 to 3.23395, saving model to weights.h5
+
+Epoch 00003: val_loss did not improve from 3.23395
+
+Epoch 00004: val_loss did not improve from 3.23395
+
+Epoch 00005: val_loss did not improve from 3.23395
+
+Epoch 00006: val_loss did not improve from 3.23395
+
+Epoch 00007: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00007: val_loss did not improve from 3.23395
+
+Epoch 00008: val_loss did not improve from 3.23395
+
+Epoch 00009: val_loss did not improve from 3.23395
+
+Epoch 00010: val_loss did not improve from 3.23395
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[272.68  271.26  270.01  272.46  275.09  283.68  282.7   276.76  274.13
+ 264.545]
+[[61.572346]
+ [61.473843]
+ [61.380733]
+ [61.313313]
+ [61.267593]
+ [61.244293]
+ [61.242683]
+ [61.257946]
+ [61.283154]
+ [61.31637 ]]
+--- 629.9169781208038 seconds ---
+Accuracy: 33.33333333333333%../Data Mining/Stock_Data/Lam Research Corp.csv

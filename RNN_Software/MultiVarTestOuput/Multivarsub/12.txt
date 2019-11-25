@@ -1,0 +1,71 @@
+11
+Running Monster Beverage Corp.csvfrom 11
+       timestamp   open   high  ...    NasClose     NasHigh      Naslow
+5032  1999-11-22  4.188  4.563  ...  360.200012  365.799988  360.100006
+5031  1999-11-23  4.500  4.750  ...  367.200012  367.899994  365.899994
+
+[2 rows x 10 columns]
+
+Epoch 00001: val_loss improved from inf to 0.14171, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 0.14171 to 0.10269, saving model to weights.h5
+
+Epoch 00003: val_loss did not improve from 0.10269
+
+Epoch 00004: val_loss did not improve from 0.10269
+
+Epoch 00005: val_loss did not improve from 0.10269
+
+Epoch 00006: val_loss improved from 0.10269 to 0.10234, saving model to weights.h5
+
+Epoch 00007: val_loss improved from 0.10234 to 0.09230, saving model to weights.h5
+
+Epoch 00008: val_loss improved from 0.09230 to 0.09142, saving model to weights.h5
+
+Epoch 00009: val_loss improved from 0.09142 to 0.08617, saving model to weights.h5
+
+Epoch 00010: val_loss did not improve from 0.08617
+
+Epoch 00011: val_loss did not improve from 0.08617
+
+Epoch 00012: val_loss did not improve from 0.08617
+
+Epoch 00013: val_loss did not improve from 0.08617
+
+Epoch 00014: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00014: val_loss did not improve from 0.08617
+
+Epoch 00015: val_loss did not improve from 0.08617
+
+Epoch 00016: val_loss improved from 0.08617 to 0.08573, saving model to weights.h5
+
+Epoch 00017: val_loss did not improve from 0.08573
+
+Epoch 00018: val_loss improved from 0.08573 to 0.08492, saving model to weights.h5
+
+Epoch 00019: val_loss did not improve from 0.08492
+
+Epoch 00020: val_loss did not improve from 0.08492
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[56.09 56.47 55.99 56.64 58.16 58.03 58.4  58.95]
+[[58.472923]
+ [58.423435]
+ [58.355442]
+ [58.25829 ]
+ [58.184734]
+ [58.171494]
+ [58.222805]]
+--- 1858.942675113678 seconds ---
+Accuracy: 83.33333333333334%../Data Mining/TestSubSet/Monster Beverage Corp.csv

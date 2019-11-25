@@ -1,0 +1,64 @@
+10
+Running Mercadolibre Inc.csvfrom 10
+       timestamp  open   high  ...    NasClose     NasHigh      Naslow
+3093  2007-08-10  22.0  29.00  ...  297.320007  297.320007  297.320007
+3092  2007-08-13  31.2  39.67  ...  293.209991  293.209991  293.209991
+
+[2 rows x 10 columns]
+
+Epoch 00001: val_loss improved from inf to 0.84779, saving model to weights.h5
+
+Epoch 00002: val_loss did not improve from 0.84779
+
+Epoch 00003: val_loss did not improve from 0.84779
+
+Epoch 00004: val_loss did not improve from 0.84779
+
+Epoch 00005: val_loss improved from 0.84779 to 0.83397, saving model to weights.h5
+
+Epoch 00006: val_loss did not improve from 0.83397
+
+Epoch 00007: val_loss did not improve from 0.83397
+
+Epoch 00008: val_loss did not improve from 0.83397
+
+Epoch 00009: val_loss did not improve from 0.83397
+
+Epoch 00010: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00010: val_loss did not improve from 0.83397
+
+Epoch 00011: val_loss did not improve from 0.83397
+
+Epoch 00012: val_loss did not improve from 0.83397
+
+Epoch 00013: val_loss did not improve from 0.83397
+
+Epoch 00014: val_loss did not improve from 0.83397
+
+Epoch 00015: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00015: val_loss did not improve from 0.83397
+Epoch 00015: early stopping
+3093    2007-08-10
+3092    2007-08-13
+3091    2007-08-14
+3090    2007-08-15
+3089    2007-08-16
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 3094, dtype: object
+[485.79 485.06 482.95 491.99 494.42 497.62 499.5  513.73]
+[[348.88712]
+ [347.89618]
+ [346.6089 ]
+ [345.18747]
+ [343.7688 ]
+ [342.46448]
+ [341.28366]]
+--- 1852.0658373832703 seconds ---
+Accuracy: 16.666666666666664%../Data Mining/TestSubSet/Mercadolibre Inc.csv

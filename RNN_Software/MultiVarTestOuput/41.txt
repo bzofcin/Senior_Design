@@ -1,0 +1,50 @@
+41
+Running Intuit Inc.csvfrom 41
+       timestamp    open    high     low   close   volume
+5022  1999-12-07  59.500  63.000  58.375  61.625  8140800
+5021  1999-12-08  60.813  61.875  55.563  56.250  9916000
+
+Epoch 00001: val_loss improved from inf to 2.01208, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 2.01208 to 1.80311, saving model to weights.h5
+
+Epoch 00003: val_loss improved from 1.80311 to 1.73295, saving model to weights.h5
+
+Epoch 00004: val_loss did not improve from 1.73295
+
+Epoch 00005: val_loss improved from 1.73295 to 1.58981, saving model to weights.h5
+
+Epoch 00006: val_loss did not improve from 1.58981
+
+Epoch 00007: val_loss improved from 1.58981 to 1.41843, saving model to weights.h5
+
+Epoch 00008: val_loss did not improve from 1.41843
+
+Epoch 00009: val_loss improved from 1.41843 to 1.38875, saving model to weights.h5
+
+Epoch 00010: val_loss did not improve from 1.38875
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[256.85 258.03 259.98 261.75 264.78 266.05 268.4  272.26 273.48 271.2 ]
+[[124.98076 ]
+ [124.98426 ]
+ [124.99021 ]
+ [124.98887 ]
+ [124.9882  ]
+ [124.98751 ]
+ [124.983315]
+ [124.967285]
+ [124.94545 ]
+ [124.91958 ]]
+--- 638.5317194461823 seconds ---
+Accuracy: 33.33333333333333%../Data Mining/Stock_Data/Intuit Inc.csv

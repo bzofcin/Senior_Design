@@ -1,0 +1,73 @@
+8
+Running Liberty Global PLC.csvfrom 8
+       timestamp   open   high  ...    NasClose     NasHigh      Naslow
+3576  2005-09-08  24.71  24.90  ...  279.700012  281.100006  279.600006
+3575  2005-09-09  24.00  24.25  ...  280.299988  280.399994  279.200012
+
+[2 rows x 10 columns]
+
+Epoch 00001: val_loss improved from inf to 0.02414, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 0.02414 to 0.01513, saving model to weights.h5
+
+Epoch 00003: val_loss did not improve from 0.01513
+
+Epoch 00004: val_loss did not improve from 0.01513
+
+Epoch 00005: val_loss improved from 0.01513 to 0.01358, saving model to weights.h5
+
+Epoch 00006: val_loss did not improve from 0.01358
+
+Epoch 00007: val_loss did not improve from 0.01358
+
+Epoch 00008: val_loss did not improve from 0.01358
+
+Epoch 00009: val_loss did not improve from 0.01358
+
+Epoch 00010: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00010: val_loss did not improve from 0.01358
+
+Epoch 00011: val_loss did not improve from 0.01358
+
+Epoch 00012: val_loss did not improve from 0.01358
+
+Epoch 00013: val_loss did not improve from 0.01358
+
+Epoch 00014: val_loss improved from 0.01358 to 0.01280, saving model to weights.h5
+
+Epoch 00015: val_loss did not improve from 0.01280
+
+Epoch 00016: val_loss did not improve from 0.01280
+
+Epoch 00017: val_loss did not improve from 0.01280
+
+Epoch 00018: val_loss did not improve from 0.01280
+
+Epoch 00019: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00019: val_loss did not improve from 0.01280
+
+Epoch 00020: val_loss did not improve from 0.01280
+3576    2005-09-08
+3575    2005-09-09
+3574    2005-09-12
+3573    2005-09-13
+3572    2005-09-14
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 3577, dtype: object
+[24.08 24.07 23.68 23.47 23.45 23.47 22.68 21.99]
+[[25.132618]
+ [25.124987]
+ [25.134005]
+ [25.144648]
+ [25.15299 ]
+ [25.159422]
+ [25.151302]]
+--- 751.3903131484985 seconds ---
+Accuracy: 66.66666666666666%../Data Mining/TestSubSet/Liberty Global PLC.csv

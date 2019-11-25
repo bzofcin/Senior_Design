@@ -1,0 +1,53 @@
+34
+Running Gilead Sciences Inc.csvfrom 34
+       timestamp    open     high     low  close    volume
+5022  1999-12-07  44.438  45.1250  42.625  44.25  10179200
+5021  1999-12-08  44.125  46.0006  42.500  43.00  10550400
+
+Epoch 00001: val_loss improved from inf to 0.04839, saving model to weights.h5
+
+Epoch 00002: val_loss did not improve from 0.04839
+
+Epoch 00003: val_loss did not improve from 0.04839
+
+Epoch 00004: val_loss did not improve from 0.04839
+
+Epoch 00005: val_loss did not improve from 0.04839
+
+Epoch 00006: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00006: val_loss did not improve from 0.04839
+
+Epoch 00007: val_loss did not improve from 0.04839
+
+Epoch 00008: val_loss did not improve from 0.04839
+
+Epoch 00009: val_loss did not improve from 0.04839
+
+Epoch 00010: val_loss did not improve from 0.04839
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[65.38   64.64   64.32   63.33   63.81   65.07   64.29   65.     64.88
+ 64.8818]
+[[65.61271 ]
+ [65.6039  ]
+ [65.45257 ]
+ [65.18708 ]
+ [64.85253 ]
+ [64.52496 ]
+ [64.27386 ]
+ [64.14931 ]
+ [64.16032 ]
+ [64.269714]]
+--- 801.4751131534576 seconds ---
+Accuracy: 55.55555555555556%../Data Mining/Stock_Data/Gilead Sciences Inc.csv

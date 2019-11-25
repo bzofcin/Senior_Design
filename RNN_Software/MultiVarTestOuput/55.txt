@@ -1,0 +1,53 @@
+55
+Running Mondelez International Inc.csvfrom 55
+       timestamp   open   high    low  close   volume
+4630  2001-06-27  29.95  30.00  29.81  29.94  3182300
+4629  2001-06-28  29.98  30.44  29.97  30.41  2778100
+
+Epoch 00001: val_loss improved from inf to 0.34895, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 0.34895 to 0.22913, saving model to weights.h5
+
+Epoch 00003: val_loss did not improve from 0.22913
+
+Epoch 00004: val_loss did not improve from 0.22913
+
+Epoch 00005: val_loss did not improve from 0.22913
+
+Epoch 00006: val_loss did not improve from 0.22913
+
+Epoch 00007: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00007: val_loss did not improve from 0.22913
+
+Epoch 00008: val_loss did not improve from 0.22913
+
+Epoch 00009: val_loss did not improve from 0.22913
+
+Epoch 00010: val_loss did not improve from 0.22913
+4640    2001-06-13
+4639    2001-06-14
+4638    2001-06-15
+4637    2001-06-18
+4636    2001-06-19
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 4641, dtype: object
+[51.73   51.8    52.07   52.7    52.9    52.82   53.08   52.71   52.41
+ 52.1847]
+[[46.024532]
+ [46.005825]
+ [45.98581 ]
+ [45.957207]
+ [45.9187  ]
+ [45.863506]
+ [45.78804 ]
+ [45.690796]
+ [45.57863 ]
+ [45.46435 ]]
+--- 817.913462638855 seconds ---
+Accuracy: 44.44444444444444%../Data Mining/Stock_Data/Mondelez International Inc.csv

@@ -1,0 +1,53 @@
+86
+Running Workday Inc.csvfrom 86
+       timestamp   open   high    low  close  volume
+1778  2012-10-26  49.65  50.50  48.20   50.0  484600
+1777  2012-10-31  51.00  51.03  48.09   48.5  400900
+
+Epoch 00001: val_loss improved from inf to 0.84066, saving model to weights.h5
+
+Epoch 00002: val_loss did not improve from 0.84066
+
+Epoch 00003: val_loss did not improve from 0.84066
+
+Epoch 00004: val_loss did not improve from 0.84066
+
+Epoch 00005: val_loss did not improve from 0.84066
+
+Epoch 00006: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00006: val_loss did not improve from 0.84066
+
+Epoch 00007: val_loss did not improve from 0.84066
+
+Epoch 00008: val_loss did not improve from 0.84066
+
+Epoch 00009: val_loss did not improve from 0.84066
+
+Epoch 00010: val_loss did not improve from 0.84066
+1788    2012-10-12
+1787    2012-10-15
+1786    2012-10-16
+1785    2012-10-17
+1784    2012-10-18
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 1789, dtype: object
+[162.42   163.97   163.71   166.38   164.8    165.98   164.     166.89
+ 172.56   171.4427]
+[[135.83798]
+ [135.76532]
+ [135.71928]
+ [135.70209]
+ [135.70465]
+ [135.721  ]
+ [135.75504]
+ [135.79614]
+ [135.8381 ]
+ [135.87334]]
+--- 557.6096968650818 seconds ---
+Accuracy: 44.44444444444444%../Data Mining/Stock_Data/Workday Inc.csv
