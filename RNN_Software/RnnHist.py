@@ -44,9 +44,9 @@ if __name__ == "__main__":
     #PredictOn is the number of days the RNN trains to predict a day
     #epoch is then number of epochs to run
     #years in the amount of historical data it will be trained on
-    predictOn = 60
-    epoch = 10
-    years = 20
+    predictOn = 120
+    epoch = 50
+    years = 10
     single = False
 
 

@@ -14,14 +14,14 @@ import time
 
 start_time = time.time()
 
-BADTESTS  = "../Data Mining/Stock_Data/"
+BADTESTS  = "../Data Mining/TestDir/"
 
 start_time = time.time()
 #print(int(argv[1]))
 mylist = os.listdir(BADTESTS)
 #print (1)
-num1 = int(argv[1])
-#num1 = 1
+#num1 = int(argv[1])
+num1 = 1
 
 print("Running " + mylist[num1] + "from " + str(num1))
 # Importing the training set
