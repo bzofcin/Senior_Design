@@ -8,10 +8,10 @@ x = 0
 
 start_time = time.time()
 def f(l, i, a,x):
-    while(a[x] <  19):
+    while(a[x] <  10):
         l.acquire()
         a[x] = a[x]+1
-        temp = "./MultiVarTestOuput/Multivarsub/" + str(a[x]) + '.txt'
+        temp = "./MultiVarTestOuput/BestSub2/" + str(a[x]) + '.txt'
         print(a[x])
         l.release()
         open(temp, 'w+')
@@ -19,9 +19,9 @@ def f(l, i, a,x):
 
 if __name__ == '__main__':
     lock = Lock()
-    arr = Array('i', range(19))
+    arr = Array('i', range(11))
 
-    for num in range(10):
+    for num in range(11):
         Process(target=f, args=(lock, num, arr,x)).start()
 
-    print("--- %s seconds ---" % (time.time() - start_time))
+print("--- %s seconds ---" % (time.time() - start_time))

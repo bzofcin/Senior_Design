@@ -14,7 +14,7 @@ import time
 
 start_time = time.time()
 
-BADTESTS  = "../Data Mining/TestSubSet/"
+BADTESTS  = "../Data Mining/BestSub/"
 
 start_time = time.time()
 #print(int(argv[1]))
@@ -22,7 +22,7 @@ mylist = os.listdir(BADTESTS)
 #print (1)
 num1 = int(argv[1])
 print(num1)
-#num1 = 7
+#num1 = 6
 
 print("Running " + mylist[num1] + "from " + str(num1))
 # Importing the training set
@@ -42,9 +42,9 @@ test = mylist[num1]
 n_future = 7  # Number of days you want to predict into the future
 n_past = 60  # Number of past days you want to use to predict the future
 
-dataset_train.drop(dataset_train.tail(n_future - 7).index,inplace=True)
+dataset_train.drop(dataset_train.tail(n_future ).index,inplace=True)
 dataset_train.sort_values(by="timestamp", inplace=True,ascending=True)
-print(dataset_train.head(2))
+print(dataset_train.tail(7))
 # this is training on the first opening price
 # need to end range at n+1 because the uperbound is excluded
 # [:] gets entire column
@@ -186,9 +186,9 @@ y_true = np.array(dataset_test[ 'close'])
 print(dataset_test['timestamp'])
 len1 = len(y_true)
 
-print(y_true[len1 - n_future - 7 : len1 - 7 + 1])
+print(y_true[len1 - n_future  : len1  + 1])
 
-y_true = y_true[len1 - n_future : len1 + 1]
+y_true = y_true[len1 - n_future  : len1 + 1]
 
 # Trim the test set to first 12 entries (till the 19th)
 y_true = y_true[0:n_future+1]
