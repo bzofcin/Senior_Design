@@ -3,6 +3,7 @@ import csv
 from datetime import date, timedelta
 import pandas as pd
 
+
 def AddToFile(StockFile, file, title, df):
     df.columns = range(df.shape[1])
     print("Determining if " + file + " exists")

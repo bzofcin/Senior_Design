@@ -24,7 +24,7 @@ if __name__ == "__main__":
 #StockName is the Stock name of the csv file declared as StockDir
         StockList = os.listdir(TestStock)
         #Stock = int(argv[1])
-        Stock = 1
+        Stock = 6
         StockCSV = StockList[Stock]
         StockName = StockCSV[:-4]
         TestStockFile = TestStock + '/' + StockCSV
@@ -36,11 +36,12 @@ if __name__ == "__main__":
         print("Data was not pulled correctly")
         sys.exit(0)
 
+
     try:
         #Epoch = int(argv[2])
-        Epoch = 75
+        Epoch = 50
         #PredNumDays = int(argv[3])
-        PredNumDays = 30
+        PredNumDays = 7
         PredOn= 60
         Years = 5
         StockDir = Directory + '/' + StockName
@@ -50,7 +51,7 @@ if __name__ == "__main__":
         print("Was unable to create the directory")
         sys.exit(0)
     try:
-        for num in range(0, 6):
+        for num in range(0, 5):
             Data = di.GetDataByDate(TestStockFile, Years, num*PredNumDays, single)
             Data = Data[num*PredNumDays:]
             Actual = Data[0:PredNumDays]
@@ -71,7 +72,7 @@ if __name__ == "__main__":
                 ActualStock = Actual.loc[:, ['timestamp', 'close']]
                 ActualStock.rename(columns = {'close': 'actual close'}, inplace= True)
                 PredStock = pd.concat([StockCol, ActualStock, PredStock], axis=1, join='inner')
-                File = StockName + '_Epoch_' + str(Epoch) + '.csv'
+                File = StockName + '_Epoch_' + str(Epoch) + '_Days_' + str(PredNumDays) + '.csv'
                 Title = ["Stock Name", "timestamp", "Actual Close", "Predicted Close"]
                 # FIX ADD TO FILE TO ALLOW FOR MULTIPLE DAYS
                 di.AddToFile(StockDir, File, Title, PredStock)

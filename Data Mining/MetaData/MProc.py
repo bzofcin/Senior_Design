@@ -11,7 +11,7 @@ def f(l, i, a, t):
         l.acquire()
         a[x] = a[x]+1
         l.release()
-        os.system('python ./MetaData.py ' + str(a[x]) + ' ' + str(25) + ' ' + str(30))
+        os.system('python ./MetaData.py ' + str(a[x]) + ' ' + str(75) + ' ' + str(7))
 
 
 if __name__ == '__main__':
