@@ -27,6 +27,9 @@ locu_api = 'YOUR KEY HERE'
 #import feedparser
 
 
+########################################################################################################
+# Read API Test - Ivy B.
+########################################################################################################
 
 def readapi(request):
 
@@ -45,6 +48,9 @@ def readapi(request):
         #print(item['name'], item['phone']
     return render(request,'stockpicker/rssdump.html', {'data': json_obj})
 
+########################################################################################################
+# Login - Ivy B.
+########################################################################################################
 
 def login(request):
 
@@ -71,13 +77,40 @@ def registered(request):
 
     return render(request,'accounts/registered.html', {'authenticated': False})
 
+########################################################################################################
+# Check Password - Nick P., Kevin, & Ivy B.
+########################################################################################################
+
+def checkPassword(passwd):
+    SpecialSym=['$','@','#']
+    if len(passwd) < 8:
+        return 'the length of password should be at least 6 char long'
+    if len(passwd) > 16:
+        return 'the length of password should be not be greater than 8'
+    if not any(char.isdigit() for char in passwd):
+        return 'the password should have at least one numeral'
+    if not any(char.isupper() for char in passwd):
+        return 'the password should have at least one uppercase letter'
+    if not any(char.islower() for char in passwd):
+        return 'the password should have at least one lowercase letter'
+    if not any(char in SpecialSym for char in passwd):
+        return 'the password should have at least one of the symbols $@#'
+
+    return ('Ok')
+
+
+########################################################################################################
+# Registration - Nick P., Kevin, & Ivy B.
+########################################################################################################
 
 def register(request):
     status = 0
     message = ''
-
      # if this is a POST request we need to process the form data
     if request.method == 'POST':
+        passwordVerifMsg = checkPassword(request.POST['password1'])
+        if(passwordVerifMsg != 'Ok'):
+            return render(request,'accounts/registration.html', {'status': 1, 'message': passwordVerifMsg})
 
         form = UserCreationForm(request.POST)
         # check whether it's valid:
@@ -99,11 +132,17 @@ def register(request):
     return render(request,'accounts/registration.html', {'authenticated': False, 'status': status, 'message': message})
 
 
+########################################################################################################
+# About - Ivy B. - Not used
+########################################################################################################
 
 def about(request):
 
     return render(request,'accounts/about.html', {'authenticated': False })
 
+########################################################################################################
+# Logout - Ivy B.
+########################################################################################################
 
 @login_required
 def logout(request):
