@@ -40,17 +40,32 @@ def research(request):
     if request.method == 'POST':
         api_key = locu_api
         company = request.POST['company'].upper()
-        url1= 'http://johnsmallman.wordpress.com/author/johnsmallman/feed/'
         url = 'https://www.nasdaq.com/feed/rssoutbound?symbol=' + company
-        json_obj = feedparser.parse(url)
+        data = feedparser.parse(url)
+        response = requests.get('https://financialmodelingprep.com/api/v3/stock/real-time-price/' + company)
+        stockdata = response.json()
+        historical_response = requests.get('https://financialmodelingprep.com/api/v3/historical-price-full/' + company + '?serietype=line')
+        historical_stockdata = historical_response.json()
 
-        return render(request,'stockpicker/stock_purchase.html', {'data': json_obj,  'authenticated': True})
+        return render(request,'stockpicker/stock_purchase.html', {'data': data,
+                                                                  'symbol': stockdata['symbol'],
+                                                                  'price': stockdata['price'],
+                                                                  'historical_stockdata': historical_stockdata,
+                                                                  'authenticated': True})
     else:
         api_key = locu_api
         url = 'https://www.nasdaq.com/feed/rssoutbound'
         data = feedparser.parse(url)
+        response = requests.get('https://financialmodelingprep.com/api/v3/stock/real-time-price/AAPL')
+        stockdata = response.json()
+        historical_response = requests.get('https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?serietype=line')
+        historical_stockdata = historical_response.json()
 
-    return render(request,'stockpicker/stock_purchase.html', {'data': data, 'authenticated': True})
+    return render(request,'stockpicker/stock_purchase.html', {'data': data,
+                                                              'symbol': stockdata['symbol'],
+                                                              'price': stockdata['price'],
+                                                              'historical_stockdata': historical_stockdata,
+                                                              'authenticated': True})
 
 
 def myportfolio(request):
