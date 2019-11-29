@@ -15,6 +15,9 @@ import datetime
 #import feedparser
 import requests
 
+########################################################################################################
+# Trends
+########################################################################################################
 
 def trends(request):
     if request.method == 'POST':   # when you post a form
@@ -23,17 +26,28 @@ def trends(request):
     return render(request,'stockpicker/stock_trends.html', {})
 
 
-
 def get_context_data(self, item, **kwargs):
     context = super().get_context_data(**kwargs)
     context['author'] = item.author
     print(context['author'])
     return context
 
+
+
+
+
+########################################################################################################
+# Main Page - Ivy B.
+########################################################################################################
+
 @login_required
 def main(request):
     data = {'authenticated': True}
     return render(request,'stockpicker/main.html', data)
+
+########################################################################################################
+# Research  - Ivy B.
+########################################################################################################
 
 @login_required
 def research(request):
@@ -68,22 +82,35 @@ def research(request):
                                                               'authenticated': True})
 
 
-def myportfolio(request):
-    link = 'http://finance.yahoo.com/rss/headline?s=yhoo'
-  #  foo = feedparser.parse(link)
-  #  feed = foo['feed']
-  #  title = feed['title']
+########################################################################################################
+# Show My Portfolio and Stocks  - Ivy B.
+########################################################################################################
 
-    context = {'authenticated': True, 'userPorfolio': portfolio.objects.all()}
+@login_required
+def myportfolio(request):
+    if request.method == 'POST':
+        response = requests.get('https://financialmodelingprep.com/api/v3/stock/real-time-price/' + company)
+        stockdata = response.json()
+        historical_response = requests.get('https://financialmodelingprep.com/api/v3/historical-price-full/' + company + '?serietype=line')
+        historical_stockdata = historical_response.json()
+
+    current_user = request.user
+    data = portfolio.objects.filter(user_id=current_user.id)
+
+    context = {'authenticated': True, 'userPorfolio': data}
     return render(request,'stockpicker/showportfolio.html', context)
+
+########################################################################################################
+# Purchase -> Redirects back to Portfolio  - Ivy B.
+########################################################################################################
 
 @login_required
 def purchase(request):
-
+    current_user = request.user
     if request.method == 'POST':
         a = portfolio()
-        a.user_id = 1
-        a.user_name = 'Test User'
+        a.user_id = current_user.id
+        a.user_name = current_user.username
         a.company = request.POST['company'].upper()
         a.price = 31.33
         a.shares = request.POST['shares']
@@ -92,11 +119,60 @@ def purchase(request):
 
     return redirect('myportfolio')
 
+########################################################################################################
+# Stock Info - Ivy B.
+########################################################################################################
+
+@login_required
+def stockinfo(request):
+    responseList = requests.get('https://financialmodelingprep.com/api/v3/company/stock/list')
+    stocklist = responseList.json()
+
+    if request.method == 'POST':
+        api_key = locu_api
+        company = request.POST['company'].upper()
+        url = 'https://www.nasdaq.com/feed/rssoutbound?symbol=' + company
+        data = feedparser.parse(url)
+        response = requests.get('https://financialmodelingprep.com/api/v3/stock/real-time-price/' + company)
+        stockdata = response.json()
+        historical_response = requests.get('https://financialmodelingprep.com/api/v3/historical-price-full/' + company + '?serietype=line')
+        historical_stockdata = historical_response.json()
+
+        return render(request,'stockpicker/stock_information.html', {'data': data,
+                                                                  'symbol': stockdata['symbol'],
+                                                                  'price': stockdata['price'],
+                                                                  'historical_stockdata': historical_stockdata,
+                                                                  'stocklist': stocklist,
+                                                                  'authenticated': True})
+    else:
+        api_key = locu_api
+        url = 'https://www.nasdaq.com/feed/rssoutbound'
+        data = feedparser.parse(url)
+        response = requests.get('https://financialmodelingprep.com/api/v3/stock/real-time-price/AAPL')
+        stockdata = response.json()
+        historical_response = requests.get('https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?serietype=line')
+        historical_stockdata = historical_response.json()
+
+        return render(request,'stockpicker/stock_information.html', {'data': data,
+                                                              'symbol': stockdata['symbol'],
+                                                              'price': stockdata['price'],
+                                                              'stocklist': stocklist,
+                                                              'historical_stockdata': historical_stockdata,
+                                                              'authenticated': True})
+
+########################################################################################################
+# Sell -> Redirects back to Portfolio  - Ivy B.
+########################################################################################################
+
 @login_required
 def sell(request, id):
     mportfolio = portfolio.objects.get(id=id)
     mportfolio.delete()
     return redirect('myportfolio')
+
+########################################################################################################
+# Dashboard - Not Used  - Ivy B.
+########################################################################################################
 
 @login_required
 def dashboard(request):

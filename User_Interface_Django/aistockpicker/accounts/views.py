@@ -19,7 +19,7 @@ import crypt, getpass, pwd
 import urllib
 import json
 import datetime
-import re
+
 from urllib import request
 #from .rssfeed import rssapi
 import feedparser
@@ -83,7 +83,7 @@ def registered(request):
 
 def checkPassword(passwd):
     SpecialSym=['$','@','#']
-    if len(passwd) < 8:
+    if len(passwd) < 6:
         return 'the length of password should be at least 6 char long'
     if len(passwd) > 16:
         return 'the length of password should be not be greater than 8'
