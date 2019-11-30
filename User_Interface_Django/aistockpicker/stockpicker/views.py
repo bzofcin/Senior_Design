@@ -6,14 +6,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.sessions.models import Session
-
+import json
 import feedparser
 locu_api = 'YOUR KEY HERE'
-
+import csv
 from .models import portfolio
 import datetime
 #import feedparser
 import requests
+import os
+
+
+from collections import defaultdict
 
 ########################################################################################################
 # Trends
@@ -33,9 +37,6 @@ def get_context_data(self, item, **kwargs):
     return context
 
 
-
-
-
 ########################################################################################################
 # Main Page - Ivy B.
 ########################################################################################################
@@ -51,7 +52,21 @@ def main(request):
 
 @login_required
 def research(request):
+
     if request.method == 'POST':
+        path = '/home/unlvteamseven/aistockpicker/static/predictions/Facebook.csv'
+        timeStamp = []
+        closePrice = []
+        openPrice = []
+        volume = []
+        with open(path) as csvfile:
+            inputcsv = csv.reader(csvfile, delimiter=',')
+            for row in inputcsv:
+                timeStamp.append(row[0:1])
+                openPrice.append(row[1:2])
+                closePrice.append(row[2:3])
+                volume.append(row[3:4])
+
         api_key = locu_api
         company = request.POST['company'].upper()
         url = 'https://www.nasdaq.com/feed/rssoutbound?symbol=' + company
@@ -64,6 +79,10 @@ def research(request):
         return render(request,'stockpicker/stock_purchase.html', {'data': data,
                                                                   'symbol': stockdata['symbol'],
                                                                   'price': stockdata['price'],
+                                                                  'timeStamp': timeStamp,
+                                                                  'closePrice': closePrice,
+                                                                  'openPrice': openPrice,
+                                                                  'volume': volume,
                                                                   'historical_stockdata': historical_stockdata,
                                                                   'authenticated': True})
     else:
@@ -135,27 +154,30 @@ def stockinfo(request):
         data = feedparser.parse(url)
         response = requests.get('https://financialmodelingprep.com/api/v3/stock/real-time-price/' + company)
         stockdata = response.json()
-        historical_response = requests.get('https://financialmodelingprep.com/api/v3/historical-price-full/' + company + '?serietype=line')
+        historical_response = requests.get('https://financialmodelingprep.com/api/v3/historical-price-full/' + company + '?timeseries=1')
         historical_stockdata = historical_response.json()
-
+        showBuyForm = True
         return render(request,'stockpicker/stock_information.html', {'data': data,
                                                                   'symbol': stockdata['symbol'],
                                                                   'price': stockdata['price'],
+                                                                  'showBuyForm': showBuyForm,
                                                                   'historical_stockdata': historical_stockdata,
                                                                   'stocklist': stocklist,
                                                                   'authenticated': True})
     else:
+        showBuyForm = False
         api_key = locu_api
         url = 'https://www.nasdaq.com/feed/rssoutbound'
         data = feedparser.parse(url)
         response = requests.get('https://financialmodelingprep.com/api/v3/stock/real-time-price/AAPL')
         stockdata = response.json()
-        historical_response = requests.get('https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?serietype=line')
+        historical_response = requests.get('https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?timeseries=1')
         historical_stockdata = historical_response.json()
 
         return render(request,'stockpicker/stock_information.html', {'data': data,
                                                               'symbol': stockdata['symbol'],
                                                               'price': stockdata['price'],
+                                                              'showBuyForm': showBuyForm,
                                                               'stocklist': stocklist,
                                                               'historical_stockdata': historical_stockdata,
                                                               'authenticated': True})
