@@ -10,7 +10,7 @@ import json
 import feedparser
 locu_api = 'YOUR KEY HERE'
 import csv
-from .models import portfolio
+from .models import portfolio, account
 import datetime
 #import feedparser
 import requests
@@ -80,6 +80,7 @@ def research(request):
                                                                   'symbol': stockdata['symbol'],
                                                                   'price': stockdata['price'],
                                                                   'timeStamp': timeStamp,
+
                                                                   'closePrice': closePrice,
                                                                   'openPrice': openPrice,
                                                                   'volume': volume,
@@ -131,7 +132,7 @@ def purchase(request):
         a.user_id = current_user.id
         a.user_name = current_user.username
         a.company = request.POST['company'].upper()
-        a.price = 31.33
+        a.purchase_price = request.POST['price'].upper()
         a.shares = request.POST['shares']
         a.purchase_timestamp = datetime.date.today()
         a.save()
@@ -146,7 +147,18 @@ def purchase(request):
 def stockinfo(request):
     responseList = requests.get('https://financialmodelingprep.com/api/v3/company/stock/list')
     stocklist = responseList.json()
+    current_user = request.user
 
+    if account.objects.filter(user_id=current_user.id).exists():
+      # Do nothing for now
+        userAccount = account.objects.values('credits').filter(user_id=current_user.id)
+        credits = userAccount
+    else:
+        a = account()
+        a.user_id = current_user.id
+        a.user_name = current_user.username
+        a.credits = 100000.00
+        a.save()
     if request.method == 'POST':
         api_key = locu_api
         company = request.POST['company'].upper()
@@ -160,6 +172,8 @@ def stockinfo(request):
         return render(request,'stockpicker/stock_information.html', {'data': data,
                                                                   'symbol': stockdata['symbol'],
                                                                   'price': stockdata['price'],
+                                                                  'credits': credits,
+                                                                  'company': company,
                                                                   'showBuyForm': showBuyForm,
                                                                   'historical_stockdata': historical_stockdata,
                                                                   'stocklist': stocklist,
@@ -177,6 +191,7 @@ def stockinfo(request):
         return render(request,'stockpicker/stock_information.html', {'data': data,
                                                               'symbol': stockdata['symbol'],
                                                               'price': stockdata['price'],
+                                                              'credits': credits,
                                                               'showBuyForm': showBuyForm,
                                                               'stocklist': stocklist,
                                                               'historical_stockdata': historical_stockdata,
