@@ -11,7 +11,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-sm-6">
 
                     <div class="row mb-5">
                         <div class="col-12">
@@ -33,6 +33,12 @@
                                         <p class="card-text">
                                           <form method="post">
                                              {% csrf_token %}
+                                               <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                                    </div>
+                                                    <input class="form-control" name="first_name" id="first_name"  placeholder="First Name" type="text">
+                                                </div>
 
                                                 <div class="form-group input-group">
                                                     <div class="input-group-prepend">
@@ -66,7 +72,7 @@
 
                 </div>
 
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Privacy Policy</h5>
@@ -87,7 +93,7 @@
             						<li id="letter" class="invalid">At least <strong>one letter</strong></li>
             						<li id="capital" class="invalid">At least <strong>one capital letter</strong></li>
             						<li id="number" class="invalid">At least <strong>one number</strong></li>
-            						<li id="length" class="invalid">Be at least <strong>6 characters</strong></li>
+            						<li id="length" class="invalid">Be at least <strong>8 characters</strong></li>
             						<li id="space" class="invalid">be<strong> use [~,!,@,#,$,%,^,&,*,-,=,.,;,']</strong></li>
             					</ul>
             				</div>
@@ -146,7 +152,7 @@ $(document).ready(function(){
         var pass = $('#password1').val();
         var pass2 = $('#password2').val();
         if(pass != pass2){
-            alert('The passwords didn\'t match!');
+            alert('the passwords didn\'t match!');
         }
 
     });

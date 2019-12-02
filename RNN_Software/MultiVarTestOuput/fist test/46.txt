@@ -1,9 +1,0 @@
-46
-Running Kraft Heinz Co.csvfrom 46
-       timestamp   open   high      low  close    volume
-1095  2015-07-20  79.95  81.20  79.1300  80.11  10284500
-1094  2015-07-21  79.97  80.68  79.3954  80.22   6088600
-
-Epoch 00001: val_loss improved from inf to 0.58121, saving model to weights.h5
-
-Epoch 00002: val_loss improved from 0.58121 to 0.51006, saving model to weights.h5
