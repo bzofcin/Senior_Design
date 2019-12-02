@@ -14,7 +14,7 @@ if __name__ == '__main__':
     #Passes the stock to run and the day to predict
     for item in Stocks:
         for counter in range(30, 29, -1):
-            os.system('python ./RnnHist1.py ' + str(StockNum) + ' ' + str(counter))
+            os.system('python ./RnnHist.py ' + str(StockNum) + ' ' + str(counter))
         StockNum = StockNum + 1
         print("Stock " + item + " is Processed")
     print("All Stocks Processed")

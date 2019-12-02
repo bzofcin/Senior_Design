@@ -1,9 +1,5 @@
 import pandas as pd
-import statistics as stat
-import analytics
 import os
-import math
-from sklearn.metrics import mean_squared_error
 
 class Accuracy:
     def __init__(self, prediction_dir, stocks_dir):
@@ -14,10 +10,7 @@ class Accuracy:
     def single_epoch_method(self, prediction_dir, stocks_dir):
         prediction_sets = os.listdir(prediction_dir)
         actual_sets = os.listdir(stocks_dir)
-        accuracy_sum = 0
-        accuracy_set = []
-        rmse_sum = 0
-        rmse_set = []
+        avg_accuracy = 0
         # print(actual_sets)
         # print(prediction_sets)
 
@@ -72,35 +65,10 @@ class Accuracy:
             # print(predicted_stock_price)
             # print("Actual: ")
             # print(real_stock_price)
-            analytics.rmse = self.calc_rmse(predicted_stock_price, real_stock_price, stock_name)
-            print(stock_name + " RMSE: " + str(analytics.rmse))
-            accuracy = self.accuracy_calc(predicted_stock_price, real_stock_price, stock_name)
-            rmse_set.append(analytics.rmse)
-            rmse_sum += analytics.rmse
-            accuracy_set.append(accuracy)
-            accuracy_sum += accuracy
+            avg_accuracy += self.accuracy_calc(predicted_stock_price, real_stock_price, stock_name)
 
-        analytics.avg_accuracy = self.calc_avg(accuracy_sum, real_set)
-        analytics.med_accuracy = self.calc_med(accuracy_set)
-        analytics.hi_accuracy = self.calc_hi(accuracy_set)
-        analytics.lo_accuracy = self.calc_lo(accuracy_set)
-        analytics.var_accuracy = self.calc_var(accuracy_set)
-        print("Accuracy Average: " + str(analytics.avg_accuracy))
-        print("Accuracy Median: " + str(analytics.med_accuracy))
-        print("Accuracy High: " + str(analytics.hi_accuracy))
-        print("Accuracy Low: " + str(analytics.lo_accuracy))
-        print("Accuracy Variance: " + str(analytics.var_accuracy))
-        print(" ")
-        analytics.avg_rmse = self.rmse_avg(rmse_sum, real_set)
-        analytics.med_rmse = self.rmse_med(rmse_set)
-        analytics.hi_rmse = self.rmse_hi(rmse_set)
-        analytics.lo_rmse = self.rmse_lo(rmse_set)
-        analytics.var_rmse = self.rmse_var(rmse_set)
-        print("RMSE Average: " + str(analytics.avg_rmse))
-        print("RMSE Median: " + str(analytics.med_rmse))
-        print("RMSE High: " + str(analytics.hi_rmse))
-        print("RMSE Low: " + str(analytics.lo_rmse))
-        print("RMSE Variance: " + str(analytics.var_rmse))
+        avg_accuracy = avg_accuracy / real_set
+        print("Average accuracy: " + str(avg_accuracy))
 
     def accuracy_calc(self, predicted_stock_price, real_stock_price, stock_name):
         # Calculating accuracy
@@ -136,54 +104,14 @@ class Accuracy:
 
         percent_accurate = (accurate / total) * 100
         print(stock_name + " accuracy: " + str(percent_accurate) + "%")
-        print(" ")
         return percent_accurate
 
-    def calc_avg(self, accuracy_sum, real_set):
-        return accuracy_sum / real_set
 
-    def calc_med(self, accuracy_set):
-        return stat.median(accuracy_set)
-
-    def calc_hi(self, accuracy_set):
-        return max(accuracy_set)
-
-    def calc_lo(self, accuracy_set):
-        return min(accuracy_set)
-
-    def calc_var(self, accuracy_set):
-        return stat.variance(accuracy_set)
-
-    def calc_rmse(self, predicted_stock_price, real_stock_price, stock_name):
-        min_price = min(real_stock_price)
-        max_price = max(real_stock_price)
-        price_range = max_price - min_price
-        rmse = math.sqrt(mean_squared_error(real_stock_price, predicted_stock_price))
-        rmse = (rmse/price_range)
-        return rmse
-
-    def rmse_avg(self, rmse_sum, real_set):
-        return rmse_sum / real_set
-
-    def rmse_med(self, rmse_set):
-        return stat.median(rmse_set)
-
-    def rmse_hi(self, rmse_set):
-        return max(rmse_set)
-
-    def rmse_lo(self, rmse_set):
-        return min(rmse_set)
-
-    def rmse_var(self, rmse_set):
-        return stat.variance(rmse_set)
 
 # stocks_dir = "../RNN_Experiments/Data Mining/Stock_Data_Indexed/"
-# stocks_dir = "../Data Mining/Test_Data_Indexed/"
+stocks_dir = "../Data Mining/Test_Data_Indexed/"
 # prediction_dir = "../RNN_Experiments/Predicted_Data/E_10_PO_60_DP_30_H_5/"
-# prediction_dir = "../RNN_Software/Prediction_Test/E_100_PO_60_DP_30_H_20/"
-
-stocks_dir = "C:/Users/Terran/Documents/seniorprojectfall2019team7/RNN_Software/Automated_QA/Test_Data_Indexed/"
-prediction_dir = "C:/Users/Terran/Documents/seniorprojectfall2019team7/RNN_Software/Prediction_Test/E_10_PO_60_DP_30_H_5/"
+prediction_dir = "../RNN_Software/Prediction_Test/E_100_PO_60_DP_30_H_20/"
 accuracy = Accuracy(prediction_dir, stocks_dir)
 accuracy.single_epoch_method(prediction_dir, stocks_dir)
 
