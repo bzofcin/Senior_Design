@@ -1,6 +1,6 @@
 
 
-def calculate_accuracy(predicted_stock_price, real_stock_price):
+def calculate_accuracy(predicted_stock_price, real_stock_price, testname):
     # Calculating accuracy
     predicted_length = len(predicted_stock_price)
     # trend up == 1; trend down == 0; no change == 2
@@ -30,4 +30,4 @@ def calculate_accuracy(predicted_stock_price, real_stock_price):
         total += 1
 
     percent_accurate = (accurate/total) * 100
-    print("Accuracy: " + str(percent_accurate) + "%")
+    print("Accuracy: " + str(percent_accurate) + "%" + testname)

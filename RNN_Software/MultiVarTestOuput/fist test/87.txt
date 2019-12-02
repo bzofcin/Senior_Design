@@ -1,0 +1,50 @@
+87
+Running Wynn Resorts Ltd.csvfrom 87
+       timestamp   open     high    low  close  volume
+4288  2002-11-08  13.02  13.0382  12.83  12.93  106400
+4287  2002-11-11  13.00  13.0000  12.65  12.71  110500
+
+Epoch 00001: val_loss improved from inf to 0.07699, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 0.07699 to 0.07293, saving model to weights.h5
+
+Epoch 00003: val_loss improved from 0.07293 to 0.06608, saving model to weights.h5
+
+Epoch 00004: val_loss did not improve from 0.06608
+
+Epoch 00005: val_loss improved from 0.06608 to 0.06099, saving model to weights.h5
+
+Epoch 00006: val_loss did not improve from 0.06099
+
+Epoch 00007: val_loss improved from 0.06099 to 0.05294, saving model to weights.h5
+
+Epoch 00008: val_loss did not improve from 0.05294
+
+Epoch 00009: val_loss did not improve from 0.05294
+
+Epoch 00010: val_loss did not improve from 0.05294
+4298    2002-10-25
+4297    2002-10-28
+4296    2002-10-29
+4295    2002-10-30
+4294    2002-10-31
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 4299, dtype: object
+[126.47 121.62 120.74 118.84 118.68 117.7  120.15 120.25 117.55 118.01]
+[[115.3514  ]
+ [116.442986]
+ [117.470276]
+ [118.37779 ]
+ [119.13995 ]
+ [119.754234]
+ [120.28648 ]
+ [120.849335]
+ [121.39376 ]
+ [121.85492 ]]
+--- 554.6071045398712 seconds ---
+Accuracy: 33.33333333333333%../Data Mining/Stock_Data/Wynn Resorts Ltd.csv

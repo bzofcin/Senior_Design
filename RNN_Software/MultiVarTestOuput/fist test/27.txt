@@ -1,0 +1,52 @@
+27
+Running Dollar Tree Inc.csvfrom 27
+       timestamp    open    high     low   close   volume
+5022  1999-12-07  46.625  47.063  45.500  47.063  1479800
+5021  1999-12-08  46.750  47.250  44.875  44.875  1514000
+
+Epoch 00001: val_loss improved from inf to 0.11200, saving model to weights.h5
+
+Epoch 00002: val_loss did not improve from 0.11200
+
+Epoch 00003: val_loss improved from 0.11200 to 0.07624, saving model to weights.h5
+
+Epoch 00004: val_loss did not improve from 0.07624
+
+Epoch 00005: val_loss did not improve from 0.07624
+
+Epoch 00006: val_loss did not improve from 0.07624
+
+Epoch 00007: val_loss did not improve from 0.07624
+
+Epoch 00008: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00008: val_loss did not improve from 0.07624
+
+Epoch 00009: val_loss did not improve from 0.07624
+
+Epoch 00010: val_loss did not improve from 0.07624
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[110.35 108.93 107.69 108.4  108.75 108.85 109.06 106.88 107.26 107.91]
+[[77.735   ]
+ [77.92774 ]
+ [78.046555]
+ [78.27623 ]
+ [78.58076 ]
+ [78.97285 ]
+ [79.42956 ]
+ [79.976524]
+ [80.50299 ]
+ [81.273705]]
+--- 789.837170124054 seconds ---
+Accuracy: 66.66666666666666%../Data Mining/Stock_Data/Dollar Tree Inc.csv

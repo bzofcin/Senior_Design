@@ -1,0 +1,50 @@
+38
+Running Illumina Inc.csvfrom 38
+       timestamp     open   high     low   close  volume
+4850  2000-08-11  44.9380  45.00  41.875  41.875  394800
+4849  2000-08-14  42.6272  42.75  39.625  40.000  473400
+
+Epoch 00001: val_loss improved from inf to 0.55600, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 0.55600 to 0.51236, saving model to weights.h5
+
+Epoch 00003: val_loss improved from 0.51236 to 0.34412, saving model to weights.h5
+
+Epoch 00004: val_loss did not improve from 0.34412
+
+Epoch 00005: val_loss did not improve from 0.34412
+
+Epoch 00006: val_loss did not improve from 0.34412
+
+Epoch 00007: val_loss improved from 0.34412 to 0.26103, saving model to weights.h5
+
+Epoch 00008: val_loss improved from 0.26103 to 0.24420, saving model to weights.h5
+
+Epoch 00009: val_loss did not improve from 0.24420
+
+Epoch 00010: val_loss did not improve from 0.24420
+4860    2000-07-28
+4859    2000-07-31
+4858    2000-08-01
+4857    2000-08-02
+4856    2000-08-03
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 4861, dtype: object
+[293.39 295.   295.73 298.22 298.44 305.99 306.67 311.01 314.91 310.5 ]
+[[237.44339]
+ [236.93799]
+ [236.40732]
+ [235.91827]
+ [235.49695]
+ [235.16881]
+ [234.97455]
+ [234.90308]
+ [234.88673]
+ [234.86258]]
+--- 799.8096153736115 seconds ---
+Accuracy: 11.11111111111111%../Data Mining/Stock_Data/Illumina Inc.csv

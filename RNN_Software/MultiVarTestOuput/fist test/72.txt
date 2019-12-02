@@ -1,0 +1,52 @@
+72
+Running Starbucks Corp.csvfrom 72
+       timestamp  open    high      low   close    volume
+5022  1999-12-07  27.0  27.375  26.7505  27.063  11990400
+5021  1999-12-08  27.0  27.063  25.1250  25.813  17665600
+
+Epoch 00001: val_loss improved from inf to 0.04341, saving model to weights.h5
+
+Epoch 00002: val_loss did not improve from 0.04341
+
+Epoch 00003: val_loss did not improve from 0.04341
+
+Epoch 00004: val_loss did not improve from 0.04341
+
+Epoch 00005: val_loss did not improve from 0.04341
+
+Epoch 00006: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00006: val_loss did not improve from 0.04341
+
+Epoch 00007: val_loss improved from 0.04341 to 0.02712, saving model to weights.h5
+
+Epoch 00008: val_loss did not improve from 0.02712
+
+Epoch 00009: val_loss did not improve from 0.02712
+
+Epoch 00010: val_loss did not improve from 0.02712
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[81.77 82.43 83.32 83.94 84.38 84.21 84.02 83.66 83.6  82.45]
+[[88.95588 ]
+ [88.88665 ]
+ [88.852844]
+ [88.7413  ]
+ [88.612625]
+ [88.494644]
+ [88.27816 ]
+ [87.97669 ]
+ [87.64498 ]
+ [87.201096]]
+--- 926.8059282302856 seconds ---
+Accuracy: 55.55555555555556%../Data Mining/Stock_Data/Starbucks Corp.csv

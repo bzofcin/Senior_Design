@@ -1,0 +1,50 @@
+45
+Running KLA Corp.csvfrom 45
+       timestamp     open     high    low    close   volume
+5022  1999-12-07  103.500  103.625  98.75  101.250  4858000
+5021  1999-12-08   99.938  100.750  95.75   96.125  4299000
+
+Epoch 00001: val_loss improved from inf to 1.21104, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 1.21104 to 0.97537, saving model to weights.h5
+
+Epoch 00003: val_loss improved from 0.97537 to 0.94156, saving model to weights.h5
+
+Epoch 00004: val_loss did not improve from 0.94156
+
+Epoch 00005: val_loss improved from 0.94156 to 0.92549, saving model to weights.h5
+
+Epoch 00006: val_loss did not improve from 0.92549
+
+Epoch 00007: val_loss improved from 0.92549 to 0.83526, saving model to weights.h5
+
+Epoch 00008: val_loss improved from 0.83526 to 0.70711, saving model to weights.h5
+
+Epoch 00009: val_loss did not improve from 0.70711
+
+Epoch 00010: val_loss did not improve from 0.70711
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[174.21 174.43 174.42 176.35 176.6  177.86 177.   175.99 173.67 162.09]
+[[92.02322 ]
+ [92.04424 ]
+ [92.069885]
+ [92.10014 ]
+ [92.13717 ]
+ [92.174324]
+ [92.211296]
+ [92.246155]
+ [92.276375]
+ [92.306244]]
+--- 641.3233568668365 seconds ---
+Accuracy: 44.44444444444444%../Data Mining/Stock_Data/KLA Corp.csv

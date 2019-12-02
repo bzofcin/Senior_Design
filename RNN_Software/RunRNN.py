@@ -27,6 +27,8 @@ def RunRNN(TrainData, TestData, TrainLen, TestLen, predictOn, epoch):
     regressor.add(Dropout(0.2))
     regressor.add(LSTM(units=50, return_sequences=True))
     regressor.add(Dropout(0.2))
+    regressor.add(LSTM(units=50, return_sequences=True))
+    regressor.add(Dropout(0.2))
     regressor.add(LSTM(units=50))
     regressor.add(Dropout(0.2))
     regressor.add(Dense(units=1))

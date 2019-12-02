@@ -1,0 +1,72 @@
+0
+Running Baidu Inc.csvfrom 0
+       timestamp    open    high  ...    NasClose     NasHigh      Naslow
+3599  2005-08-05   66.00  151.21  ...  279.899994  280.500000  279.700012
+3598  2005-08-08  137.75  153.98  ...  280.299988  280.299988  279.000000
+
+[2 rows x 10 columns]
+
+Epoch 00001: val_loss improved from inf to 0.03290, saving model to weights.h5
+
+Epoch 00002: val_loss did not improve from 0.03290
+
+Epoch 00003: val_loss improved from 0.03290 to 0.02878, saving model to weights.h5
+
+Epoch 00004: val_loss improved from 0.02878 to 0.02859, saving model to weights.h5
+
+Epoch 00005: val_loss improved from 0.02859 to 0.02728, saving model to weights.h5
+
+Epoch 00006: val_loss improved from 0.02728 to 0.02628, saving model to weights.h5
+
+Epoch 00007: val_loss did not improve from 0.02628
+
+Epoch 00008: val_loss improved from 0.02628 to 0.02604, saving model to weights.h5
+
+Epoch 00009: val_loss improved from 0.02604 to 0.02545, saving model to weights.h5
+
+Epoch 00010: val_loss did not improve from 0.02545
+
+Epoch 00011: val_loss did not improve from 0.02545
+
+Epoch 00012: val_loss did not improve from 0.02545
+
+Epoch 00013: val_loss did not improve from 0.02545
+
+Epoch 00014: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00014: val_loss did not improve from 0.02545
+
+Epoch 00015: val_loss did not improve from 0.02545
+
+Epoch 00016: val_loss did not improve from 0.02545
+
+Epoch 00017: val_loss did not improve from 0.02545
+
+Epoch 00018: val_loss did not improve from 0.02545
+
+Epoch 00019: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00019: val_loss did not improve from 0.02545
+Epoch 00019: early stopping
+3599    2005-08-05
+3598    2005-08-08
+3597    2005-08-09
+3596    2005-08-10
+3595    2005-08-11
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 3600, dtype: object
+[109.62 108.05 107.36 121.87 124.56 120.87 121.8  118.29]
+[[105.88788 ]
+ [105.92902 ]
+ [106.179115]
+ [106.75506 ]
+ [107.79596 ]
+ [109.3226  ]
+ [111.245255]]
+--- 760.0071794986725 seconds ---
+Accuracy: 16.666666666666664%../Data Mining/TestSubSet/Baidu Inc.csv

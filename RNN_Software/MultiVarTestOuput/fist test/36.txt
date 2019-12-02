@@ -1,0 +1,50 @@
+36
+Running Henry Schein Inc.csvfrom 36
+       timestamp    open    high     low   close   volume
+5022  1999-12-07  12.438  12.563  12.000  12.125  1008700
+5021  1999-12-08  12.125  12.438  11.875  11.875  1482500
+
+Epoch 00001: val_loss improved from inf to 0.14959, saving model to weights.h5
+
+Epoch 00002: val_loss did not improve from 0.14959
+
+Epoch 00003: val_loss improved from 0.14959 to 0.13789, saving model to weights.h5
+
+Epoch 00004: val_loss did not improve from 0.13789
+
+Epoch 00005: val_loss did not improve from 0.13789
+
+Epoch 00006: val_loss did not improve from 0.13789
+
+Epoch 00007: val_loss improved from 0.13789 to 0.13365, saving model to weights.h5
+
+Epoch 00008: val_loss improved from 0.13365 to 0.12379, saving model to weights.h5
+
+Epoch 00009: val_loss did not improve from 0.12379
+
+Epoch 00010: val_loss did not improve from 0.12379
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[68.91 67.4  67.88 68.28 68.18 68.46 68.69 69.5  68.35 68.4 ]
+[[63.249218]
+ [63.319283]
+ [63.395737]
+ [63.47774 ]
+ [63.556248]
+ [63.627323]
+ [63.66303 ]
+ [63.633896]
+ [63.601933]
+ [63.662098]]
+--- 818.5141804218292 seconds ---
+Accuracy: 66.66666666666666%../Data Mining/Stock_Data/Henry Schein Inc.csv

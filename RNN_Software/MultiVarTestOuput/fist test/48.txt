@@ -1,0 +1,50 @@
+48
+Running Liberty Global PLC.csvfrom 48
+       timestamp   open   high    low  close   volume
+3566  2005-09-22  25.21  25.33  24.97  24.98  2100000
+3565  2005-09-23  25.05  25.79  24.91  25.48  1359600
+
+Epoch 00001: val_loss improved from inf to 0.03219, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 0.03219 to 0.01826, saving model to weights.h5
+
+Epoch 00003: val_loss did not improve from 0.01826
+
+Epoch 00004: val_loss did not improve from 0.01826
+
+Epoch 00005: val_loss improved from 0.01826 to 0.01806, saving model to weights.h5
+
+Epoch 00006: val_loss improved from 0.01806 to 0.01295, saving model to weights.h5
+
+Epoch 00007: val_loss did not improve from 0.01295
+
+Epoch 00008: val_loss did not improve from 0.01295
+
+Epoch 00009: val_loss improved from 0.01295 to 0.01270, saving model to weights.h5
+
+Epoch 00010: val_loss did not improve from 0.01270
+3576    2005-09-08
+3575    2005-09-09
+3574    2005-09-12
+3573    2005-09-13
+3572    2005-09-14
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 3577, dtype: object
+[23.45 23.47 22.68 21.99 21.82 21.66 21.74 21.82 21.66 21.58]
+[[25.39828 ]
+ [25.314457]
+ [25.184877]
+ [25.0266  ]
+ [24.860197]
+ [24.709618]
+ [24.59193 ]
+ [24.51584 ]
+ [24.4805  ]
+ [24.47131 ]]
+--- 569.9331023693085 seconds ---
+Accuracy: 66.66666666666666%../Data Mining/Stock_Data/Liberty Global PLC.csv

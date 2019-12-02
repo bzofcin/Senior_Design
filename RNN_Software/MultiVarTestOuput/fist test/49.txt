@@ -1,0 +1,50 @@
+49
+Running Lululemon Athletica Inc.csvfrom 49
+       timestamp  open  high    low  close   volume
+3093  2007-08-10  34.0  36.2  32.26  36.15  2232800
+3092  2007-08-13  38.0  38.0  36.51  36.88   962800
+
+Epoch 00001: val_loss improved from inf to 1.99862, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 1.99862 to 1.88516, saving model to weights.h5
+
+Epoch 00003: val_loss did not improve from 1.88516
+
+Epoch 00004: val_loss did not improve from 1.88516
+
+Epoch 00005: val_loss did not improve from 1.88516
+
+Epoch 00006: val_loss improved from 1.88516 to 1.85448, saving model to weights.h5
+
+Epoch 00007: val_loss did not improve from 1.85448
+
+Epoch 00008: val_loss did not improve from 1.85448
+
+Epoch 00009: val_loss did not improve from 1.85448
+
+Epoch 00010: val_loss did not improve from 1.85448
+3103    2007-07-27
+3102    2007-07-30
+3101    2007-07-31
+3100    2007-08-01
+3099    2007-08-02
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 3104, dtype: object
+[204.13 207.19 207.81 211.11 213.22 215.91 218.46 216.88 217.04 217.7 ]
+[[72.314575]
+ [72.24327 ]
+ [72.173355]
+ [72.115005]
+ [72.07007 ]
+ [72.03772 ]
+ [72.03398 ]
+ [72.052315]
+ [72.08759 ]
+ [72.127106]]
+--- 574.7064480781555 seconds ---
+Accuracy: 22.22222222222222%../Data Mining/Stock_Data/Lululemon Athletica Inc.csv

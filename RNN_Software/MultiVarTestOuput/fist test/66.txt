@@ -1,0 +1,50 @@
+67
+Running Qualcomm Inc.csvfrom 67
+       timestamp     open   high     low    close    volume
+5022  1999-12-07  399.750  407.5  395.50  398.875  32708000
+5021  1999-12-08  396.125  407.0  388.75  389.250  30504000
+
+Epoch 00001: val_loss improved from inf to 0.04169, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 0.04169 to 0.03878, saving model to weights.h5
+
+Epoch 00003: val_loss improved from 0.03878 to 0.03738, saving model to weights.h5
+
+Epoch 00004: val_loss improved from 0.03738 to 0.03353, saving model to weights.h5
+
+Epoch 00005: val_loss did not improve from 0.03353
+
+Epoch 00006: val_loss did not improve from 0.03353
+
+Epoch 00007: val_loss improved from 0.03353 to 0.03233, saving model to weights.h5
+
+Epoch 00008: val_loss improved from 0.03233 to 0.03094, saving model to weights.h5
+
+Epoch 00009: val_loss improved from 0.03094 to 0.02838, saving model to weights.h5
+
+Epoch 00010: val_loss did not improve from 0.02838
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[94.03 91.84 90.97 90.47 90.48 90.81 90.48 87.96 85.62 85.46]
+[[74.34941 ]
+ [74.65051 ]
+ [74.995056]
+ [75.38587 ]
+ [75.78236 ]
+ [76.17901 ]
+ [76.61871 ]
+ [77.124504]
+ [77.69061 ]
+ [78.434074]]
+--- 915.6211836338043 seconds ---
+Accuracy: 22.22222222222222%../Data Mining/Stock_Data/Qualcomm Inc.csv

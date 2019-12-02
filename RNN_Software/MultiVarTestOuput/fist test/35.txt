@@ -1,0 +1,52 @@
+35
+Running Hasbro Inc.csvfrom 35
+       timestamp    open    high      low   close   volume
+5022  1999-12-07  21.625  21.813  19.9380  21.250  1747600
+5021  1999-12-08  23.000  23.000  21.5625  22.125  2060100
+
+Epoch 00001: val_loss improved from inf to 0.29045, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 0.29045 to 0.20294, saving model to weights.h5
+
+Epoch 00003: val_loss improved from 0.20294 to 0.13477, saving model to weights.h5
+
+Epoch 00004: val_loss did not improve from 0.13477
+
+Epoch 00005: val_loss did not improve from 0.13477
+
+Epoch 00006: val_loss did not improve from 0.13477
+
+Epoch 00007: val_loss did not improve from 0.13477
+
+Epoch 00008: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00008: val_loss did not improve from 0.13477
+
+Epoch 00009: val_loss did not improve from 0.13477
+
+Epoch 00010: val_loss did not improve from 0.13477
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[95.53 95.51 94.4  94.   95.33 95.41 95.36 95.25 94.91 96.11]
+[[86.459335]
+ [86.62201 ]
+ [86.70458 ]
+ [86.69115 ]
+ [86.57103 ]
+ [86.34168 ]
+ [86.00666 ]
+ [85.60133 ]
+ [85.179   ]
+ [84.76263 ]]
+--- 798.1235628128052 seconds ---
+Accuracy: 44.44444444444444%../Data Mining/Stock_Data/Hasbro Inc.csv

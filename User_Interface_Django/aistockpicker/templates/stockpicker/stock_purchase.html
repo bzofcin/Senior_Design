@@ -50,7 +50,9 @@
                                                 </div> <!-- form-group// -->
                                             </div>
                                         </div>
+                                        <hr>
 
+                                        Current Price: ${{ price }} per share
                                         </p>
                                     </form>
                                 </article>
@@ -61,13 +63,12 @@
             </div>
         </div>
 
-        <div class="col-sm-6">
+       <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Market News </h5>
                     <p class="card-text">
                         <p><b>RSS News Feed from Nasdaq</b></p>
-                        <div id="chartContainer" style="height: 370px; width: 100%;">
                         {% for entry in data.entries %}
                             <li><a target="_blank" href="{{entry.link}}">{{entry.title}}</a></li>
                         {% endfor %}
@@ -77,10 +78,9 @@
                 </div>
             </div>
         </div>
-    </div>
-
 
     </div>
 
 
 {% endblock %}
+

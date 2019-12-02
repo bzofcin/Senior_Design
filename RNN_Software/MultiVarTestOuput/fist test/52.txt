@@ -1,0 +1,52 @@
+52
+Running Mercadolibre Inc.csvfrom 52
+       timestamp   open   high    low  close  volume
+3083  2007-08-24  29.16  30.25  28.52   30.0  144200
+3082  2007-08-27  29.37  30.25  28.51   29.4  173200
+
+Epoch 00001: val_loss improved from inf to 1.14749, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 1.14749 to 0.87360, saving model to weights.h5
+
+Epoch 00003: val_loss improved from 0.87360 to 0.68472, saving model to weights.h5
+
+Epoch 00004: val_loss did not improve from 0.68472
+
+Epoch 00005: val_loss did not improve from 0.68472
+
+Epoch 00006: val_loss did not improve from 0.68472
+
+Epoch 00007: val_loss did not improve from 0.68472
+
+Epoch 00008: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00008: val_loss did not improve from 0.68472
+
+Epoch 00009: val_loss did not improve from 0.68472
+
+Epoch 00010: val_loss did not improve from 0.68472
+3093    2007-08-10
+3092    2007-08-13
+3091    2007-08-14
+3090    2007-08-15
+3089    2007-08-16
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 3094, dtype: object
+[494.42 497.62 499.5  513.73 536.54 550.1  533.01 536.33 547.85 556.94]
+[[342.18637]
+ [342.63632]
+ [343.0411 ]
+ [343.49216]
+ [343.95868]
+ [344.23828]
+ [344.17206]
+ [343.61185]
+ [342.65097]
+ [341.27344]]
+--- 574.1963105201721 seconds ---
+Accuracy: 66.66666666666666%../Data Mining/Stock_Data/Mercadolibre Inc.csv

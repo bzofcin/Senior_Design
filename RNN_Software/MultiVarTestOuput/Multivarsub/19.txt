@@ -1,0 +1,68 @@
+18
+Running Texas Instruments Inc.csvfrom 18
+       timestamp    open    high  ...    NasClose     NasHigh      Naslow
+5032  1999-11-22  49.000  49.719  ...  360.200012  365.799988  360.100006
+5031  1999-11-23  49.969  51.250  ...  367.200012  367.899994  365.899994
+
+[2 rows x 10 columns]
+
+Epoch 00001: val_loss improved from inf to 0.89586, saving model to weights.h5
+
+Epoch 00002: val_loss improved from 0.89586 to 0.39069, saving model to weights.h5
+
+Epoch 00003: val_loss improved from 0.39069 to 0.32591, saving model to weights.h5
+
+Epoch 00004: val_loss improved from 0.32591 to 0.32195, saving model to weights.h5
+
+Epoch 00005: val_loss did not improve from 0.32195
+
+Epoch 00006: val_loss did not improve from 0.32195
+
+Epoch 00007: val_loss improved from 0.32195 to 0.20312, saving model to weights.h5
+
+Epoch 00008: val_loss did not improve from 0.20312
+
+Epoch 00009: val_loss did not improve from 0.20312
+
+Epoch 00010: val_loss did not improve from 0.20312
+
+Epoch 00011: val_loss did not improve from 0.20312
+
+Epoch 00012: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00012: val_loss did not improve from 0.20312
+
+Epoch 00013: val_loss did not improve from 0.20312
+
+Epoch 00014: val_loss did not improve from 0.20312
+
+Epoch 00015: val_loss did not improve from 0.20312
+
+Epoch 00016: val_loss did not improve from 0.20312
+
+Epoch 00017: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00017: val_loss did not improve from 0.20312
+Epoch 00017: early stopping
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[120.97 119.86 120.36 119.92 120.11 118.08 119.02 118.42]
+[[87.784355]
+ [87.763016]
+ [87.74127 ]
+ [87.71695 ]
+ [87.69    ]
+ [87.655136]
+ [87.614716]]
+--- 1714.2058999538422 seconds ---
+Accuracy: 83.33333333333334%../Data Mining/TestSubSet/Texas Instruments Inc.csv

@@ -1,0 +1,52 @@
+21
+Running Cisco Systems Inc.csvfrom 21
+       timestamp     open     high      low    close    volume
+5022  1999-12-07  100.938  102.438  100.063  101.500  55914600
+5021  1999-12-08  102.000  103.000   99.000   99.938  41666800
+
+Epoch 00001: val_loss improved from inf to 0.02784, saving model to weights.h5
+
+Epoch 00002: val_loss did not improve from 0.02784
+
+Epoch 00003: val_loss did not improve from 0.02784
+
+Epoch 00004: val_loss improved from 0.02784 to 0.02223, saving model to weights.h5
+
+Epoch 00005: val_loss did not improve from 0.02223
+
+Epoch 00006: val_loss did not improve from 0.02223
+
+Epoch 00007: val_loss did not improve from 0.02223
+
+Epoch 00008: val_loss did not improve from 0.02223
+
+Epoch 00009: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00009: val_loss did not improve from 0.02223
+
+Epoch 00010: val_loss did not improve from 0.02223
+5032    1999-11-22
+5031    1999-11-23
+5030    1999-11-24
+5029    1999-11-26
+5028    1999-11-29
+           ...    
+4       2019-11-15
+3       2019-11-18
+2       2019-11-19
+1       2019-11-20
+0       2019-11-21
+Name: timestamp, Length: 5033, dtype: object
+[48.83 48.1  48.37 48.46 44.91 45.09 45.15 45.47 45.08 44.82]
+[[44.66079 ]
+ [44.64312 ]
+ [44.629692]
+ [44.627205]
+ [44.637844]
+ [44.63058 ]
+ [44.618393]
+ [44.603764]
+ [44.60297 ]
+ [44.62863 ]]
+--- 806.1165878772736 seconds ---
+Accuracy: 22.22222222222222%../Data Mining/Stock_Data/Cisco Systems Inc.csv
