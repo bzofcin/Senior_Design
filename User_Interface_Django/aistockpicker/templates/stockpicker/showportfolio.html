@@ -3,93 +3,96 @@
 {% block content %}
 
 
-
 <div class="container">
-   <div class="row">
-        <div class="col-sm-12">
-            <div class="row mb-5">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Search Information</h5>
+    <div class="row mb-5">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title"></h5>
 
-                            <p class="card-text">
-                                <h5>Credits: ${{credits}}</h5>
-                                <hr>
+                    <p class="card-text">
 
-                                {% if showBuyForm == False %}
-                                    <form method="POST">
-                                    {% csrf_token %}
-                                    <div>
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <label>Enter Stock Symbol</label>
-                                                <div class="form-group input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <i class="fa fa-sitemap"></i> </span>
-                                                    </div>
-                                                    <input name="company" class="form-control" placeholder="Stock" type="text" maxlength="4" size="4" required>
-                                                    <button type="submit" class="btn btn-primary ml-2"><i class="fa fa-search"></i> Search  </button>
+
+                        {% if showBuyForm == False %}
+                            <form method="POST">
+                            {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h5>Credits: ${{credits}}</h5>
+                                        <label>Enter Stock Symbol</label>
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <i class="fa fa-sitemap"></i> </span>
                                             </div>
-                                        </div>
-                                        <hr>
-
-                                        </p>
-                                    </form>
-                                {% endif %}
-
-                                {% if showBuyForm %}
-
-                               	    <form method="POST" action="/stockpicker/purchase" enctype="multipart/form-data">
-                                    {% csrf_token %}
-
-                                    <div class="row mt-4">
-                                        <div class="col-12 mb-3">
-                                            Company: {{company}} Current Price: <b>${{ price }}</b> per share
-                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <label>Shares</label>
-                                            <div class="form-group input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fa fa-sitemap"></i> </span>
-                                                </div>
-                                                <input name="company" id="company" value="{{company}}" type="hidden">
-                                                <input name="price" id="price" type="hidden" value="{{ price }}">
-                                                <input name="credits" id="credits" type="hidden" value="{{ credits }}">
-                                                <input name="shares" id="shares" class="form-control" placeholder="Shares" value="" type="text" maxlength="6" >
-
-                                            </div>
+                                            <input name="company" class="form-control" placeholder="Stock" type="text" maxlength="4" size="4" required>
+                                            <button type="submit" class="btn btn-primary ml-2"><i class="fa fa-search"></i> Search  </button>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary mt-4"><i class="fa fa-search mr-2"></i> Purchase </button>
-                                            </div> <!-- form-group// -->
+                                </p>
+                            </form>
+                        {% endif %}
+
+                        {% if showBuyForm %}
+
+                       	    <form method="POST" action="/stockpicker/purchase" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <h5>Credits: ${{credits}}</h5>
+
+                            <div class="row mt-4">
+                                <div class="col-12 mb-3">
+                                    Company: {{company}} Current Price: <b>${{ price }}</b> per share
+                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label>Shares</label>
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-sitemap"></i> </span>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <a href="/stockpicker/cancel" class="btn btn-danger mt-4 ml-5"><i class="fa fa-undo mr-2"></i> Cancel  </a>
-                                            </div> <!-- form-group// -->
-                                        </div>
+                                        <input name="company" id="company" value="{{company}}" type="hidden">
+                                        <input name="price" id="price" type="hidden" value="{{ price }}">
+                                        <input name="credits" id="credits" type="hidden" value="{{ credits }}">
+                                        <input name="shares" id="shares" class="form-control" placeholder="Shares" value="" type="text" maxlength="6" >
+
                                     </div>
-                                </form>
+                                </div>
+                            </div>
 
-                                {% endif %}
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary mt-4"><i class="fa fa-search mr-2"></i> Purchase </button>
+                                    </div> <!-- form-group// -->
+                                </div>
+                                <div class="col-7">
+                                    <div class="form-group">
+                                        <a href="/stockpicker/cancel" class="btn btn-danger mt-4 ml-5"><i class="fa fa-undo mr-2"></i> Cancel  </a>
+                                    </div> <!-- form-group// -->
+                                </div>
+                            </div>
+                        </form>
 
-                            </p>
-                        </div>
-                    </div>
+                        {% endif %}
+
+                    </p>
                 </div>
             </div>
 
-
-
         </div>
-
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-12">
+                        <div id="chartContainer" style="height: 370px; width: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 	<div class="row mt-5">
 		<div class="col-md-12">
@@ -138,7 +141,6 @@
                             {{ item.company }}
                         </td>
                         <td>
-
 
                         </td>
                         <td>
@@ -218,4 +220,39 @@
 	</div>
 </div>
 
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "light2",
+	animationEnabled: true,
+		subtitles: [{
+		text: "Stocks vs Cash",
+		fontSize: 18
+	}],
+
+	data: [{
+		type: "pie",
+		indexLabelFontSize: 16,
+		radius: 80,
+		indexLabel: "{label} - {y}",
+		yValueFormatString: "$###.#0",
+		click: explodePie,
+		dataPoints: [
+			{ y: {{portfolioValue|floatformat:2 }}, label: "Stocks" },
+			{ y: {{credits|floatformat:2 }}, label: "Cash"},
+		]
+	}]
+});
+chart.render();
+
+function explodePie(e) {
+	for(var i = 0; i < e.dataSeries.dataPoints.length; i++) {
+		if(i !== e.dataPointIndex)
+			e.dataSeries.dataPoints[i].exploded = false;
+	}
+}
+
+}
+</script>
 {% endblock %}
