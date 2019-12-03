@@ -13,6 +13,8 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard'),
     path('purchase', views.purchase, name='purchase'),
     path('research', views.research, name='research'),
-    path('trends', views.trends, name='trends')
+    path('stockinfo', views.stockinfo, name='stockinfo'),
+    path('trends', views.trends, name='trends'),
+    path('cancel', views.cancel, name='cancel')
 ]
 

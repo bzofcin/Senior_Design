@@ -2,93 +2,101 @@
 
 {% block content %}
 
+<style>
+    /* Dropdown Button */
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
 
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+/* The search field */
+#myInput {
+  box-sizing: border-box;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+/* The search field when it gets focus/clicked on */
+#myInput:focus {outline: 3px solid #ddd;}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+</style>
 <div class="container">
 
     <div class="row mb-5">
         <div class="col-xs-12">
-            <h1>Delphi Stock Picker</h1>
+            <h1></h1>
         </div>
     </div>
 
-    <div class="row">
+   <div class="row">
         <div class="col-sm-6">
             <div class="row mb-5">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Search Information</h5>
+                            <h5 class="card-title"><b>Account Information</b></h5>
+                            <hr>
 
                             <p class="card-text">
 
-                                <article class="card-body mx-auto" style="max-width: 90%;">
-                                    <div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label>Stock Ticker Symbol</label>
-                                                <div class="form-group input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <i class="fa fa-sitemap"></i> </span>
-                                                    </div>
-                                                    <input name="" class="form-control" placeholder="Stock" type="text" maxlength="3">
-                                                </div>
-                                            </div>
-                                        </div>
+                                <p class="mt-3">Money Market: <span class="badge badge-pill badge-success p-2">${{credits}}</span></p>
+				                <p class="mt-5">Portfolio Value: <span class="badge badge-pill badge-secondary p-2">${{portfolioValue|floatformat:2 }}</span></p>
+				                <p class="mt-5">Total Cash Value <span class="badge badge-pill badge-primary p-2">${{valueTotal|floatformat:2 }} </span></p><br>
 
-                                        <div class="row mt-2">
-                                            <div class="col-6">
-                                                <label for="begin_date">Begin Date</label>
-                                                <div class="form-group input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
-                                                    </div>
-                                                    <input id="begin_date" class="form-control" placeholder="Begin Date" type="date">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="end_date">End Date</label>
-                                                <div class="form-group input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
-                                                    </div>
-                                                    <input id="end_date" class="form-control" placeholder="Begin Date" type="date">
-                                                </div>
-                                            </div>
-                                        </div>
+                             <hr>
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="/stockpicker/research" class="btn btn-secondary btn-lg btn-block p-2"><i class="fa fa-bar-chart mr-3"></i> RNN Prediction</a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="/stockpicker/myportfolio" class="btn btn-secondary btn-lg btn-block  p-2"><i class="fa fa-pie-chart mr-3"></i>My Portfolio</a>
+                                </div>
+                            </div>
 
-                                        <div class="row mt-2">
-                                            <div class="col-8">
-                                                <label>Model</label>
-                                                <div class="form-group input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <i class="fa fa-gear"></i> </span>
-                                                    </div>
-                                                    <select name="model" class="form-control">
-                                                        <option>Please Select</option>
-                                                        <option>Model 1</option>
-                                                        <option>Model 2</option>
-                                                        <option>Model 3</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-5">
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-block"> Submit  </button>
-                                                </div> <!-- form-group// -->
-                                            </div>
-                                            <div class="col-4"></div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <button type="button" class="btn btn-warning btn-block"> Clear  </button>
-                                                </div> <!-- form-group// -->
-                                            </div>
-                                        </div>
 
-                                        </p>
-                                    </form>
-                                </article>
                             </p>
                         </div>
                     </div>
@@ -96,70 +104,35 @@
             </div>
         </div>
 
-        <div class="col-sm-6">
+       <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Stock Information </h5>
-                    <p class="card-text">
-                        <p><b>Stock Price Range Prediction</b></p>
-                        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                    <h5 class="card-title">Market News on AI </h5>
 
+
+                    <hr>
+                    <p class="card-text">
+                        <p><b>RSS News Feed from Nasdaq</b></p>
+                        {% for entry in data.entries %}
+                            <li><a target="_blank" href="{{entry.link}}">{{entry.title}}</a></li>
+                        {% endfor %}
+
+                        </div>
                     </p>
                 </div>
             </div>
-        </div>
-    </div>
+       </div>
 
 
     </div>
-    <script>
-            window.onload = function () {
 
-            var options = {
-                animationEnabled: true,
-                exportEnabled: true,
-                title:{
-                    text: "Value Per Share October 2019"
-                },
-                axisY: {
-                    includeZero:false,
-                    title: "Value Per Share",
-                    suffix: " °C"
-                },
-                axisX: {
-                    valueFormatString: "DD MMM"
-                },
-                data: [
-                {
-                    type: "rangeArea",
-                    xValueFormatString: "DD MMMM",
-                    yValueFormatString: "$#0.##",
-                    toolTipContent: " <span style=\"color:#4F81BC\">{x}</span><br><b>Min:</b> {y[0]}<br><b>Max:</b> {y[1]}",
-                    dataPoints: [
-                        { x: new Date(2019, 10, 1), y: [112, 114] },
-                        { x: new Date(2019, 10, 2), y: [113, 124] },
-                        { x: new Date(2019, 10, 3), y: [110, 120] },
-                        { x: new Date(2019, 10, 4), y: [116, 124] },
-                        { x: new Date(2019, 10, 5), y: [112, 127] },
-                        { x: new Date(2019, 10, 6), y: [118, 119] },
-                        { x: new Date(2019, 10, 7), y: [114, 120] },
-                        { x: new Date(2019, 10, 8), y: [117, 124] },
-                        { x: new Date(2019, 10, 9), y: [120, 125] },
-                        { x: new Date(2019, 10, 10), y: [118, 120] },
-                        { x: new Date(2019, 10, 11), y: [114, 120] },
-                        { x: new Date(2019, 10, 12), y: [116, 120] },
-                        { x: new Date(2019, 10, 13), y: [121, 129] },
-                        { x: new Date(2019, 10, 14), y: [122, 129] },
-                        { x: new Date(2019, 10, 15), y: [123, 132] },
-                        { x: new Date(2019, 10, 16), y: [125, 132] },
-                        { x: new Date(2019, 10, 17), y: [127, 130] },
-                    ]
-                }]
-            };
-            $("#chartContainer").CanvasJSChart(options);
+    </div>
 
-            }
-        </script>
+
+
+</div>
+
 
 
 {% endblock %}
+

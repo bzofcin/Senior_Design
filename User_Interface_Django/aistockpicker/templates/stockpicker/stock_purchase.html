@@ -11,68 +11,74 @@
         </div>
     </div>
 
-   <div class="row">
-        <div class="col-sm-6">
-            <div class="row mb-5">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Search Information</h5>
+   <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">RNN Stock Predictions</h5>
 
-                            <p class="card-text">
+                    <p class="card-text">
 
-                                <article class="card-body mx-auto" style="max-width: 90%;">
-                                    <form method="POST">
-                                    {% csrf_token %}
-                                    <div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label>Stock Ticker Symbol</label>
-                                                <div class="form-group input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <i class="fa fa-sitemap"></i> </span>
-                                                    </div>
-                                                    <input name="company" class="form-control" placeholder="Stock" type="text" maxlength="4">
-                                                </div>
+                        <article class="card-body mx-auto" style="max-width: 90%;">
+                            <form method="POST">
+                            {% csrf_token %}
+                            <div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6>Please select a company from the dropdown</h6>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <i class="fa fa-gear"></i> </span>
                                             </div>
+                                            <select name="company" class="form-control">
+                                                <option>Please Select</option>
+                                                <option value="Amazon.com Inc">Amazon.com Inc</option>
+                                                <option value="Apple Inc">Apple Inc</option>
+                                                <option value="Biogen Inc">Biogen Inc</option>
+                                                <option value="Booking Holdings Inc">Booking Holdings Inc</option>
+                                                <option value="Celgene Corp">Celgene Corp</option>
+                                                <option value="Cisco Systems Inc">Cisco Systems Inc</option>
+                                                <option value="Costco Wholesale Corp">Costco Wholesale Corp</option>
+                                                <option value="eBay Inc">eBay Inc</option>
+                                                <option value="Microsoft Corp">Microsoft Corp</option>
+                                                <option value="NVIDIA Corp">NVIDIA Corp</option>
+                                            </select>
                                         </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block "><i class="fa fa-search"></i> Search  </button>
+                                        </div> <!-- form-group// -->
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-warning btn-block "> Clear  </button>
+                                        </div> <!-- form-group// -->
+                                    </div>
 
-                                        <div class="row mt-5">
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search"></i> Search  </button>
-                                                </div> <!-- form-group// -->
-                                            </div>
-                                            <div class="col-4"></div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <button type="button" class="btn btn-warning btn-block"> Clear  </button>
-                                                </div> <!-- form-group// -->
-                                            </div>
-                                        </div>
-
-                                        </p>
-                                    </form>
-                                </article>
-                            </p>
-                        </div>
-                    </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </article>
+                    </p>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-6">
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Market News </h5>
+                    <h5 class="card-title">RNN Stock Analysis for <span class="badge badge-danger  p-2"> <b style="font-size:18px">{{company}}</b></span> </h5>
                     <p class="card-text">
-                        <p><b>RSS News Feed from Nasdaq</b></p>
-                        <div id="chartContainer" style="height: 370px; width: 100%;">
-                        {% for entry in data.entries %}
-                            <li><a target="_blank" href="{{entry.link}}">{{entry.title}}</a></li>
-                        {% endfor %}
-                        <hr>
-                        </div>
+                       <div id="chartContainer" style="height: 300px; width: 100%;">
                     </p>
                 </div>
             </div>
@@ -80,7 +86,77 @@
     </div>
 
 
-    </div>
+</div>
 
+
+
+
+</div>
+
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title:{
+		text: "Stock Performance vs Predictions"
+	},
+	axisX: {
+		valueFormatString: "DD MMM,YY"
+	},
+	axisY: {
+		title: "",
+		includeZero: false,
+		prefix: "$"
+	},
+	legend:{
+		cursor: "pointer",
+		fontSize: 16,
+		itemclick: toggleDataSeries
+	},
+	toolTip:{
+		shared: true
+	},
+	data: [{
+		name: "Closing Price",
+		type: "spline",
+		yValueFormatString: "####.##",
+		showInLegend: true,
+		dataPoints: [
+            {% for item in res %}
+            { x: new Date({{item.timestamp}}), y: {{item.close}} },
+            {% endfor %}
+		]
+	},
+	{
+		name: "Prediction",
+		type: "spline",
+		yValueFormatString: "####.##",
+		showInLegend: true,
+		dataPoints: [
+
+            {% for item in res %}
+            { x: new Date({{item.timestamp}}), y: {{item.prediction}} },
+            {% endfor %}
+
+		]
+	}]
+});
+chart.render();
+
+function toggleDataSeries(e){
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else{
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
+}
+</script>
 
 {% endblock %}
+
+
