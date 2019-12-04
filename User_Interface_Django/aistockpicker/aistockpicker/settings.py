@@ -135,7 +135,8 @@ TEMPLATES = [
         },
     },
 ]
-
+SESSION_EXPIRE_SECONDS = 14400  # 4 hours
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -153,6 +154,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+STATIC = '/static/'
 STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 SESSION_COOKIE_AGE = 3600
